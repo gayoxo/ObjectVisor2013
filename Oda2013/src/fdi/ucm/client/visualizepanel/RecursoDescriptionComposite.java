@@ -36,6 +36,7 @@ public class RecursoDescriptionComposite extends Composite {
 
 	private static final String SHOWMORE = "Show More";
 	protected static final int MaxWidth = 50;
+	private static final String PX = "PX";
 	private static String BasePath;
 	private HashMap<Meta, VerticalPanel> Pestanas;
 	private SimplePanel PanelDecorador;
@@ -50,6 +51,7 @@ public class RecursoDescriptionComposite extends Composite {
 	private String ImagenAsociada;
 	private VerticalPanel PanelA;
 	private SimplePanel PanelDelIcono;
+	private DecoratorPanel decoratorPanel;
 
 	public RecursoDescriptionComposite(Resources recurso,List<CollectionAttribute> list) {
 		super();
@@ -63,7 +65,7 @@ public class RecursoDescriptionComposite extends Composite {
 //		MetaPestanaATab=new HashMap<Meta, TabElement>();
 		
 		
-		DecoratorPanel decoratorPanel = new DecoratorPanel();
+		decoratorPanel = new DecoratorPanel();
 		initWidget(decoratorPanel);
 		decoratorPanel.setSize("100%", "100%");
 		
@@ -423,6 +425,12 @@ Resources elementoIcono = recurso.getIcon();
 
 	
 
-	
+	@Override
+	protected void onLoad() {
+		super.onLoad();
+		if (decoratorPanel.getOffsetWidth()>0)
+			PanelA.setWidth((decoratorPanel.getOffsetWidth()-2)+PX);
+		
+	}
 
 }
