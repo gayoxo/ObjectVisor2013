@@ -44,7 +44,6 @@ public class RecursoDescriptionComposite extends Composite {
 	private Resources Recurso;
 	private ArrayList<MetaValue> vaciosCreados;
 	private ArrayList<Meta> MetaOrden;
-//	private  HashMap<Meta, TabElement> MetaPestanaATab;
 	private List<CollectionAttribute> ColeccionSons;
 	private Image Icono;
 	private String Destino;
