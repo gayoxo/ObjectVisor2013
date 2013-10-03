@@ -52,6 +52,7 @@ public class RecursoDescriptionComposite extends Composite {
 	private SimplePanel PanelDelIcono;
 	private DecoratorPanel decoratorPanel;
 	private HorizontalPanel PanelGeneral;
+	private VerticalPanel PanelGeneral2;
 
 	public RecursoDescriptionComposite(Resources recurso,List<CollectionAttribute> list) {
 		super();
@@ -69,9 +70,12 @@ public class RecursoDescriptionComposite extends Composite {
 		initWidget(decoratorPanel);
 		decoratorPanel.setSize("100%", "100%");
 		
+		PanelGeneral2 = new VerticalPanel();
+		decoratorPanel.setWidget(PanelGeneral2);
+		PanelGeneral2.setSize("100%", "100%");
 		
 		PanelGeneral = new HorizontalPanel();
-		decoratorPanel.setWidget(PanelGeneral);
+		PanelGeneral2.add(PanelGeneral);
 		PanelGeneral.setSize("", "100%");
 		
 		PanelDelIcono = new SimplePanel();
@@ -429,8 +433,9 @@ Resources elementoIcono = recurso.getIcon();
 	protected void onLoad() {
 		super.onLoad();
 		if (decoratorPanel.getOffsetWidth()>0)
-			PanelGeneral.setWidth((decoratorPanel.getOffsetWidth()-2)+PX);
+			PanelGeneral2.setWidth((decoratorPanel.getOffsetWidth()-MaxWidth-13)+PX);
 		
 	}
+	
 
 }
