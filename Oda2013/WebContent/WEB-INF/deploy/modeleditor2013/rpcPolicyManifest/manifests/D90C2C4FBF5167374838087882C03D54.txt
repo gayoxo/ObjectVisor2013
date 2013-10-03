@@ -1,0 +1,2 @@
+serviceClass: fdi.ucm.client.service.LoadService
+path: BCE939CF25B680CB019039E9D296C461.gwt.rpc

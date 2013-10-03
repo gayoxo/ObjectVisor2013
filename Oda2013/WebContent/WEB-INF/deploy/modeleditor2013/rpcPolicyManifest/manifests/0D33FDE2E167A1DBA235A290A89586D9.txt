@@ -1,0 +1,2 @@
+serviceClass: fdi.ucm.client.service.SaveService
+path: D76AE6127AF96502246312A0F317447F.gwt.rpc

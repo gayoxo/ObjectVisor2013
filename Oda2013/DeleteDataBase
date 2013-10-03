@@ -1,0 +1,6 @@
+drop table `oda3`.`metavalues`;
+drop table `oda3`.`collectionattribute`;
+drop table `oda3`.`attributable`;
+drop table `oda3`.`vocabulary`;
+drop table `oda3`.`collection`;
+drop table `oda3`.`users`;

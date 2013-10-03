@@ -1,0 +1,2 @@
+serviceClass: fdi.ucm.client.service.Oda3Service
+path: D2317DBE1FEA350077CF8C0AF286CFD1.gwt.rpc
