@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="ModelEditor2013JPA" transaction-type="JTA">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<jta-data-source>jdbc/ODA3ME</jta-data-source>
+		<class>fdi.ucm.shared.model.userserver.UserServer</class>
+		<class>fdi.ucm.shared.model.userserver.CollectionPropias</class>
+
+		
+		
+		
+		<properties>
+            <property name="javax.persistence.jdbc.password" value="platano"/>
+			<property name="javax.persistence.jdbc.user" value="ilsaserver"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Oda3me"/>
+   		  <property name="eclipselink.ddl-generation" value="create-tables" />
+      		<property name="eclipselink.ddl-generation.output-mode" value="database" />
+      		<property name="eclipselink.jdbc.batch-writing" value="JDBC" />
+        <property name="eclipselink.jdbc.batch-writing.size" value="1000000" />
+	<property name="eclipselink.logging.level" value="off"/>
+            
+        </properties>
+		
+        
+        
+	</persistence-unit>
+</persistence>
