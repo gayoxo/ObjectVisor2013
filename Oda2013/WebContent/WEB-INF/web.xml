@@ -17,17 +17,6 @@
 		<url-pattern>/modeleditor2013/service/oda3</url-pattern>
 	</servlet-mapping>
 	
-	<servlet>
-		<description></description>
-		<display-name>UploadServlet</display-name>
-		<servlet-name>UploadServlet</servlet-name>
-		<servlet-class>fdi.ucm.server.Oda3ServiceImpUpload</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>UploadServlet</servlet-name>
-		<url-pattern>/upload</url-pattern>
-	</servlet-mapping>
 	
   <!-- Default page to serve -->
   <welcome-file-list>
