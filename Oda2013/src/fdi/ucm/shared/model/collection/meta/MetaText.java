@@ -23,14 +23,11 @@ public class MetaText extends Meta {
 
 	/**
 	 * @param name
-	 * @param browseable
 	 * @param father
 	 * @param summary
-	 * @param visible
 	 */
-	public MetaText(String name, Boolean browseable,
-			CollectionAttribute father, Boolean summary) {
-		super(name, browseable, father, summary);
+	public MetaText(String name,CollectionAttribute father, Boolean summary) {
+		super(name,father, summary);
 	}
 
 	

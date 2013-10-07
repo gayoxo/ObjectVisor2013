@@ -21,14 +21,11 @@ public class MetaDate extends Meta {
 
 	/**
 	 * @param name
-	 * @param browseable
 	 * @param father
 	 * @param summary
-	 * @param visible
 	 */
-	public MetaDate(String name, Boolean browseable,
-			CollectionAttribute father, Boolean summary) {
-		super(name, browseable, father, summary);
+	public MetaDate(String name,CollectionAttribute father, Boolean summary) {
+		super(name, father, summary);
 	}
 
 	

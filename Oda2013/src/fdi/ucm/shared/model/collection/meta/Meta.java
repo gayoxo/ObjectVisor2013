@@ -23,7 +23,6 @@ public class Meta extends CollectionAttribute implements Serializable,IsSerializ
 	private static final long serialVersionUID = 5151085195953705390L;
 	protected String Name;
 	protected ArrayList<Show> Shows;   
-	protected Boolean Browseable;
 	protected Boolean Summary;
 
 
@@ -34,7 +33,6 @@ public class Meta extends CollectionAttribute implements Serializable,IsSerializ
 	 */
 	public Meta() {
 		super();
-	Browseable=false;
 	Father=null;
 	Name="unknown";
 	Summary=false;
@@ -50,10 +48,9 @@ public class Meta extends CollectionAttribute implements Serializable,IsSerializ
 	 * @param browseable Define si es navegable
 	 * @param summary si es sumario.
 	 */
-		public Meta(String name, Boolean browseable, CollectionAttribute father,Boolean summary) {
+		public Meta(String name, CollectionAttribute father,Boolean summary) {
 			super();
 			Name = name;
-			Browseable = browseable;
 			Father = father;
 			Summary=summary;
 			Shows=new ArrayList<Show>();
@@ -71,22 +68,6 @@ public class Meta extends CollectionAttribute implements Serializable,IsSerializ
 	 */
 	public void setName(String name) {
 		Name = name;
-	}
-	
-	/**
-	 * 
-	 * @return the Browseable
-	 */
-	public Boolean getBrowseable() {
-		return Browseable;
-	}
-	
-	/**
-	 * 
-	 * @param browseable to browseable to set
-	 */
-	public void setBrowseable(Boolean browseable) {
-		Browseable = browseable;
 	}
 
 

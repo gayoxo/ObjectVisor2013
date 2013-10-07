@@ -19,14 +19,11 @@ public class MetaRelation extends Meta{
 
 	/**
 	 * @param name
-	 * @param browseable
 	 * @param father
 	 * @param summary
-	 * @param visible
 	 */
-	public MetaRelation(String name, Boolean browseable,
-			CollectionAttribute father, Boolean summary) {
-		super(name, browseable, father, summary);
+	public MetaRelation(String name, CollectionAttribute father, Boolean summary) {
+		super(name,father, summary);
 	}
 	
 

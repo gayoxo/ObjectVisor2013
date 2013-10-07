@@ -38,9 +38,8 @@ public class MetaControlled extends Meta {
 	 * @param summary
 	 * @param visible
 	 */
-	public MetaControlled(String name, Boolean browseable,
-			CollectionAttribute father, Boolean summary) {
-		super(name, browseable, father, summary);
+	public MetaControlled(String name,CollectionAttribute father, Boolean summary) {
+		super(name,father, summary);
 		vocabulary=new Vocabulary();
 	}
 

@@ -23,14 +23,11 @@ public class MetaNumeric extends Meta {
 
 	/**
 	 * @param name
-	 * @param browseable
 	 * @param father
 	 * @param summary
-	 * @param visible
 	 */
-	public MetaNumeric(String name, Boolean browseable,
-			CollectionAttribute father, Boolean summary) {
-		super(name, browseable, father, summary);
+	public MetaNumeric(String name,	CollectionAttribute father, Boolean summary) {
+		super(name, father, summary);
 	}
 
 	

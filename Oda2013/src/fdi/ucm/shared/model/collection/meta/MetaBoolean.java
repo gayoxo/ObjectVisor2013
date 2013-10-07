@@ -24,14 +24,11 @@ public class MetaBoolean extends Meta {
 	/**
 	 * {@link Meta constructor}
 	 * @param name
-	 * @param browseable
 	 * @param father
 	 * @param summary
-	 * @param visible
 	 */
-	public MetaBoolean(String name, Boolean browseable,
-			CollectionAttribute father, Boolean summary) {
-		super(name, browseable, father, summary);
+	public MetaBoolean(String name,CollectionAttribute father, Boolean summary) {
+		super(name, father, summary);
 	}
 
 	
