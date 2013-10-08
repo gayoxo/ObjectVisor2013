@@ -1,3 +1,0 @@
-# Module modeleditor2013
-# RPC service class, partial path of RPC policy file
-fdi.ucm.client.service.Oda3Service, 17431C6B95CEE622447266E7F0726914.gwt.rpc

@@ -3,7 +3,7 @@
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
-        <property name="context-root" value="ModelEditor2013"/>
         <property name="java-output-path" value="/ModelEditor2013/war/WEB-INF/classes"/>
+        <property name="context-root" value="DOV2013"/>
     </wb-module>
 </project-modules>

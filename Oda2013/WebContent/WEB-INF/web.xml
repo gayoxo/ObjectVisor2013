@@ -1,30 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-              http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-         version="2.5"
-         xmlns="http://java.sun.com/xml/ns/javaee">
-
-  <!-- Servlets -->
-	
-	 <servlet>
-		<servlet-name>Oda3Service</servlet-name>
-		<servlet-class>fdi.ucm.server.Oda3ServiceImp</servlet-class>
-	</servlet>
-  
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <servlet>
+    <servlet-name>Oda3Service</servlet-name>
+    <servlet-class>fdi.ucm.server.Oda3ServiceImp</servlet-class>
+  </servlet>
   <servlet-mapping>
-		<servlet-name>Oda3Service</servlet-name>
-		<url-pattern>/modeleditor2013/service/oda3</url-pattern>
-	</servlet-mapping>
-	
-	
-  <!-- Default page to serve -->
+    <servlet-name>Oda3Service</servlet-name>
+    <url-pattern>/dov2013/service/oda3</url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
-    <welcome-file>ModelEditor2013.html</welcome-file>
+    <welcome-file>dov2013.html</welcome-file>
   </welcome-file-list>
-
-  
- 
-
-  
 </web-app>
