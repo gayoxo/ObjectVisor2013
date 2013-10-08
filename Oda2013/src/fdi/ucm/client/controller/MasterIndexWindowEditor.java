@@ -10,7 +10,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import fdi.ucm.client.ConstantsError;
 import fdi.ucm.client.service.Oda3Service;
 import fdi.ucm.client.service.Oda3ServiceAsync;
-import fdi.ucm.client.window.WindowEditor;
 import fdi.ucm.shared.model.userserver.CollectionAndFilePath;
 
 /**
@@ -30,7 +29,7 @@ public class MasterIndexWindowEditor implements WindowEditor {
 		
 		String IdentificadorPublico = com.google.gwt.user.client.Window.Location.getParameter("name");
 		if (IdentificadorPublico==null||IdentificadorPublico.isEmpty())
-			ControladorEntryPoint.ToLoginWindowEditor();
+			processGeneral();		
 		else {
 				serviceOda.LoadPublicCollection(IdentificadorPublico, new AsyncCallback<CollectionAndFilePath>() {
 					
@@ -38,17 +37,22 @@ public class MasterIndexWindowEditor implements WindowEditor {
 					public void onSuccess(CollectionAndFilePath result) {
 						if (result.getColeccion()!=null)
 							ControladorEntryPoint.ToPublicCollectionVisualiceWindowEditor(result.getColeccion(), "http://"+Window.Location.getHost()+"/ME2013/Files/"+result.getFilePath(), result.getDescription());
-						else ControladorEntryPoint.ToLoginWindowEditor();
+						else processGeneral();
 					}
 					
 					@Override
 					public void onFailure(Throwable caught) {
-						Window.alert(ConstantsError.ERROR_LOADING_COLLECTION_PUBLIC);
-						ControladorEntryPoint.ToLoginWindowEditor();
+						processGeneral();
 					}
 				});
 		}
 
+	}
+
+	private void processGeneral() {
+		//TODO UN INDEX QUE ESCUPA TODO LO PUBLICADO
+		Window.alert(ConstantsError.ERROR_LOADING_COLLECTION_PUBLIC);
+		
 	}
 
 }

@@ -5,8 +5,7 @@ package fdi.ucm.client.publiccolletions;
 
 import com.google.gwt.user.client.ui.RootPanel;
 
-import fdi.ucm.client.visualizepanel.SplitLayoutPanelPropio;
-import fdi.ucm.client.window.WindowEditor;
+import fdi.ucm.client.controller.WindowEditor;
 
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.dom.client.Style.Unit;
