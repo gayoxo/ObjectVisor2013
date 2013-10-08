@@ -24,8 +24,8 @@ public class MetaDate extends Meta {
 	 * @param father
 	 * @param summary
 	 */
-	public MetaDate(String name,CollectionAttribute father, Boolean summary) {
-		super(name, father, summary);
+	public MetaDate(String name,CollectionAttribute father) {
+		super(name, father);
 	}
 
 	

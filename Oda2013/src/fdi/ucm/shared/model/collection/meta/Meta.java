@@ -22,8 +22,7 @@ public class Meta extends CollectionAttribute implements Serializable,IsSerializ
 
 	private static final long serialVersionUID = 5151085195953705390L;
 	protected String Name;
-	protected ArrayList<Show> Shows;   
-	protected Boolean Summary;
+	protected ArrayList<Show> Shows;  
 
 
 	
@@ -35,7 +34,6 @@ public class Meta extends CollectionAttribute implements Serializable,IsSerializ
 		super();
 	Father=null;
 	Name="unknown";
-	Summary=false;
 	Shows=new ArrayList<Show>();
 	}
 
@@ -46,13 +44,11 @@ public class Meta extends CollectionAttribute implements Serializable,IsSerializ
 	 * @param father Padre del attibuto.
 	 * @param name Nombre del atributo.
 	 * @param browseable Define si es navegable
-	 * @param summary si es sumario.
 	 */
-		public Meta(String name, CollectionAttribute father,Boolean summary) {
+		public Meta(String name, CollectionAttribute father) {
 			super();
 			Name = name;
 			Father = father;
-			Summary=summary;
 			Shows=new ArrayList<Show>();
 		}
 	
@@ -68,24 +64,6 @@ public class Meta extends CollectionAttribute implements Serializable,IsSerializ
 	 */
 	public void setName(String name) {
 		Name = name;
-	}
-
-
-
-	/**
-	 * @return the summary
-	 */
-	public Boolean getSummary() {
-		return Summary;
-	}
-
-
-
-	/**
-	 * @param summary the summary to set
-	 */
-	public void setSummary(Boolean summary) {
-		Summary = summary;
 	}
 
 
@@ -110,13 +88,6 @@ public class Meta extends CollectionAttribute implements Serializable,IsSerializ
 
 
 
-//	@Override
-//	public String pathFather() {
-//		if (Father!=null)
-//			return Father.pathFather()+"/" + Name ;
-//		else return Name;
-//	}
-	
-	
+
 	
 }

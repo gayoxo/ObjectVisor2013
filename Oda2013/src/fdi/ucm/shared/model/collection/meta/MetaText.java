@@ -24,10 +24,9 @@ public class MetaText extends Meta {
 	/**
 	 * @param name
 	 * @param father
-	 * @param summary
 	 */
-	public MetaText(String name,CollectionAttribute father, Boolean summary) {
-		super(name,father, summary);
+	public MetaText(String name,CollectionAttribute father) {
+		super(name,father);
 	}
 
 	

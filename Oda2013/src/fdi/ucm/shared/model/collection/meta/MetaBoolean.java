@@ -25,10 +25,9 @@ public class MetaBoolean extends Meta {
 	 * {@link Meta constructor}
 	 * @param name
 	 * @param father
-	 * @param summary
 	 */
-	public MetaBoolean(String name,CollectionAttribute father, Boolean summary) {
-		super(name, father, summary);
+	public MetaBoolean(String name,CollectionAttribute father) {
+		super(name, father);
 	}
 
 	

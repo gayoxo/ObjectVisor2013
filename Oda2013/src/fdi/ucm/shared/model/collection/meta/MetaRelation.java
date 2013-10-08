@@ -22,8 +22,8 @@ public class MetaRelation extends Meta{
 	 * @param father
 	 * @param summary
 	 */
-	public MetaRelation(String name, CollectionAttribute father, Boolean summary) {
-		super(name,father, summary);
+	public MetaRelation(String name, CollectionAttribute father) {
+		super(name,father);
 	}
 	
 
