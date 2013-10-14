@@ -13,7 +13,7 @@
             <property name="javax.persistence.jdbc.password" value="platano"/>
 			<property name="javax.persistence.jdbc.user" value="ilsaserver"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Oda3me"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/oda3me"/>
    		  <property name="eclipselink.ddl-generation" value="create-tables" />
       		<property name="eclipselink.ddl-generation.output-mode" value="database" />
       		<property name="eclipselink.jdbc.batch-writing" value="JDBC" />
