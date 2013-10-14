@@ -1,0 +1,26 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.tmp
+*.symbolMap
+
+# gwt caches and compiled units #
+war/gwt_bree/
+WebContent/gwt_bree/
+gwt-unitCache/
+
+# boilerplate generated classes #
+.apt_generated/
+
+# more caches and things from deploy #
+war/WEB-INF/deploy/
+war/WEB-INF/classes/
+WebContent/WEB-INF/deploy/
+WebContent/WEB-INF/classes/
+WebContent/modeleditor2013/
+ModelEditor2013/WebContent/WEB-INF/deploy/
+ModelEditor2013/WebContent/WEB-INF/classes/
+ModelEditor2013/WebContent/modeleditor2013/
+
