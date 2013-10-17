@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fdi.ucm.shared.model.collection.meta.show;
 
 import java.io.Serializable;
@@ -9,22 +6,22 @@ import java.util.ArrayList;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
- * Clase que define un valor para la vista
+ * Clase que define el Show Value General que se encuentran en los Show
  * @author Joaquin Gayoso-Cabada
  *
  */
-public class ShowValues implements Serializable,IsSerializable{
+public abstract class ShowValues implements Serializable,IsSerializable{
 
-
-	private static final long serialVersionUID = 2611988084685026790L;
-	protected String Valor;
+	private static final long serialVersionUID = -97254894124910878L;
 	protected ArrayList<ShowValoresResult> Resultado;
+	protected String Valor;
+	
 	
 	public ShowValues() {
-		Valor="";
 		Resultado=new ArrayList<ShowValoresResult>();
+		Valor="";
 	}
-
+	
 	/**
 	 * @param valor
 	 */
@@ -61,7 +58,4 @@ public class ShowValues implements Serializable,IsSerializable{
 	public void setResultado(ArrayList<ShowValoresResult> resultado) {
 		Resultado = resultado;
 	}
-	
-	
-	
 }
