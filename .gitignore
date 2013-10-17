@@ -19,8 +19,8 @@ war/WEB-INF/deploy/
 war/WEB-INF/classes/
 WebContent/WEB-INF/deploy/
 WebContent/WEB-INF/classes/
-WebContent/modeleditor2013/
-ModelEditor2013/WebContent/WEB-INF/deploy/
-ModelEditor2013/WebContent/WEB-INF/classes/
-ModelEditor2013/WebContent/modeleditor2013/
+WebContent/dov2013/
+Oda2013/WebContent/WEB-INF/deploy/
+Oda2013/WebContent/WEB-INF/classes/
+Oda2013/WebContent/dov2013/
 
