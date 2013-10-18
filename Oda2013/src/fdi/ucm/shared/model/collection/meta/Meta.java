@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 import fdi.ucm.shared.model.collection.CollectionAttribute;
-import fdi.ucm.shared.model.collection.meta.show.Show;
+import fdi.ucm.shared.model.collection.meta.show.ShowSchema;
 
 
 
@@ -22,7 +22,7 @@ public class Meta extends CollectionAttribute implements Serializable,IsSerializ
 
 	private static final long serialVersionUID = 5151085195953705390L;
 	protected String Name;
-	protected ArrayList<Show> Shows;  
+	protected ArrayList<ShowSchema> Shows;  
 
 
 	
@@ -34,7 +34,7 @@ public class Meta extends CollectionAttribute implements Serializable,IsSerializ
 		super();
 	Father=null;
 	Name="unknown";
-	Shows=new ArrayList<Show>();
+	Shows=new ArrayList<ShowSchema>();
 	}
 
 
@@ -49,7 +49,7 @@ public class Meta extends CollectionAttribute implements Serializable,IsSerializ
 			super();
 			Name = name;
 			Father = father;
-			Shows=new ArrayList<Show>();
+			Shows=new ArrayList<ShowSchema>();
 		}
 	
 	/**
@@ -72,7 +72,7 @@ public class Meta extends CollectionAttribute implements Serializable,IsSerializ
 	/**
 	 * @return the shows
 	 */
-	public ArrayList<Show> getShows() {
+	public ArrayList<ShowSchema> getShows() {
 		return Shows;
 	}
 
@@ -82,7 +82,7 @@ public class Meta extends CollectionAttribute implements Serializable,IsSerializ
 	/**
 	 * @param shows the shows to set
 	 */
-	public void setShows(ArrayList<Show> shows) {
+	public void setShows(ArrayList<ShowSchema> shows) {
 		Shows = shows;
 	}
 

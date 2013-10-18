@@ -86,8 +86,8 @@ public class RecursoDescriptionComposite extends Composite {
 Resources elementoIcono = recurso.getIcon();
 		
 		
-		Destino=CalculosStaticos.calculaDestino(elementoIcono,BasePath);
-		ImagenAsociada=CalculosStaticos.calculaImagenAsociada(elementoIcono,BasePath);
+		Destino=ShowsStaticFunctions.calculaDestino(elementoIcono,BasePath);
+		ImagenAsociada=ShowsStaticFunctions.calculaImagenAsociada(elementoIcono,BasePath);
 		
 		
 		
@@ -197,7 +197,7 @@ Resources elementoIcono = recurso.getIcon();
 		
 		
 		for (MetaValue MetaValueD : recurso.getDescription()) {
-			if (!Procesados.containsKey(MetaValueD)&&(ShowsStaticFunctions.isSummary(MetaValueD.getHastype())))
+			if (!Procesados.containsKey(MetaValueD)&&(ShowsStaticFunctions.isSummary(MetaValueD)))
 					procesa(MetaValueD);
 		}
 		
@@ -228,28 +228,19 @@ Resources elementoIcono = recurso.getIcon();
 		{
 			Meta Padre;
 			
-			Padre=FindPadreSummaryAscendente(metaValueD.getHastype().getFather());
+			Padre=FindPadreSummaryAscendente(metaValueD, metaValueD.getHastype());
 			
-			if (Pestanas.containsKey(Padre))
-				if (ShowsStaticFunctions.isSummary(Padre))
-					{
-					//Se retorno el padre por ser el padre
-						return procesosobremipadre(metaValueD,Padre);
-					}
-				else
+			if (Padre==null)
 				{
-					//se retorno el padre porque no hay nadie mas arriba
-					VerticalPanel A = Pestanas.get(Padre);
-					TabElement nuevo= new TabElement(metaValueD);
-					A.add(nuevo);
-					Procesados.put(metaValueD, nuevo);
-//					MetaPestanaATab.put(metaValueD.getHastype(), nuevo);
-					return nuevo;
+				VerticalPanel A = Pestanas.get(Padre);
+				TabElement nuevo= new TabElement(metaValueD);
+				A.add(nuevo);
+				Procesados.put(metaValueD, nuevo);
+				return nuevo;
 				}
 			else
-				{
 				return procesosobremipadre(metaValueD,Padre);
-				}
+					
 			
 			
 			
@@ -312,24 +303,34 @@ Resources elementoIcono = recurso.getIcon();
 	 * @param metaValueD
 	 * @return
 	 */
-	private Meta FindPadreSummaryAscendente(CollectionAttribute padre) {
+	private Meta FindPadreSummaryAscendente(MetaValue metaValueD,Meta Metain) {
 		
-		if (padre instanceof Meta)
-			{
-			if ((ShowsStaticFunctions.isSummary((Meta)padre))||Pestanas.containsKey(padre))
-				return (Meta) padre;
+		Meta Padre;
+		if (Metain.getFather() instanceof Meta)
+			Padre=(Meta) Metain.getFather();
+		else 
+			Padre=findMeta((Iterator) Metain.getFather());
+		
+		MetaValue PadreMV=findMetaValue(Padre, metaValueD.getAmbitos());
+		
+		
+		
+		if (PadreMV!=null)
+			if (ShowsStaticFunctions.isSummary(PadreMV))
+				return Padre;
 			else 
-				return FindPadreSummaryAscendente(padre.getFather());
-			}
-		else {
-			
-			Meta Padreprob = findMeta((Iterator) padre);
-			if ((ShowsStaticFunctions.isSummary(Padreprob))||Pestanas.containsKey(padre))
-				return (Meta) Padreprob;
+				return FindPadreSummaryAscendente(PadreMV,PadreMV.getHastype());
+		else
+			if (ShowsStaticFunctions.isSummary(Padre))
+				return Padre;
 			else 
-				return FindPadreSummaryAscendente(Padreprob.getFather());
-			}
+				return FindPadreSummaryAscendente(metaValueD,Padre);
+
 	}
+
+
+
+
 
 	private MetaValue getMetavalueVacio(Meta padre, ArrayList<Integer> ambitos) {
 		for (MetaValue vaciosCandidato : vaciosCreados) {

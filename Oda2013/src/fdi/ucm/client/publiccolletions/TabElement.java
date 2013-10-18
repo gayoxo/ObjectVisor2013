@@ -140,7 +140,7 @@ public class TabElement extends Composite {
 			Resources elementoIconoBoton=MRV.getValue();
 			
 
-			ImagenAsociada=CalculosStaticos.calculaImagenAsociada(elementoIconoBoton,BasePath);
+			ImagenAsociada=ShowsStaticFunctions.calculaImagenAsociada(elementoIconoBoton,BasePath);
 			
 			Image MRVI=new MetaRelationValueImage(MRV.getValue(),ColeccionSons,ImagenAsociada);
 			return MRVI;

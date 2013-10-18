@@ -7,7 +7,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 import fdi.ucm.shared.model.collection.Attributable;
 import fdi.ucm.shared.model.collection.meta.Meta;
-import fdi.ucm.shared.model.collection.meta.show.Show;
+import fdi.ucm.shared.model.collection.meta.show.ShowInstance;
 
 
 
@@ -25,7 +25,7 @@ public class MetaValue implements Serializable,IsSerializable {
 	private static final long serialVersionUID = 1L;
 	protected Meta hastype;
 	protected ArrayList<Integer> Ambitos;
-	protected ArrayList<Show> Shows;  
+	protected ArrayList<ShowInstance> Shows;  
 
 	
 	/**
@@ -33,7 +33,7 @@ public class MetaValue implements Serializable,IsSerializable {
 	 */
 	public MetaValue() {
 		Ambitos=new ArrayList<Integer>();
-		Shows=new ArrayList<Show>();
+		Shows=new ArrayList<ShowInstance>();
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class MetaValue implements Serializable,IsSerializable {
 	public MetaValue(Meta hastype) {
 		this.hastype = hastype;
 		Ambitos=new ArrayList<Integer>();
-		Shows=new ArrayList<Show>();
+		Shows=new ArrayList<ShowInstance>();
 	}
 
 	/**
@@ -93,14 +93,14 @@ public class MetaValue implements Serializable,IsSerializable {
 	/**
 	 * @return the shows
 	 */
-	public ArrayList<Show> getShows() {
+	public ArrayList<ShowInstance> getShows() {
 		return Shows;
 	}
 
 	/**
 	 * @param shows the shows to set
 	 */
-	public void setShows(ArrayList<Show> shows) {
+	public void setShows(ArrayList<ShowInstance> shows) {
 		Shows = shows;
 	}
 	

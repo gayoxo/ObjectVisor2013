@@ -13,12 +13,6 @@ import com.google.gwt.user.client.ui.PopupPanel;
 import fdi.ucm.shared.model.collection.CollectionAttribute;
 import fdi.ucm.shared.model.collection.Iterator;
 import fdi.ucm.shared.model.collection.meta.Meta;
-import fdi.ucm.shared.model.collection.meta.MetaBoolean;
-import fdi.ucm.shared.model.collection.meta.MetaControlled;
-import fdi.ucm.shared.model.collection.meta.MetaDate;
-import fdi.ucm.shared.model.collection.meta.MetaNumeric;
-import fdi.ucm.shared.model.collection.meta.MetaRelation;
-import fdi.ucm.shared.model.collection.meta.MetaText;
 import fdi.ucm.shared.model.collection.metavalues.MetaValue;
 import fdi.ucm.shared.model.collection.resources.Resources;
 
@@ -113,8 +107,8 @@ public class ReferencePopUpPanel extends PopupPanel {
 		
 		Resources elementoIcono = value.getIcon();
 		
-		Destino=CalculosStaticos.calculaDestino(elementoIcono,BasePath);
-		ImagenAsociada=CalculosStaticos.calculaImagenAsociada(elementoIcono,BasePath);
+		Destino=ShowsStaticFunctions.calculaDestino(elementoIcono,BasePath);
+		ImagenAsociada=ShowsStaticFunctions.calculaImagenAsociada(elementoIcono,BasePath);
 		
 		Icono = new Image(ImagenAsociada);
 		verticalPanel.add(Icono);
@@ -197,7 +191,7 @@ public class ReferencePopUpPanel extends PopupPanel {
 //				panelScrollVertical.setSize(WidthScroll+"px", HeighScroll+"px");
 				panelScrollVertical.setSize("100%", HeighScroll+"px");
 				PanelDecorador.add(panelScrollVertical, MetaActual.getName(), true);
-				if (NotBasic(MetaActual))
+				if (ShowsStaticFunctions.NotBasic(MetaActual))
 					panelScrollVertical.add(res);
 				else
 					{
@@ -224,26 +218,7 @@ public class ReferencePopUpPanel extends PopupPanel {
 		
 	}
 	
-	/**
-	 * Devuelve si el tipo es de tipo meta Basico
-	 * @param metaActual
-	 * @return
-	 */
-	private boolean NotBasic(Meta metaActual) {
-		if (metaActual instanceof MetaControlled)
-			return true;
-		else if (metaActual instanceof MetaText)
-			return true;
-		else if (metaActual instanceof MetaDate)
-			return true;
-		else if (metaActual instanceof MetaNumeric)
-			return true;
-		else if (metaActual instanceof MetaBoolean)
-			return true;
-		else if (metaActual instanceof MetaRelation)
-			return true;
-		else return false;
-	}
+	
 
 	/**
 	 * Funcion que procesa un recurso, creando el padre si este no existe.
