@@ -174,7 +174,7 @@ public class ReferencePopUpPanel extends PopupPanel {
 		
 		
 		for (MetaValue MetaValueD : Recurso.getDescription()) {
-			if (!Procesados.containsKey(MetaValueD)&&(ShowsStaticFunctions.isVisible(MetaValueD.getHastype())))
+			if (!Procesados.containsKey(MetaValueD)&&(ShowsStaticFunctions.isVisible(MetaValueD)))
 					procesa(MetaValueD);
 		}
 		
@@ -241,10 +241,10 @@ public class ReferencePopUpPanel extends PopupPanel {
 			Meta Padre;
 			
 			
-			Padre=FindPadreVisibleAscendente(metaValueD.getHastype().getFather());
+			Padre=FindPadreVisibleAscendente(metaValueD,metaValueD.getHastype());
 			
 			if (Pestanas.containsKey(Padre))
-				if (ShowsStaticFunctions.isVisible(Padre))
+				if (isVisibleMeta(Padre,metaValueD))
 					{
 					//Se retorno el padre por ser el padre
 						return procesosobremipadre(metaValueD,Padre);
@@ -270,6 +270,23 @@ public class ReferencePopUpPanel extends PopupPanel {
 			}	
 		
 	}
+	
+	
+	/**
+	 * procesa si el padre es visible
+	 * @param padre
+	 * @param metaValueD 
+	 * @return
+	 */
+	private boolean isVisibleMeta(Meta padre, MetaValue metaValueD) {
+		MetaValue PadreMV=findMetaValue(padre, metaValueD.getAmbitos());
+		if (PadreMV!=null)
+			return ShowsStaticFunctions.isVisible(PadreMV);
+		else
+			return ShowsStaticFunctions.isVisible(padre);
+				
+	}
+
 
 	/**
 	 * Procesa un elemto sobre su padre
@@ -320,26 +337,37 @@ public class ReferencePopUpPanel extends PopupPanel {
 	}
 
 	/**
-	 * Busca el padre visible mas cercano
-	 * @param father
+	 * Busca al padre que ademas de se meta sea summary
+	 * @param metaValueD
 	 * @return
 	 */
-	private Meta FindPadreVisibleAscendente(CollectionAttribute padre) {
-		if (padre instanceof Meta)
-		{
-		if (ShowsStaticFunctions.isVisible(((Meta)padre))||Pestanas.containsKey(padre))
-			return (Meta) padre;
-		else 
-			return FindPadreVisibleAscendente(padre.getFather());
-		}
-	else {
+	private Meta FindPadreVisibleAscendente(MetaValue metaValueD,Meta Metain) {
 		
-		Meta Padreprob = findMeta((Iterator) padre);
-		if (ShowsStaticFunctions.isVisible(Padreprob)||Pestanas.containsKey(padre))
-			return (Meta) Padreprob;
+		Meta Padre;
+		
+		if (Metain.getFather()==null)
+			return Metain;
+		
+		if (Metain.getFather() instanceof Meta)
+			Padre=(Meta) Metain.getFather();
 		else 
-			return FindPadreVisibleAscendente(Padreprob.getFather());
-		}
+			Padre=findMeta((Iterator) Metain.getFather());
+		
+		MetaValue PadreMV=findMetaValue(Padre, metaValueD.getAmbitos());
+		
+		
+		
+		if (PadreMV!=null)
+			if (ShowsStaticFunctions.isVisible(PadreMV))
+				return Padre;
+			else 
+				return FindPadreVisibleAscendente(PadreMV,PadreMV.getHastype());
+		else
+			if (ShowsStaticFunctions.isVisible(Padre))
+				return Padre;
+			else 
+				return FindPadreVisibleAscendente(metaValueD,Padre);
+
 	}
 
 	/**

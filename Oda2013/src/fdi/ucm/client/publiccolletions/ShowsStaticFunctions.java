@@ -112,6 +112,50 @@ public class ShowsStaticFunctions {
 		return false;
 	}
 
+	
+	/**
+	 * Ser visible con la instancia incluida
+	 * @param metaValueD
+	 * @return
+	 */
+	public static boolean isVisible(MetaValue metaValueD) {
+		
+		
+		Boolean B=isVisibleVal(metaValueD);
+		if (B!=null)
+			return B;
+		else 
+			return isVisible(metaValueD.getHastype());
+
+	}
+	
+	
+	/**
+	 * Comprueba si el metavalue es visible y sobre escribe el normal
+	 * @param metaValueD
+	 * @return
+	 */
+	private static Boolean isVisibleVal(MetaValue metaValueD) {
+	
+		ArrayList<ShowInstance> Shows = metaValueD.getShows();
+		for (ShowInstance show : Shows) {
+			ArrayList<ShowValuesInstance> ShowValue = show.getValues();
+			for (ShowValues showValues : ShowValue) {
+				if (showValues.getValor().equals(Oda2013StaticNames.VISIBLESHOWN))
+						{
+						ArrayList<ShowValoresResult> result=showValues.getResultado();
+							for (ShowValoresResult showValoresResult : result) {
+								if (showValoresResult.getResultado().equals(Boolean.toString(true)))
+									return true;
+								if (showValoresResult.getResultado().equals(Boolean.toString(false)))
+									return false;
+							}
+						}
+			}
+		}
+		return null;
+	}
+	
 	public static boolean isBrowseable(Meta meta) {
 		ArrayList<ShowSchema> Shows = meta.getShows();
 		for (ShowSchema show : Shows) {

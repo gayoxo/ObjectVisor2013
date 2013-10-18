@@ -230,23 +230,50 @@ Resources elementoIcono = recurso.getIcon();
 			
 			Padre=FindPadreSummaryAscendente(metaValueD, metaValueD.getHastype());
 			
-			if (Padre==null)
+			if (Pestanas.containsKey(Padre))
+				if (isSummaryMeta(Padre,metaValueD))
+					{
+					//Se retorno el padre por ser el padre
+						return procesosobremipadre(metaValueD,Padre);
+					}
+				else
 				{
-				VerticalPanel A = Pestanas.get(Padre);
-				TabElement nuevo= new TabElement(metaValueD);
-				A.add(nuevo);
-				Procesados.put(metaValueD, nuevo);
-				return nuevo;
+					Pestanas.put((Meta) metaValueD.getHastype(), PanelA);
+					MetaOrden.add((Meta) metaValueD.getHastype());
+					TabElement nuevo= new TabElement(metaValueD);
+					PanelA.add(nuevo);
+					Procesados.put(metaValueD, nuevo);
+					return nuevo;
 				}
 			else
+				{
 				return procesosobremipadre(metaValueD,Padre);
-					
+				}
 			
 			
 			
 			}	
 		
 	}
+
+
+	/**
+	 * procesa si el padre es visible
+	 * @param padre
+	 * @param metaValueD 
+	 * @return
+	 */
+	private boolean isSummaryMeta(Meta padre, MetaValue metaValueD) {
+		MetaValue PadreMV=findMetaValue(padre, metaValueD.getAmbitos());
+		if (PadreMV!=null)
+			return ShowsStaticFunctions.isSummary(PadreMV);
+		else
+			return ShowsStaticFunctions.isSummary(padre);
+				
+	}
+
+
+
 
 
 
@@ -306,6 +333,10 @@ Resources elementoIcono = recurso.getIcon();
 	private Meta FindPadreSummaryAscendente(MetaValue metaValueD,Meta Metain) {
 		
 		Meta Padre;
+		
+		if (Metain.getFather()==null)
+			return Metain;
+		
 		if (Metain.getFather() instanceof Meta)
 			Padre=(Meta) Metain.getFather();
 		else 
@@ -383,6 +414,8 @@ Resources elementoIcono = recurso.getIcon();
 	 * @return Meta mas cercano hacia arrriba en el arbol.
 	 */
 	private Meta findMeta(Iterator IteradorProcesar) {
+		if (IteradorProcesar.getFather()==null)
+			return null;
 		if (IteradorProcesar.getFather() instanceof Meta)
 			return (Meta) IteradorProcesar.getFather();
 		else return findMeta((Iterator)IteradorProcesar.getFather());
