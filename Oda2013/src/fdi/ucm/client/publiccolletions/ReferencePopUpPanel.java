@@ -105,7 +105,7 @@ public class ReferencePopUpPanel extends PopupPanel {
 		
 
 		
-		Resources elementoIcono = value.getIcon();
+		Resources elementoIcono = ShowsStaticFunctions.getIcon(value);
 		
 		Destino=ShowsStaticFunctions.calculaDestino(elementoIcono,BasePath);
 		ImagenAsociada=ShowsStaticFunctions.calculaImagenAsociada(elementoIcono,BasePath);

@@ -16,8 +16,7 @@ public abstract class Resources extends Attributable{
 	private static final long serialVersionUID = 1L;
 
 	private Collection collectionFather;
-	
-	private Resources Icon;
+
 	
 	/**
 	 * Constructor por defecto. 
@@ -40,19 +39,7 @@ public abstract class Resources extends Attributable{
 		this.collectionFather = collectionFather;
 	}
 
-	/**
-	 * @return the icon
-	 */
-	public Resources getIcon() {
-		return Icon;
-	}
 
-	/**
-	 * @param icon the icon to set
-	 */
-	public void setIcon(Resources icon) {
-		Icon = icon;
-	}
 	
 	
 	

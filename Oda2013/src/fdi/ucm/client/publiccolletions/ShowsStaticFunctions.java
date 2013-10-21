@@ -177,7 +177,57 @@ public class ShowsStaticFunctions {
 	}
 
 	
-
+	/**
+	 * Funcion que tetorna el icono de un recurso Objeto digital
+	 * @param objetoDigital
+	 * @return
+	 */
+	public static Resources getIcon(Resources recurso) {
+		for (MetaValue elem : recurso.getDescription()) {
+			String res=getIcon(elem);
+				if (res!=null)
+					return new File(res);
+		}
+		
+		return null;
+	}
+	
+	
+	/**
+	 * Funcion que retorna el icono de un MetaValue donde esta definido el icono
+	 * @param elem
+	 * @return
+	 */
+	private static String getIcon(MetaValue elem) {
+		
+		ArrayList<ShowInstance> ShowsInst = elem.getShows();
+		for (ShowInstance show : ShowsInst) {
+			ArrayList<ShowValuesInstance> ShowValue = show.getValues();
+			for (ShowValues showValues : ShowValue) {
+				if (showValues.getValor().equals(Oda2013StaticNames.ICON))
+						{
+						ArrayList<ShowValoresResult> result=showValues.getResultado();
+							if (result.size()>0)
+								return result.get(0).getResultado();
+						}
+			}
+		}
+		
+		ArrayList<ShowSchema> Shows = elem.getHastype().getShows();
+		for (ShowSchema show : Shows) {
+			ArrayList<ShowValues> ShowValue = show.getValues();
+			for (ShowValues showValues : ShowValue) {
+				if (showValues.getValor().equals(Oda2013StaticNames.ICON))
+						{
+						ArrayList<ShowValoresResult> result=showValues.getResultado();
+							if (result.size()>0)
+								return result.get(0).getResultado();
+						}
+			}
+		}
+		return null;
+		
+	}
 	
 /**
  * Calcula el destino dependiendo si es imagen o URL
@@ -186,7 +236,7 @@ public class ShowsStaticFunctions {
  * @return Direccion destino
  */
 	public static String calculaDestino(Resources elementoIcono,String BasePath) {
-		if (elementoIcono instanceof Construct)
+		if (elementoIcono==null || elementoIcono instanceof Construct)
 			return null;
 		else if (elementoIcono instanceof File)
 			return BasePath+"/"+((File)elementoIcono).getPath();
@@ -203,6 +253,8 @@ public class ShowsStaticFunctions {
 	 * @return path del icono o imagen asociado.
 	 */
 	public static String calculaImagenAsociada(Resources elementoIcono,String BasePath) {
+		if (elementoIcono==null)
+			return GWT.getHostPageBaseURL()+StaticIconos.ICONODEFAULT;
 		if (elementoIcono instanceof File)
 			{
 			if
@@ -338,4 +390,6 @@ public class ShowsStaticFunctions {
 			return true;
 		else return false;
 	}
+
+	
 }

@@ -83,7 +83,7 @@ public class RecursoDescriptionComposite extends Composite {
 		//PanelDelIcono.setSize("", "");
 		PanelGeneral.setCellVerticalAlignment(PanelDelIcono, HasVerticalAlignment.ALIGN_MIDDLE);
 		
-Resources elementoIcono = recurso.getIcon();
+Resources elementoIcono = ShowsStaticFunctions.getIcon(recurso);
 		
 		
 		Destino=ShowsStaticFunctions.calculaDestino(elementoIcono,BasePath);

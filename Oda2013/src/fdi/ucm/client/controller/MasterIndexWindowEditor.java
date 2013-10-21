@@ -8,6 +8,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import fdi.ucm.client.ConstantsError;
+import fdi.ucm.client.publiccolletions.Oda2013StaticNames;
 import fdi.ucm.client.service.Oda3Service;
 import fdi.ucm.client.service.Oda3ServiceAsync;
 import fdi.ucm.shared.model.userserver.CollectionAndFilePath;
@@ -31,10 +32,13 @@ public class MasterIndexWindowEditor implements WindowEditor {
 		if (IdentificadorPublico==null||IdentificadorPublico.isEmpty())
 			processGeneral();		
 		else {
+				LoadingPopupPanel.getInstance().setLabelTexto(Oda2013StaticNames.LOADING + IdentificadorPublico);
+				LoadingPopupPanel.getInstance().center();
 				serviceOda.LoadPublicCollection(IdentificadorPublico, new AsyncCallback<CollectionAndFilePath>() {
 					
 					@Override
 					public void onSuccess(CollectionAndFilePath result) {
+						LoadingPopupPanel.getInstance().hide();
 						if (result.getColeccion()!=null)
 							ControladorEntryPoint.ToPublicCollectionVisualiceWindowEditor(result.getColeccion(), "http://"+Window.Location.getHost()+"/ME2013/Files/"+result.getFilePath(), result.getDescription());
 						else processGeneral();
@@ -42,6 +46,7 @@ public class MasterIndexWindowEditor implements WindowEditor {
 					
 					@Override
 					public void onFailure(Throwable caught) {
+						LoadingPopupPanel.getInstance().hide();
 						processGeneral();
 					}
 				});
