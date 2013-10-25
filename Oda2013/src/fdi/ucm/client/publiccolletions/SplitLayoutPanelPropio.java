@@ -11,15 +11,12 @@ import java.util.List;
 import java.util.Stack;
 
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.logical.shared.OpenEvent;
 import com.google.gwt.event.logical.shared.OpenHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -44,10 +41,14 @@ import fdi.ucm.shared.model.collection.metavalues.MetaControlledValue;
 import fdi.ucm.shared.model.collection.metavalues.MetaTextValue;
 import fdi.ucm.shared.model.collection.metavalues.MetaValue;
 import fdi.ucm.shared.model.collection.resources.Resources;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.kiouri.sliderbar.client.event.BarValueChangedEvent;
+import com.kiouri.sliderbar.client.event.BarValueChangedHandler;
+import com.kiouri.sliderbar.client.solution.simplehorizontal.SliderBarSimpleHorizontal;
 
 /**
  * Clase que mantiene y genera el panel de vision general para el modelo.
- * @author Coca-COla
+ * @author Joaquin Gayoso-Cabada
  *
  */
 public class SplitLayoutPanelPropio extends SplitLayoutPanel {
@@ -65,7 +66,10 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 	private Label PageLabel;
 	private static Collection coleccion;
 	private static String BasePath;
-	
+	private SliderBarSimpleHorizontal SB;
+	private ArrayList<Resources> Lista;
+	private SplitLayoutPanelPropio OEThis;
+	private SimplePanel PanelScrollBar;
 	
 	public SplitLayoutPanelPropio() {
 		
@@ -86,14 +90,14 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 		scrollPanel.setWidget(ZonaArboles);
 		ZonaArboles.setSize("100%", "100%");
 		
-
+		OEThis=this;
 		
 		
 		Tree ArbolAGenerar = new Tree();
 		ArbolAGenerar.addSelectionHandler(new SelectionHandler<TreeItem>() {
-			private Button Mas;
-			private ArrayList<Resources> Lista;
-			private Button Menos;
+//			private Button Mas;
+//
+//			private Button Menos;
 
 			public void onSelection(SelectionEvent<TreeItem> event) {
 				if (event.getSelectedItem() instanceof MetaVisualizeTreeItem)  
@@ -103,73 +107,54 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 					Lista = ((MetaVisualizeTreeItem)event.getSelectedItem()).getHijosRecurso();
 					Path.setText(pathFather(Element));
 					PanelRecursosActuales.clear();
+					SB.setMaxValue(Lista.size()-1);
+					SB.setValue(0);
 					LastElement=0;
 					showNextLista();
-					setPageLabel();
-					Mas=new Button(MORE_BUTTON);
-					Mas.addClickHandler(new ClickHandler() {
-						
-						@Override
-						public void onClick(ClickEvent event) {
-								PanelRecursosActuales.clear();
-								PanelRecursosActuales.add(Menos);
-								showNextLista();
-								if (LastElement<Lista.size())
-									PanelRecursosActuales.add(Mas);
-								scrollElementos.setVerticalScrollPosition(0);
-
-						}
-					});
-					if (LastElement>=9)
-						PanelRecursosActuales.add(Mas);
-					Mas.setWidth("100%");
-					Menos=new Button(LESS_BUTTON);
-					Menos.addClickHandler(new ClickHandler() {
-						
-						@Override
-						public void onClick(ClickEvent event) {
-								PanelRecursosActuales.clear();
-								int calMenos=LastElement-1;
-								int div=(calMenos/10);
-								LastElement=div*10;		
-								LastElement=LastElement-20;
-								if (LastElement>0)
-									PanelRecursosActuales.add(Menos);
-								if (LastElement<0)
-									LastElement=0;
-								showNextLista();
-									PanelRecursosActuales.add(Mas);
-									scrollElementos.setVerticalScrollPosition(0);
-
-						}
-					});
-					Menos.setWidth("100%");
+					setPageLabel(LastElement);
+					PanelScrollBar.setWidget(SB);
+//					Mas=new Button(MORE_BUTTON);
+//					Mas.addClickHandler(new ClickHandler() {
+//						
+//						@Override
+//						public void onClick(ClickEvent event) {
+//								PanelRecursosActuales.clear();
+//								PanelRecursosActuales.add(Menos);
+//								showNextLista();
+//								if (LastElement<Lista.size())
+//									PanelRecursosActuales.add(Mas);
+//								scrollElementos.setVerticalScrollPosition(0);
+//
+//						}
+//					});
+//					if (LastElement>=9)
+//						PanelRecursosActuales.add(Mas);
+//					Mas.setWidth("100%");
+//					Menos=new Button(LESS_BUTTON);
+//					Menos.addClickHandler(new ClickHandler() {
+//						
+//						@Override
+//						public void onClick(ClickEvent event) {
+//								PanelRecursosActuales.clear();
+//								int calMenos=LastElement-1;
+//								int div=(calMenos/10);
+//								LastElement=div*10;		
+//								LastElement=LastElement-20;
+//								if (LastElement>0)
+//									PanelRecursosActuales.add(Menos);
+//								if (LastElement<0)
+//									LastElement=0;
+//								showNextLista();
+//									PanelRecursosActuales.add(Mas);
+//									scrollElementos.setVerticalScrollPosition(0);
+//
+//						}
+//					});
+//					Menos.setWidth("100%");
 					}
 			}
 
-			private void setPageLabel() {
-				int Menos=(LastElement-9);
-				if (Menos<1)
-					if (LastElement>0)
-						Menos=1;
-					else
-						Menos=0;
-				PageLabel.setText((Menos)+"/"+(LastElement));
-				
-			}
-
-			private void showNextLista() {
-				int actual = 0;
-				for (int i = 0; i<10 && (LastElement+i) < Lista.size(); i++) {
-					Resources recurso =Lista.get(LastElement+i);
-					PanelRecursosActuales.add(new RecursoDescriptionComposite(recurso,coleccion.getMetamodelSchemas()));
-					actual++;
-				}
-				LastElement=LastElement+actual;
-				setPageLabel();
-				
-				
-			}
+		
 		});
 		ArbolAGenerar.addOpenHandler(new OpenHandler<TreeItem>() {
 			public void onOpen(OpenEvent<TreeItem> event) {
@@ -224,8 +209,14 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 		add(ZonaElementosActual);
 		ZonaElementosActual.setSize("100%", "100%");
 		
+		VerticalPanel verticalPanel = new VerticalPanel();
+		verticalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+		verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		ZonaElementosActual.addNorth(verticalPanel, 48.0);
+		verticalPanel.setSize("100%", "100%");
+		
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
-		ZonaElementosActual.addNorth(horizontalPanel, 40.0);
+		verticalPanel.add(horizontalPanel);
 		horizontalPanel.setSize("100%", "100%");
 		
 		ScrollPanel scrollPanel_2 = new ScrollPanel();
@@ -241,6 +232,12 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 		horizontalPanel.add(PageLabel);
 		PageLabel.setSize("100%", "100%");
 		
+		PanelScrollBar = new SimplePanel();
+		verticalPanel.add(PanelScrollBar);
+		verticalPanel.setCellVerticalAlignment(PanelScrollBar, HasVerticalAlignment.ALIGN_MIDDLE);
+		verticalPanel.setCellHorizontalAlignment(PanelScrollBar, HasHorizontalAlignment.ALIGN_CENTER);
+		PanelScrollBar.setSize("100%", "100%");
+		
 		scrollElementos = new ScrollPanel();
 		ZonaElementosActual.add(scrollElementos);
 		scrollElementos.setSize("100%", "100%");
@@ -248,6 +245,24 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 		PanelRecursosActuales = new VerticalPanel();
 		scrollElementos.setWidget(PanelRecursosActuales);
 		PanelRecursosActuales.setSize("100%", "100%");
+		
+		LastElement=0;
+		SB=new SliderBarSimpleHorizontal(0, "100%", true);
+		SB.setVisible(true);
+		SB.addBarValueChangedHandler(new BarValueChangedHandler() {
+			
+
+
+			@Override
+			public void onBarValueChanged(BarValueChangedEvent event) {
+				if (PanelRecursosActuales!=null&&Lista!=null)
+				{
+				PanelRecursosActuales.clear();
+				LastElement=event.getValue();
+				OEThis.showNextLista();
+				}
+			}
+		});
 
 	}
 	
@@ -597,4 +612,23 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 			return pathFather(entrada.getFather())+ConstantsInformation.BARRAINVERTIDA+DataShow;
 		else return DataShow;
 	}
+	
+	private void showNextLista() {
+		int actual = 0;
+		int inicial=LastElement;
+		for (int i = 0; i<10 && (LastElement+i) < Lista.size(); i++) {
+			Resources recurso =Lista.get(LastElement+i);
+			PanelRecursosActuales.add(new RecursoDescriptionComposite(recurso,coleccion.getMetamodelSchemas()));
+			actual++;
+		}
+		LastElement=LastElement+actual;
+		setPageLabel(inicial);
+	}
+	
+	private void setPageLabel(Integer inicio) {
+		PageLabel.setText((inicio+1)+"/"+(LastElement));
+		
+	}
+
+	
 }
