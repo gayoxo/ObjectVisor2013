@@ -249,6 +249,7 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 		LastElement=0;
 		SB=new SliderBarSimpleHorizontal(0, "100%", true);
 		SB.setVisible(true);
+		SB.setMinMarkStep(10);
 		SB.addBarValueChangedHandler(new BarValueChangedHandler() {
 			
 
