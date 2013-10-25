@@ -142,3 +142,9 @@ background-color: rgba(178, 203, 225, 0.40);
 .MenuItemGris {
 	color: Silver;
 }
+
+
+.gwt-Image
+{
+	z-index: 0 !important;
+}
