@@ -32,7 +32,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Joaquin Gayoso-Cabada
  *
  */
-public class ReferencePopUpPanel2 extends PopupPanel implements PoupCerrableGrupo{
+public class ReferenceDescriptorPopUpPanel extends PopupPanel implements PoupCerrableGrupo{
 
 	
 	private static final String X = "X";
@@ -47,7 +47,7 @@ public class ReferencePopUpPanel2 extends PopupPanel implements PoupCerrableGrup
 	private static final String FILE_PATH = "File Path : ";
 
 	
-	public ReferencePopUpPanel2(Resources value,List<CollectionAttribute> coleccionSons) {
+	public ReferenceDescriptorPopUpPanel(Resources value,List<CollectionAttribute> coleccionSons) {
 		setAutoHideEnabled(true);
 		setModal(true);
 		AllClose=true;
@@ -163,9 +163,9 @@ public class ReferencePopUpPanel2 extends PopupPanel implements PoupCerrableGrup
 	public void hide(boolean autoClosed) {
 		super.hide(autoClosed);
 		if (AllClose)
-			while (!SplitLayoutPanelPropio.getPila_de_cerrado().isEmpty())
+			while (!PublicCollectionSplitLayoutPanel.getPila_de_cerrado().isEmpty())
 			{
-				PoupCerrableGrupo RPP=(PoupCerrableGrupo) SplitLayoutPanelPropio.getPila_de_cerrado().pop();
+				PoupCerrableGrupo RPP=(PoupCerrableGrupo) PublicCollectionSplitLayoutPanel.getPila_de_cerrado().pop();
 				RPP.setAllClose(false);
 				((PopupPanel)RPP).hide();
 			}

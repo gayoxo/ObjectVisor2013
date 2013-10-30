@@ -127,14 +127,14 @@ public class TabElement extends Composite {
 			{
 			ImagenAsociada=ShowsStaticFunctions.calculaImagenAsociada((Resources)elementoIconoBoton);
 			
-			Image MRVI=new MetaRelationValueImage((Resources)elementoIconoBoton,ColeccionSons,ImagenAsociada);
+			Image MRVI=new MetaRelationResourceValueImage((Resources)elementoIconoBoton,ColeccionSons,ImagenAsociada);
 			Result= MRVI;
 			}
 			else if (elementoIconoBoton instanceof Construct)
 			{
 			ImagenAsociada=ShowsStaticFunctions.calculaImagenAsociada((Construct)elementoIconoBoton);
 			
-			Image MRVI=new MetaRelationValueImage2((Construct)elementoIconoBoton,ColeccionSons,ImagenAsociada);
+			Image MRVI=new MetaRelationConstructValueImage((Construct)elementoIconoBoton,ColeccionSons,ImagenAsociada);
 			Result= MRVI;
 				
 			}

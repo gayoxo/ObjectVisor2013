@@ -160,8 +160,8 @@ public class RecursoDescriptionComposite extends Composite {
 		horizontalPanel.add(OpenElement);
 		OpenElement.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				ReferencePopUpPanel RPUP=new ReferencePopUpPanel(Recurso,ColeccionSons);
-				SplitLayoutPanelPropio.getPila_de_cerrado().add(RPUP);
+				ConstructDescriptorPopUpPanel RPUP=new ConstructDescriptorPopUpPanel(Recurso,ColeccionSons);
+				PublicCollectionSplitLayoutPanel.getPila_de_cerrado().add(RPUP);
 				RPUP.center();
 			}
 		});

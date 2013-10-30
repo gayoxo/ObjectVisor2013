@@ -13,11 +13,11 @@ import fdi.ucm.shared.model.collection.meta.controlled.Term;
  * @author Joaquin Gayoso-Cabada
  *
  */
-public class MetaVisualizeTreeItemString extends MetaVisualizeTreeItem {
+public class MetaTextMetaVisualizeTreeItem extends MetaVisualizeTreeItem {
 
 	private String TextoPropio;
 	
-	public MetaVisualizeTreeItemString(Meta atributo1, String textopropio,
+	public MetaTextMetaVisualizeTreeItem(Meta atributo1, String textopropio,
 			ArrayList<Term> arrayList, ArrayList<String> filtroTextoin) {
 		super();
 		TextoPropio=textopropio;
@@ -26,14 +26,14 @@ public class MetaVisualizeTreeItemString extends MetaVisualizeTreeItem {
 		
 		filtroTexto.add(atributo1.getName()+TextoPropio);
 		
-		HijosRecurso=SplitLayoutPanelPropio.FindResources(ListEntrada, atributo1,filtro,filtroTexto);
+		HijosRecurso=PublicCollectionSplitLayoutPanel.FindResources(ListEntrada, atributo1,filtro,filtroTexto);
 
 		if (HijosRecurso.size()>0)
 			setHTML("<i> " +TextoPropio +" </i>"+"("+HijosRecurso.size()+")");
 		else 
 			setHTML("<i> " +TextoPropio +" </i>");
 		
-		Boolean A = SplitLayoutPanelPropio.getFlagsDeAperturaString().get(TextoPropio);
+		Boolean A = PublicCollectionSplitLayoutPanel.getFlagsDeAperturaString().get(TextoPropio);
 		if (A!=null&&A)
 			setState(true, true);
 	}

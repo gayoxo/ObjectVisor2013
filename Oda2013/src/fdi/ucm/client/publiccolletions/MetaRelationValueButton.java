@@ -34,14 +34,14 @@ public class MetaRelationValueButton extends Button {
 				PopupPanel RPUP=null;
 				if (MetaRelationValue.getValue() instanceof Construct)
 				{
-					RPUP=new ReferencePopUpPanel((Construct)MetaRelationValue.getValue(),ColeccionSons);
-					SplitLayoutPanelPropio.getPila_de_cerrado().add(RPUP);
+					RPUP=new ConstructDescriptorPopUpPanel((Construct)MetaRelationValue.getValue(),ColeccionSons);
+					PublicCollectionSplitLayoutPanel.getPila_de_cerrado().add(RPUP);
 					RPUP.center();
 				}
 				else if (MetaRelationValue.getValue() instanceof Resources)
 				{
-					RPUP=new ReferencePopUpPanel2((Resources)MetaRelationValue.getValue(),ColeccionSons);
-					SplitLayoutPanelPropio.getPila_de_cerrado().add(RPUP);
+					RPUP=new ReferenceDescriptorPopUpPanel((Resources)MetaRelationValue.getValue(),ColeccionSons);
+					PublicCollectionSplitLayoutPanel.getPila_de_cerrado().add(RPUP);
 					RPUP.center();
 				}
 				

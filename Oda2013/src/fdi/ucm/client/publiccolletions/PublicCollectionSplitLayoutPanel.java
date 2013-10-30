@@ -51,10 +51,10 @@ import com.kiouri.sliderbar.client.solution.simplehorizontal.SliderBarSimpleHori
  * @author Joaquin Gayoso-Cabada
  *
  */
-public class SplitLayoutPanelPropio extends SplitLayoutPanel {
+public class PublicCollectionSplitLayoutPanel extends SplitLayoutPanel {
 
-	protected static final String MORE_BUTTON = "More";
-	protected static final String LESS_BUTTON = "Back";
+//	protected static final String MORE_BUTTON = "More";
+//	protected static final String LESS_BUTTON = "Back";
 	private static HashMap<Meta, Boolean> FlagsDeApertura;
 	private static HashMap<Term, Boolean> FlagsDeAperturaTerm;
 	private static HashMap<String, Boolean> FlagsDeAperturaString;
@@ -68,10 +68,10 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 	private static String BasePath;
 	private SliderBarSimpleHorizontal SB;
 	private ArrayList<Construct> Lista;
-	private SplitLayoutPanelPropio OEThis;
+	private PublicCollectionSplitLayoutPanel OEThis;
 	private SimplePanel PanelScrollBar;
 	
-	public SplitLayoutPanelPropio() {
+	public PublicCollectionSplitLayoutPanel() {
 		
 		if (FlagsDeApertura==null)
 			FlagsDeApertura=new HashMap<Meta, Boolean>();
@@ -95,9 +95,7 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 		
 		Tree ArbolAGenerar = new Tree();
 		ArbolAGenerar.addSelectionHandler(new SelectionHandler<TreeItem>() {
-//			private Button Mas;
-//
-//			private Button Menos;
+
 
 			public void onSelection(SelectionEvent<TreeItem> event) {
 				if (event.getSelectedItem() instanceof MetaVisualizeTreeItem)  
@@ -113,44 +111,7 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 					showNextLista();
 					setPageLabel(LastElement);
 					PanelScrollBar.setWidget(SB);
-//					Mas=new Button(MORE_BUTTON);
-//					Mas.addClickHandler(new ClickHandler() {
-//						
-//						@Override
-//						public void onClick(ClickEvent event) {
-//								PanelRecursosActuales.clear();
-//								PanelRecursosActuales.add(Menos);
-//								showNextLista();
-//								if (LastElement<Lista.size())
-//									PanelRecursosActuales.add(Mas);
-//								scrollElementos.setVerticalScrollPosition(0);
-//
-//						}
-//					});
-//					if (LastElement>=9)
-//						PanelRecursosActuales.add(Mas);
-//					Mas.setWidth("100%");
-//					Menos=new Button(LESS_BUTTON);
-//					Menos.addClickHandler(new ClickHandler() {
-//						
-//						@Override
-//						public void onClick(ClickEvent event) {
-//								PanelRecursosActuales.clear();
-//								int calMenos=LastElement-1;
-//								int div=(calMenos/10);
-//								LastElement=div*10;		
-//								LastElement=LastElement-20;
-//								if (LastElement>0)
-//									PanelRecursosActuales.add(Menos);
-//								if (LastElement<0)
-//									LastElement=0;
-//								showNextLista();
-//									PanelRecursosActuales.add(Mas);
-//									scrollElementos.setVerticalScrollPosition(0);
-//
-//						}
-//					});
-//					Menos.setWidth("100%");
+
 					}
 			}
 
@@ -158,10 +119,10 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 		});
 		ArbolAGenerar.addOpenHandler(new OpenHandler<TreeItem>() {
 			public void onOpen(OpenEvent<TreeItem> event) {
-				if (event.getTarget() instanceof MetaVisualizeTreeItemTerm)  
+				if (event.getTarget() instanceof MetaControlledTermMetaVisualizeTreeItem)  
 					{
-					FlagsDeAperturaTerm.put(((MetaVisualizeTreeItemTerm)event.getTarget()).getTermino(),true);
-					((MetaVisualizeTreeItemTerm)event.getTarget()).OpenSons();
+					FlagsDeAperturaTerm.put(((MetaControlledTermMetaVisualizeTreeItem)event.getTarget()).getTermino(),true);
+					((MetaControlledTermMetaVisualizeTreeItem)event.getTarget()).OpenSons();
 					}
 				else 
 					if (event.getTarget() instanceof MetaVisualizeTreeItem)
@@ -169,10 +130,10 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 						FlagsDeApertura.put(((MetaVisualizeTreeItem)event.getTarget()).getAttribute(),true);	
 					((MetaVisualizeTreeItem)event.getTarget()).OpenSons();
 					}
-					else if (event.getTarget() instanceof MetaVisualizeTreeItemString)
+					else if (event.getTarget() instanceof MetaTextMetaVisualizeTreeItem)
 					{	
-						FlagsDeAperturaString.put(((MetaVisualizeTreeItemString)event.getTarget()).getTextoPropio(),true);	
-					((MetaVisualizeTreeItemString)event.getTarget()).OpenSons();
+						FlagsDeAperturaString.put(((MetaTextMetaVisualizeTreeItem)event.getTarget()).getTextoPropio(),true);	
+					((MetaTextMetaVisualizeTreeItem)event.getTarget()).OpenSons();
 					}
 			}
 		});
@@ -181,15 +142,15 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 			
 			@Override
 			public void onClose(CloseEvent<TreeItem> event) {
-				if (event.getTarget() instanceof MetaVisualizeTreeItemTerm)  
-				FlagsDeAperturaTerm.put(((MetaVisualizeTreeItemTerm)event.getTarget()).getTermino(),false);
+				if (event.getTarget() instanceof MetaControlledTermMetaVisualizeTreeItem)  
+				FlagsDeAperturaTerm.put(((MetaControlledTermMetaVisualizeTreeItem)event.getTarget()).getTermino(),false);
 
 			else 
 				if (event.getTarget() instanceof MetaVisualizeTreeItem)
 					FlagsDeApertura.put(((MetaVisualizeTreeItem)event.getTarget()).getAttribute(),false);	
 				else 
-					if (event.getTarget() instanceof MetaVisualizeTreeItemString)
-						FlagsDeAperturaString.put(((MetaVisualizeTreeItemString)event.getTarget()).getTextoPropio(),false);	
+					if (event.getTarget() instanceof MetaTextMetaVisualizeTreeItem)
+						FlagsDeAperturaString.put(((MetaTextMetaVisualizeTreeItem)event.getTarget()).getTextoPropio(),false);	
 				
 			}
 		});
@@ -321,8 +282,8 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 	 * @param basePath the basePath to set
 	 */
 	public static void setColeccionAndBasePath(Collection coleccion,String basePath) {
-		SplitLayoutPanelPropio.coleccion = coleccion;
-		SplitLayoutPanelPropio.BasePath=basePath;
+		PublicCollectionSplitLayoutPanel.coleccion = coleccion;
+		PublicCollectionSplitLayoutPanel.BasePath=basePath;
 	}
 
 	/**
@@ -393,7 +354,7 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 			MetaVisualizeTreeItem padre,
 			ArrayList<MetaVisualizeTreeItem> hijosDelPadre) {
 		for (Term Terminos : vocabulary.getList()) {
-			MetaVisualizeTreeItem trtmNewItem = new MetaVisualizeTreeItemTerm(padre.getAttribute(),Terminos,padre.getFiltro(),padre.getFiltroTexto());
+			MetaVisualizeTreeItem trtmNewItem = new MetaControlledTermMetaVisualizeTreeItem(padre.getAttribute(),Terminos,padre.getFiltro(),padre.getFiltroTexto());
 			if (trtmNewItem.getHijosRecurso().size()!=0)
 				{
 				padre.addItem(trtmNewItem);
@@ -403,15 +364,15 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 		
 		
 		Boolean A=null;
-		if (padre instanceof MetaVisualizeTreeItemTerm)  
-			A = getFlagsDeAperturaTerm().get(((MetaVisualizeTreeItemTerm)padre).getTermino());
+		if (padre instanceof MetaControlledTermMetaVisualizeTreeItem)  
+			A = getFlagsDeAperturaTerm().get(((MetaControlledTermMetaVisualizeTreeItem)padre).getTermino());
 			
 		else 
 			if (padre instanceof MetaVisualizeTreeItem)
 				A = getFlagsDeApertura().get(padre.getAttribute());
 			else 
-				if (padre instanceof MetaVisualizeTreeItemString)
-					A = getFlagsDeAperturaString().get(((MetaVisualizeTreeItemString) padre).getTextoPropio());
+				if (padre instanceof MetaTextMetaVisualizeTreeItem)
+					A = getFlagsDeAperturaString().get(((MetaTextMetaVisualizeTreeItem) padre).getTextoPropio());
 
 		if (A!=null&&A)
 		{
@@ -446,15 +407,15 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 		}
 		
 		Boolean A=null;
-		if (padre instanceof MetaVisualizeTreeItemTerm)  
-			A = getFlagsDeAperturaTerm().get(((MetaVisualizeTreeItemTerm)padre).getTermino());
+		if (padre instanceof MetaControlledTermMetaVisualizeTreeItem)  
+			A = getFlagsDeAperturaTerm().get(((MetaControlledTermMetaVisualizeTreeItem)padre).getTermino());
 			
 		else 
 			if (padre instanceof MetaVisualizeTreeItem)
 				A = getFlagsDeApertura().get(padre.getAttribute());
 			else 
-				if (padre instanceof MetaVisualizeTreeItemString)
-					A = getFlagsDeAperturaString().get(((MetaVisualizeTreeItemString) padre).getTextoPropio());
+				if (padre instanceof MetaTextMetaVisualizeTreeItem)
+					A = getFlagsDeAperturaString().get(((MetaTextMetaVisualizeTreeItem) padre).getTextoPropio());
 
 		if (A!=null&&A)
 		{
@@ -548,7 +509,7 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 		ArrayList<String> ResursorAptos=FindVocabularyText(meta);
 		Collections.sort(ResursorAptos);
 		for (String texto1 : ResursorAptos) {
-			MetaVisualizeTreeItemString TreeItem= new MetaVisualizeTreeItemString(padre.getAttribute(),texto1,padre.getFiltro(),padre.getFiltroTexto());
+			MetaTextMetaVisualizeTreeItem TreeItem= new MetaTextMetaVisualizeTreeItem(padre.getAttribute(),texto1,padre.getFiltro(),padre.getFiltroTexto());
 			if (TreeItem.getHijosRecurso().size()!=0)
 			{
 			padre.addItem(TreeItem);
@@ -558,15 +519,15 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 		
 		
 		Boolean A=null;
-		if (padre instanceof MetaVisualizeTreeItemTerm)  
-			A = getFlagsDeAperturaTerm().get(((MetaVisualizeTreeItemTerm)padre).getTermino());
+		if (padre instanceof MetaControlledTermMetaVisualizeTreeItem)  
+			A = getFlagsDeAperturaTerm().get(((MetaControlledTermMetaVisualizeTreeItem)padre).getTermino());
 			
 		else 
 			if (padre instanceof MetaVisualizeTreeItem)
 				A = getFlagsDeApertura().get(padre.getAttribute());
 			else 
-				if (padre instanceof MetaVisualizeTreeItemString)
-					A = getFlagsDeAperturaString().get(((MetaVisualizeTreeItemString) padre).getTextoPropio());
+				if (padre instanceof MetaTextMetaVisualizeTreeItem)
+					A = getFlagsDeAperturaString().get(((MetaTextMetaVisualizeTreeItem) padre).getTextoPropio());
 
 		if (A!=null&&A)
 		{

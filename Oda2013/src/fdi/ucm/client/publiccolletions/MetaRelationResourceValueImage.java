@@ -17,14 +17,14 @@ import fdi.ucm.shared.model.collection.resources.Resources;
  * @author Joaquin Gayoso-Cabada
  *
  */
-public class MetaRelationValueImage extends Image {
+public class MetaRelationResourceValueImage extends Image {
 
 	
 	private List<CollectionAttribute> ColeccionSons;
 	private Resources RecursoAsociado;
 	protected static final int MaxWidth = 50;
 
-	public MetaRelationValueImage(Resources imagen, List<CollectionAttribute> coleccionSons, String imagenAsociada) {
+	public MetaRelationResourceValueImage(Resources imagen, List<CollectionAttribute> coleccionSons, String imagenAsociada) {
 		super();
 		setUrl(imagenAsociada);
 		ColeccionSons=coleccionSons;
@@ -35,8 +35,8 @@ public class MetaRelationValueImage extends Image {
 			public void onClick(ClickEvent event) {
 				
 				
-				ReferencePopUpPanel2 RPUP=new ReferencePopUpPanel2(RecursoAsociado,ColeccionSons);
-				SplitLayoutPanelPropio.getPila_de_cerrado().add(RPUP);
+				ReferenceDescriptorPopUpPanel RPUP=new ReferenceDescriptorPopUpPanel(RecursoAsociado,ColeccionSons);
+				PublicCollectionSplitLayoutPanel.getPila_de_cerrado().add(RPUP);
 				RPUP.center();
 				
 			}

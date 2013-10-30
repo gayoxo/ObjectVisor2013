@@ -34,7 +34,7 @@ public class MetaVisualizeTreeItem extends TreeItem {
 		super();
 		asignaciones(atributo1,arrayList,filtroTextoin);
 		
-		HijosRecurso=SplitLayoutPanelPropio.FindResources(ListEntrada, atributo1,filtro,filtroTexto);
+		HijosRecurso=PublicCollectionSplitLayoutPanel.FindResources(ListEntrada, atributo1,filtro,filtroTexto);
 		
 		if (HijosRecurso.size()>0)
 			setHTML(atributo1.getName()+"("+HijosRecurso.size()+")");
@@ -118,17 +118,17 @@ public class MetaVisualizeTreeItem extends TreeItem {
 		if (!open)
 			{
 			for (MetaVisualizeTreeItem Hijo : Hijos) {
-				if ((Hijo instanceof MetaVisualizeTreeItemTerm)||(Hijo instanceof MetaVisualizeTreeItemString))
-					SplitLayoutPanelPropio.processCollection(Hijo.getAttribute().getSons(), Hijo,Hijo.getHijos());
+				if ((Hijo instanceof MetaControlledTermMetaVisualizeTreeItem)||(Hijo instanceof MetaTextMetaVisualizeTreeItem))
+					PublicCollectionSplitLayoutPanel.processCollection(Hijo.getAttribute().getSons(), Hijo,Hijo.getHijos());
 				else
 				{
 				if (Hijo.getAttribute() instanceof MetaControlled)
-					SplitLayoutPanelPropio.processCollectionControlled(((MetaControlled) Hijo.getAttribute()).getVocabulary(), Hijo,Hijo.getHijos());
+					PublicCollectionSplitLayoutPanel.processCollectionControlled(((MetaControlled) Hijo.getAttribute()).getVocabulary(), Hijo,Hijo.getHijos());
 				else
 					if (Hijo.getAttribute() instanceof MetaText)
-						SplitLayoutPanelPropio.processCollectionText((MetaText) Hijo.getAttribute(), Hijo,Hijo.getHijos());
+						PublicCollectionSplitLayoutPanel.processCollectionText((MetaText) Hijo.getAttribute(), Hijo,Hijo.getHijos());
 						else 
-							SplitLayoutPanelPropio.processCollection(Hijo.getAttribute().getSons(), Hijo,Hijo.getHijos());
+							PublicCollectionSplitLayoutPanel.processCollection(Hijo.getAttribute().getSons(), Hijo,Hijo.getHijos());
 				}
 			}
 			open=true;

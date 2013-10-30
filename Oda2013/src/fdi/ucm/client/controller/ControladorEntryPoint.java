@@ -7,7 +7,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import fdi.ucm.client.publiccolletions.PublicCollectionVisualiceWindowEditor;
-import fdi.ucm.client.publiccolletions.SplitLayoutPanelPropio;
+import fdi.ucm.client.publiccolletions.PublicCollectionSplitLayoutPanel;
 import fdi.ucm.shared.model.collection.Collection;
 
 /**
@@ -35,7 +35,7 @@ public class ControladorEntryPoint implements EntryPoint{
 
 	public static void ToPublicCollectionVisualiceWindowEditor(Collection Coleccion, String FilePath, String Description) {
 		RootPanel.get().clear();
-		SplitLayoutPanelPropio.setColeccionAndBasePath(Coleccion, FilePath);
+		PublicCollectionSplitLayoutPanel.setColeccionAndBasePath(Coleccion, FilePath);
 		WE=PCVWE;
 		WE.showWindow();
 		PCVWE.setLabelInformativa(Description);

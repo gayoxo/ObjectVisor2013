@@ -64,7 +64,7 @@ public class PublicCollectionVisualiceWindowEditor implements WindowEditor {
 		PanelNorte.add(BarraDeMenu);
 		BarraDeMenu.setHeight("30px");
 		
-		SplitLayoutPanel PanelVisor = new SplitLayoutPanelPropio();
+		SplitLayoutPanel PanelVisor = new PublicCollectionSplitLayoutPanel();
 		PanelGeneral.add(PanelVisor);
 		PanelVisor.setSize("100%", "100%");
 

@@ -239,7 +239,7 @@ public class ShowsStaticFunctions {
 		if (elementoIcono==null)
 			return null;
 		else if (elementoIcono instanceof File)
-			return SplitLayoutPanelPropio.getBasePath()+"/"+((File)elementoIcono).getPath();
+			return PublicCollectionSplitLayoutPanel.getBasePath()+"/"+((File)elementoIcono).getPath();
 		else if (elementoIcono instanceof URL)
 			return ((URL)elementoIcono).getSrc();
 		else return null;
@@ -285,7 +285,7 @@ public class ShowsStaticFunctions {
 		||
 		path.toLowerCase().endsWith(".png")
 		)
-		return SplitLayoutPanelPropio.getBasePath()+"/"+path;
+		return PublicCollectionSplitLayoutPanel.getBasePath()+"/"+path;
 	else
 		if (path.toLowerCase().endsWith(".rar"))
 			return GWT.getHostPageBaseURL()+StaticIconos.ICONORAR;
