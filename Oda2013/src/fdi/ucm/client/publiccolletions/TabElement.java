@@ -22,6 +22,8 @@ import fdi.ucm.shared.model.collection.metavalues.MetaNumericValue;
 import fdi.ucm.shared.model.collection.metavalues.MetaRelationValue;
 import fdi.ucm.shared.model.collection.metavalues.MetaTextValue;
 import fdi.ucm.shared.model.collection.metavalues.MetaValue;
+import fdi.ucm.shared.model.collection.resources.Construct;
+import fdi.ucm.shared.model.collection.resources.RelationObject;
 import fdi.ucm.shared.model.collection.resources.Resources;
 
 /**
@@ -34,8 +36,9 @@ public class TabElement extends Composite {
 	
 	private VerticalPanel PanelHijos;
 	private static List<CollectionAttribute> ColeccionSons;
-	private static String BasePath;
 	private static String ImagenAsociada;
+	private Label LabelType;
+	private static final String TWO_POINTS = ":";
 
 	public TabElement(MetaValue metaValueD) {
 		
@@ -94,101 +97,55 @@ public class TabElement extends Composite {
 	 * @param metaValueD elemento de valor de entrada
 	 * @return widget asociado al valor
 	 */
-	private static Widget getElementbase(MetaValue metaValueD) {
+	private Widget getElementbase(MetaValue metaValueD) {
 		
-		StringBuffer Sb = new StringBuffer();
-	//	Sb.append("<img src=\"Keyicon.png\" alt=\"*\" align=\"middle\" >");
-		Sb.append(metaValueD.getHastype().getName());
-		Sb.append(":");
-		Label lblNewLabel=new Label();
+		HorizontalPanel V=new HorizontalPanel();
+		LabelType = new Label(metaValueD.getHastype().getName()+TWO_POINTS);
+		V.add(LabelType);
+		
+		Widget Result=null;
+		
 		if (metaValueD instanceof MetaTextValue)
-			{
-			Sb.append(((MetaTextValue) metaValueD).getValue());
-			lblNewLabel.setText(Sb.toString());
-			return lblNewLabel;
-			}
+			Result=new Label(((MetaTextValue) metaValueD).getValue());
 		else if (metaValueD instanceof MetaControlledValue)
-			{
-//			if (((MetaControlledValue) metaValueD).getValue()==null) Sb.append("Error en :" + metaValueD.getHastype().getName());
-//			else 
-				Sb.append(((MetaControlledValue) metaValueD).getValue().getTerm());
-			lblNewLabel.setText(Sb.toString());
-			return lblNewLabel;
-			}
+			Result=new Label(((MetaControlledValue) metaValueD).getValue().getTerm());
 		else if (metaValueD instanceof MetaNumericValue)
-			{
-			Sb.append( ((MetaNumericValue) metaValueD).getValue().toString());
-			lblNewLabel.setText(Sb.toString());
-			return lblNewLabel;
-			}
+			Result=new Label( ((MetaNumericValue) metaValueD).getValue().toString());
 		else if (metaValueD instanceof MetaBooleanValue)
-			{
-			Sb.append( ((MetaBooleanValue) metaValueD).getValue().toString());
-			lblNewLabel.setText(Sb.toString());
-			return lblNewLabel;
-			}
+			Result=new Label( ((MetaBooleanValue) metaValueD).getValue().toString());
 		else if (metaValueD instanceof MetaDateValue)
 		{
 			DateTimeFormat fmt = DateTimeFormat.getFormat("dd/MM/yyyy"); 
-			Sb.append( fmt.format(((MetaDateValue) metaValueD).getValue()));
-			lblNewLabel.setText(Sb.toString());
-			return lblNewLabel;
+			Result=new Label( fmt.format(((MetaDateValue) metaValueD).getValue()));
 		}
 		else if (metaValueD instanceof MetaRelationValue)
 		{
 			MetaRelationValue MRV=(MetaRelationValue)metaValueD;
-			Resources elementoIconoBoton=MRV.getValue();
+			RelationObject elementoIconoBoton=MRV.getValue();
 			
-
-			ImagenAsociada=ShowsStaticFunctions.calculaImagenAsociada(elementoIconoBoton,BasePath);
+			if (elementoIconoBoton instanceof Resources)
+			{
+			ImagenAsociada=ShowsStaticFunctions.calculaImagenAsociada((Resources)elementoIconoBoton);
 			
-			Image MRVI=new MetaRelationValueImage(MRV.getValue(),ColeccionSons,ImagenAsociada);
-			return MRVI;
+			Image MRVI=new MetaRelationValueImage((Resources)elementoIconoBoton,ColeccionSons,ImagenAsociada);
+			Result= MRVI;
+			}
+			else if (elementoIconoBoton instanceof Construct)
+			{
+			ImagenAsociada=ShowsStaticFunctions.calculaImagenAsociada((Construct)elementoIconoBoton);
 			
-			
-//			Image Icono = new Image(ImagenAsociada);
-//			PanelVerticalIcono.add(Icono);
-//			Icono.addLoadHandler(new LoadHandler() {
-//				
-//				@Override
-//				public void onLoad(LoadEvent event) {
-//					float porcent=Icono.getHeight()/MaxHeight;
-//					float Width = Icono.getWidth()/porcent;
-//					int width=Math.round(Width);
-//					String PX="px";
-//					Icono.setHeight(MaxHeight+PX);
-//					Icono.setWidth(width+PX);
-//					
-//				}
-//			});
-//			
-//		
-//			
-//			if ((MRV.getValue() instanceof File)&&
-//					(
-//							//Imagen
-//					((File)MRV.getValue()).getPath().toLowerCase().endsWith(".jpg")
-//					||
-//					((File)MRV.getValue()).getPath().toLowerCase().endsWith(".jpge")	
-//					||
-//					((File)MRV.getValue()).getPath().toLowerCase().endsWith(".gif")
-//					||
-//					((File)MRV.getValue()).getPath().toLowerCase().endsWith(".png")
-//					)
-//					)
-//			{
-//				Image MRVI=new MetaRelationValueImage(BasePath,(File)MRV.getValue(),ColeccionSons);
-//				return MRVI;
-//			}
-//			else{
-//
-//				MetaRelationValueButton B=new MetaRelationValueButton(MRV,ColeccionSons);
-//				return B;
-//			}
+			Image MRVI=new MetaRelationValueImage2((Construct)elementoIconoBoton,ColeccionSons,ImagenAsociada);
+			Result= MRVI;
+				
+			}
 			
 		}
-		lblNewLabel.setText(Sb.toString());
-		return lblNewLabel;
+		
+		if (Result!=null)
+			V.add(Result);
+		
+		
+		return V;
 	}
 
 	/**
@@ -205,20 +162,6 @@ public class TabElement extends Composite {
 		ColeccionSons = coleccionSons2;
 	}
 
-	/**
-	 * @return the basePath
-	 */
-	public static String getBasePath() {
-		return BasePath;
-	}
-
-	/**
-	 * @param basePath the basePath to set
-	 */
-	public static void setBasePath(String basePath) {
-		BasePath = basePath;
-	}
-	
 	
 
 }

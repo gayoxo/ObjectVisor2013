@@ -10,21 +10,21 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Image;
 
 import fdi.ucm.shared.model.collection.CollectionAttribute;
-import fdi.ucm.shared.model.collection.resources.Resources;
+import fdi.ucm.shared.model.collection.resources.Construct;
 
 /**
  * Clase que genera una imagen cliqueable para el caso de las imagenes
  * @author Joaquin Gayoso-Cabada
  *
  */
-public class MetaRelationValueImage extends Image {
+public class MetaRelationValueImage2 extends Image {
 
 	
 	private List<CollectionAttribute> ColeccionSons;
-	private Resources RecursoAsociado;
+	private Construct RecursoAsociado;
 	protected static final int MaxWidth = 50;
 
-	public MetaRelationValueImage(Resources imagen, List<CollectionAttribute> coleccionSons, String imagenAsociada) {
+	public MetaRelationValueImage2(Construct imagen, List<CollectionAttribute> coleccionSons, String imagenAsociada) {
 		super();
 		setUrl(imagenAsociada);
 		ColeccionSons=coleccionSons;
@@ -35,7 +35,7 @@ public class MetaRelationValueImage extends Image {
 			public void onClick(ClickEvent event) {
 				
 				
-				ReferencePopUpPanel2 RPUP=new ReferencePopUpPanel2(RecursoAsociado,ColeccionSons);
+				ReferencePopUpPanel RPUP=new ReferencePopUpPanel(RecursoAsociado,ColeccionSons);
 				SplitLayoutPanelPropio.getPila_de_cerrado().add(RPUP);
 				RPUP.center();
 				

@@ -8,8 +8,7 @@ package fdi.ucm.shared.model.collection.resources;
  * @author Joaquin Gayoso-Cabada
  *
  */
-public class File extends Resources {
-
+public class File extends Resources{
 
 
 	private static final long serialVersionUID = 1L;
@@ -40,5 +39,5 @@ public class File extends Resources {
 		Path = path;
 	}
 	
-
+	
 }

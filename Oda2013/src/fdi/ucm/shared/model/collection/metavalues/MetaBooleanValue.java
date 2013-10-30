@@ -23,7 +23,7 @@ public class MetaBooleanValue extends MetaValue {
 	 */
 	public MetaBooleanValue() {
 		super();
-		BValue=false;
+		BValue=null;
 	}
 
 	/**
@@ -32,7 +32,7 @@ public class MetaBooleanValue extends MetaValue {
 	 */
 	public MetaBooleanValue(MetaBoolean hastype) {
 		super(hastype);
-		BValue=false;
+		BValue=null;
 	}
 
 	/**

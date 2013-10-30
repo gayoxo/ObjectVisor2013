@@ -14,6 +14,7 @@ import fdi.ucm.shared.model.collection.CollectionAttribute;
 import fdi.ucm.shared.model.collection.Iterator;
 import fdi.ucm.shared.model.collection.meta.Meta;
 import fdi.ucm.shared.model.collection.metavalues.MetaValue;
+import fdi.ucm.shared.model.collection.resources.Construct;
 import fdi.ucm.shared.model.collection.resources.Resources;
 
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -37,7 +38,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Joaquin Gayoso-Cabada
  *
  */
-public class ReferencePopUpPanel extends PopupPanel {
+public class ReferencePopUpPanel extends PopupPanel implements PoupCerrableGrupo{
 
 	
 	private static final String X = "X";
@@ -45,18 +46,17 @@ public class ReferencePopUpPanel extends PopupPanel {
 	private ArrayList<Meta> MetaOrden;
 	private DecoratedTabPanel PanelDecorador;
 	private HashMap<MetaValue,TabElement> Procesados;
-	private Resources Recurso;
+	private Construct Recurso;
 	private ArrayList<MetaValue> vaciosCreados;
 	private boolean AllClose;
 	private  HashMap<Meta, TabElement> MetaPestanaATab;
 	private String Destino;
 	private String ImagenAsociada;
 	private Image Icono;
-	private static String BasePath;
 	protected static final int MaxHeight = 200;
 
 	
-	public ReferencePopUpPanel(Resources value,List<CollectionAttribute> coleccionSons) {
+	public ReferencePopUpPanel(Construct value,List<CollectionAttribute> coleccionSons) {
 		setAutoHideEnabled(true);
 		setModal(true);
 		AllClose=true;
@@ -107,8 +107,8 @@ public class ReferencePopUpPanel extends PopupPanel {
 		
 		Resources elementoIcono = ShowsStaticFunctions.getIcon(value);
 		
-		Destino=ShowsStaticFunctions.calculaDestino(elementoIcono,BasePath);
-		ImagenAsociada=ShowsStaticFunctions.calculaImagenAsociada(elementoIcono,BasePath);
+		Destino=ShowsStaticFunctions.calculaDestino(elementoIcono);
+		ImagenAsociada=ShowsStaticFunctions.calculaImagenAsociada(elementoIcono);
 		
 		Icono = new Image(ImagenAsociada);
 		verticalPanel.add(Icono);
@@ -467,9 +467,9 @@ public class ReferencePopUpPanel extends PopupPanel {
 		if (AllClose)
 			while (!SplitLayoutPanelPropio.getPila_de_cerrado().isEmpty())
 			{
-				ReferencePopUpPanel RPP=(ReferencePopUpPanel) SplitLayoutPanelPropio.getPila_de_cerrado().pop();
+				PoupCerrableGrupo RPP=(PoupCerrableGrupo) SplitLayoutPanelPropio.getPila_de_cerrado().pop();
 				RPP.setAllClose(false);
-				RPP.hide();
+				((PopupPanel)RPP).hide();
 			}
 	}
 	/**
@@ -486,19 +486,6 @@ public class ReferencePopUpPanel extends PopupPanel {
 		AllClose = allClose;
 	}
 
-	/**
-	 * @return the basePath
-	 */
-	public static String getBasePath() {
-		return BasePath;
-	}
-
-	/**
-	 * @param basePath the basePath to set
-	 */
-	public static void setBasePath(String basePath) {
-		BasePath = basePath;
-	}
 
 	
 	

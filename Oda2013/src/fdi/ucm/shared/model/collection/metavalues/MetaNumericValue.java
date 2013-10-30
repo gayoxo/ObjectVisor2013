@@ -23,7 +23,7 @@ public class MetaNumericValue extends MetaValue {
 	 */
 	public MetaNumericValue() {
 		super();
-		NValue=0f;
+		NValue=null;
 	}
 
 	/**
@@ -32,7 +32,7 @@ public class MetaNumericValue extends MetaValue {
 	 */
 	public MetaNumericValue(MetaNumeric hastype) {
 		super(hastype);
-		NValue=0f;
+		NValue=null;
 	}
 
 	/**

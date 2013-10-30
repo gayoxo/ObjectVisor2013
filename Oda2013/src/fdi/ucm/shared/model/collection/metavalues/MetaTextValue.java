@@ -25,7 +25,7 @@ public class MetaTextValue extends MetaValue {
 	 */
 	public MetaTextValue() {
 		super();
-		TValue="";
+		TValue=null;
 	}
 
 	/**
@@ -34,7 +34,7 @@ public class MetaTextValue extends MetaValue {
 	 */
 	public MetaTextValue(MetaText hastype) {
 		super(hastype);
-		TValue="";
+		TValue=null;
 	}
 
 	/**

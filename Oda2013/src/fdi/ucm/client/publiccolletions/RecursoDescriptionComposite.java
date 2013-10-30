@@ -13,6 +13,7 @@ import fdi.ucm.shared.model.collection.CollectionAttribute;
 import fdi.ucm.shared.model.collection.Iterator;
 import fdi.ucm.shared.model.collection.meta.Meta;
 import fdi.ucm.shared.model.collection.metavalues.MetaValue;
+import fdi.ucm.shared.model.collection.resources.Construct;
 import fdi.ucm.shared.model.collection.resources.Resources;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -37,11 +38,10 @@ public class RecursoDescriptionComposite extends Composite {
 	private static final String SHOWMORE = "Show More";
 	protected static final int MaxWidth = 50;
 	private static final String PX = "PX";
-	private static String BasePath;
 	private HashMap<Meta, VerticalPanel> Pestanas;
 	private SimplePanel PanelDecorador;
 	private HashMap<MetaValue,TabElement> Procesados;
-	private Resources Recurso;
+	private Construct Recurso;
 	private ArrayList<MetaValue> vaciosCreados;
 	private ArrayList<Meta> MetaOrden;
 	private List<CollectionAttribute> ColeccionSons;
@@ -54,7 +54,7 @@ public class RecursoDescriptionComposite extends Composite {
 	private HorizontalPanel PanelGeneral;
 	private VerticalPanel PanelGeneral2;
 
-	public RecursoDescriptionComposite(Resources recurso,List<CollectionAttribute> list) {
+	public RecursoDescriptionComposite(Construct recurso,List<CollectionAttribute> list) {
 		super();
 		Pestanas=new HashMap<Meta, VerticalPanel>();
 		
@@ -83,11 +83,11 @@ public class RecursoDescriptionComposite extends Composite {
 		//PanelDelIcono.setSize("", "");
 		PanelGeneral.setCellVerticalAlignment(PanelDelIcono, HasVerticalAlignment.ALIGN_MIDDLE);
 		
-Resources elementoIcono = ShowsStaticFunctions.getIcon(recurso);
+		Resources elementoIcono = ShowsStaticFunctions.getIcon(recurso);
 		
 		
-		Destino=ShowsStaticFunctions.calculaDestino(elementoIcono,BasePath);
-		ImagenAsociada=ShowsStaticFunctions.calculaImagenAsociada(elementoIcono,BasePath);
+		Destino=ShowsStaticFunctions.calculaDestino(elementoIcono);
+		ImagenAsociada=ShowsStaticFunctions.calculaImagenAsociada(elementoIcono);
 		
 		
 		
@@ -148,7 +148,6 @@ Resources elementoIcono = ShowsStaticFunctions.getIcon(recurso);
 		PanelDecorador = new SimplePanel();
 		PanelContenedorDecoyBoton.add(PanelDecorador);
 		PanelDecorador.setSize("100%", "100%");
-		ReferencePopUpPanel.setBasePath(BasePath);
 		
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
 		PanelContenedorDecoyBoton.add(horizontalPanel);
@@ -446,19 +445,19 @@ Resources elementoIcono = ShowsStaticFunctions.getIcon(recurso);
 		
 	}
 
-	/**
-	 * @return the basePath
-	 */
-	public static String getBasePath() {
-		return BasePath;
-	}
-
-	/**
-	 * @param basePath the basePath to set
-	 */
-	public static void setBasePath(String basePath) {
-		BasePath = basePath;
-	}
+//	/**
+//	 * @return the basePath
+//	 */
+//	public static String getBasePath() {
+//		return BasePath;
+//	}
+//
+//	/**
+//	 * @param basePath the basePath to set
+//	 */
+//	public static void setBasePath(String basePath) {
+//		BasePath = basePath;
+//	}
 
 
 	

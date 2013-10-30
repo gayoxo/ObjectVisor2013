@@ -23,6 +23,7 @@ public class ControladorEntryPoint implements EntryPoint{
 	private static PublicCollectionVisualiceWindowEditor PCVWE;
 	private static MasterIndexWindowEditor MIWE;
 	
+	
 	@Override
 	public void onModuleLoad() {
 		PCVWE=new PublicCollectionVisualiceWindowEditor();

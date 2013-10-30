@@ -178,11 +178,11 @@ public class ShowsStaticFunctions {
 
 	
 	/**
-	 * Funcion que tetorna el icono de un recurso Objeto digital
+	 * Funcion que retorna el icono de un recurso Objeto digital
 	 * @param objetoDigital
 	 * @return
 	 */
-	public static Resources getIcon(Resources recurso) {
+	public static Resources getIcon(Construct recurso) {
 		for (MetaValue elem : recurso.getDescription()) {
 			String res=getIcon(elem);
 				if (res!=null)
@@ -235,11 +235,11 @@ public class ShowsStaticFunctions {
  * @param BasePath path del sistema de archivos
  * @return Direccion destino
  */
-	public static String calculaDestino(Resources elementoIcono,String BasePath) {
-		if (elementoIcono==null || elementoIcono instanceof Construct)
+	public static String calculaDestino(Resources elementoIcono) {
+		if (elementoIcono==null)
 			return null;
 		else if (elementoIcono instanceof File)
-			return BasePath+"/"+((File)elementoIcono).getPath();
+			return SplitLayoutPanelPropio.getBasePath()+"/"+((File)elementoIcono).getPath();
 		else if (elementoIcono instanceof URL)
 			return ((URL)elementoIcono).getSrc();
 		else return null;
@@ -252,117 +252,14 @@ public class ShowsStaticFunctions {
 	 * @param BasePath path del sistema de archivos
 	 * @return path del icono o imagen asociado.
 	 */
-	public static String calculaImagenAsociada(Resources elementoIcono,String BasePath) {
+	public static String calculaImagenAsociada(Resources elementoIcono) {
 		if (elementoIcono==null)
 			return GWT.getHostPageBaseURL()+StaticIconos.ICONODEFAULT;
 		if (elementoIcono instanceof File)
 			{
-			if
-				(
-						//Imagen
-				((File)elementoIcono).getPath().toLowerCase().endsWith(".jpg")
-				||
-				((File)elementoIcono).getPath().toLowerCase().endsWith(".jpge")	
-				||
-				((File)elementoIcono).getPath().toLowerCase().endsWith(".gif")
-				||
-				((File)elementoIcono).getPath().toLowerCase().endsWith(".png")
-				)
-				return BasePath+"/"+((File)elementoIcono).getPath();
-			else
-				if (((File)elementoIcono).getPath().toLowerCase().endsWith(".rar"))
-					return GWT.getHostPageBaseURL()+StaticIconos.ICONORAR;
-			else
-				if (((File)elementoIcono).getPath().toLowerCase().endsWith(".avi"))
-					return GWT.getHostPageBaseURL()+StaticIconos.ICONOAVI;
-				else
-					if (((File)elementoIcono).getPath().toLowerCase().endsWith(".doc"))
-						return GWT.getHostPageBaseURL()+StaticIconos.ICONODOC;
-					else
-						if (((File)elementoIcono).getPath().toLowerCase().endsWith(".docx"))
-							return GWT.getHostPageBaseURL()+StaticIconos.ICONODOCX;
-						else
-							if (((File)elementoIcono).getPath().toLowerCase().endsWith(".pdf"))
-								return GWT.getHostPageBaseURL()+StaticIconos.ICONOPDF;
-							else
-								if (((File)elementoIcono).getPath().toLowerCase().endsWith(".html"))
-									return GWT.getHostPageBaseURL()+StaticIconos.ICONOHTML;
-								else
-									if (((File)elementoIcono).getPath().toLowerCase().endsWith(".htm"))
-										return GWT.getHostPageBaseURL()+StaticIconos.ICONOHTML;
-									else
-										if (((File)elementoIcono).getPath().toLowerCase().endsWith(".php"))
-											return GWT.getHostPageBaseURL()+StaticIconos.ICONOHTML;
-										else
-											if (((File)elementoIcono).getPath().toLowerCase().endsWith(".ppt"))
-												return GWT.getHostPageBaseURL()+StaticIconos.ICONOPPT;
-											else
-												if (((File)elementoIcono).getPath().toLowerCase().endsWith(".pptx"))
-													return GWT.getHostPageBaseURL()+StaticIconos.ICONOPPTX;
-												else
-													if (((File)elementoIcono).getPath().toLowerCase().endsWith(".mov"))
-														return GWT.getHostPageBaseURL()+StaticIconos.ICONOMOV;
-													else
-														if (((File)elementoIcono).getPath().toLowerCase().endsWith(".fla"))
-															return GWT.getHostPageBaseURL()+StaticIconos.ICONOFLA;
-														else
-															if (((File)elementoIcono).getPath().toLowerCase().endsWith(".swf"))
-																return GWT.getHostPageBaseURL()+StaticIconos.ICONOSWF;
-															else
-																if (((File)elementoIcono).getPath().toLowerCase().endsWith(".midi"))
-																	return GWT.getHostPageBaseURL()+StaticIconos.ICONOMIDI;
-																else
-																	if (((File)elementoIcono).getPath().toLowerCase().endsWith(".mp3"))
-																		return GWT.getHostPageBaseURL()+StaticIconos.ICONOMP3;
-																	else
-																		if (((File)elementoIcono).getPath().toLowerCase().endsWith(".mp4"))
-																			return GWT.getHostPageBaseURL()+StaticIconos.ICONOMP4;
-																		else
-																			if (((File)elementoIcono).getPath().toLowerCase().endsWith(".mpg"))
-																				return GWT.getHostPageBaseURL()+StaticIconos.ICONOMPG;
-																			else
-																				if (((File)elementoIcono).getPath().toLowerCase().endsWith(".odt"))
-																					return GWT.getHostPageBaseURL()+StaticIconos.ICONOODT;
-																				else
-																					if (((File)elementoIcono).getPath().toLowerCase().endsWith(".ods"))
-																						return GWT.getHostPageBaseURL()+StaticIconos.ICONOODS;
-																					else
-																						if (((File)elementoIcono).getPath().toLowerCase().endsWith(".zip"))
-																							return GWT.getHostPageBaseURL()+StaticIconos.ICONOZIP;
-																						else
-																							if (((File)elementoIcono).getPath().toLowerCase().endsWith(".rtf"))
-																								return GWT.getHostPageBaseURL()+StaticIconos.ICONORTF;
-																							else
-																								if (((File)elementoIcono).getPath().toLowerCase().endsWith(".ttf"))
-																									return GWT.getHostPageBaseURL()+StaticIconos.ICONOTTF;
-																								else
-																									if (((File)elementoIcono).getPath().toLowerCase().endsWith(".txt"))
-																										return GWT.getHostPageBaseURL()+StaticIconos.ICONOTXT;
-																									else
-																										if (((File)elementoIcono).getPath().toLowerCase().endsWith(".wav"))
-																											return GWT.getHostPageBaseURL()+StaticIconos.ICONOWAV;
-																										else
-																											if (((File)elementoIcono).getPath().toLowerCase().endsWith(".wma"))
-																												return GWT.getHostPageBaseURL()+StaticIconos.ICONOWMA;
-																											else
-																												if (((File)elementoIcono).getPath().toLowerCase().endsWith(".wmv"))
-																													return GWT.getHostPageBaseURL()+StaticIconos.ICONOWMV;
-																												else
-																													if (((File)elementoIcono).getPath().toLowerCase().endsWith(".xls"))
-																														return GWT.getHostPageBaseURL()+StaticIconos.ICONOXLS;
-																													else
-																														if (((File)elementoIcono).getPath().toLowerCase().endsWith(".xlsx"))
-																															return GWT.getHostPageBaseURL()+StaticIconos.ICONOXLSX;
-																														else
-																															if (((File)elementoIcono).getPath().toLowerCase().endsWith(".xml"))
-																																return GWT.getHostPageBaseURL()+StaticIconos.ICONOXML;
-			
-			
-													
+			return calculaIconoPorExtension(((File)elementoIcono).getPath());
 							
 			}
-		else if (elementoIcono instanceof Construct)
-			return GWT.getHostPageBaseURL()+StaticIconos.ICONOCONSTRUCT;
 		else if (elementoIcono instanceof URL)
 			return GWT.getHostPageBaseURL()+StaticIconos.ICONOURL;
 		
@@ -370,6 +267,121 @@ public class ShowsStaticFunctions {
 	}
 
 	
+	/**
+	 * Calcula el icono en base a la extension
+	 * @param path
+	 * @return 
+	 */
+	private static String calculaIconoPorExtension(String path) {
+		
+		if
+		(
+				//Imagen
+		path.toLowerCase().endsWith(".jpg")
+		||
+		path.toLowerCase().endsWith(".jpge")	
+		||
+		path.toLowerCase().endsWith(".gif")
+		||
+		path.toLowerCase().endsWith(".png")
+		)
+		return SplitLayoutPanelPropio.getBasePath()+"/"+path;
+	else
+		if (path.toLowerCase().endsWith(".rar"))
+			return GWT.getHostPageBaseURL()+StaticIconos.ICONORAR;
+	else
+		if (path.toLowerCase().endsWith(".avi"))
+			return GWT.getHostPageBaseURL()+StaticIconos.ICONOAVI;
+		else
+			if (path.toLowerCase().endsWith(".doc"))
+				return GWT.getHostPageBaseURL()+StaticIconos.ICONODOC;
+			else
+				if (path.toLowerCase().endsWith(".docx"))
+					return GWT.getHostPageBaseURL()+StaticIconos.ICONODOCX;
+				else
+					if (path.toLowerCase().endsWith(".pdf"))
+						return GWT.getHostPageBaseURL()+StaticIconos.ICONOPDF;
+					else
+						if (path.toLowerCase().endsWith(".html"))
+							return GWT.getHostPageBaseURL()+StaticIconos.ICONOHTML;
+						else
+							if (path.toLowerCase().endsWith(".htm"))
+								return GWT.getHostPageBaseURL()+StaticIconos.ICONOHTML;
+							else
+								if (path.toLowerCase().endsWith(".php"))
+									return GWT.getHostPageBaseURL()+StaticIconos.ICONOHTML;
+								else
+									if (path.toLowerCase().endsWith(".ppt"))
+										return GWT.getHostPageBaseURL()+StaticIconos.ICONOPPT;
+									else
+										if (path.toLowerCase().endsWith(".pptx"))
+											return GWT.getHostPageBaseURL()+StaticIconos.ICONOPPTX;
+										else
+											if (path.toLowerCase().endsWith(".mov"))
+												return GWT.getHostPageBaseURL()+StaticIconos.ICONOMOV;
+											else
+												if (path.toLowerCase().endsWith(".fla"))
+													return GWT.getHostPageBaseURL()+StaticIconos.ICONOFLA;
+												else
+													if (path.toLowerCase().endsWith(".swf"))
+														return GWT.getHostPageBaseURL()+StaticIconos.ICONOSWF;
+													else
+														if (path.toLowerCase().endsWith(".midi"))
+															return GWT.getHostPageBaseURL()+StaticIconos.ICONOMIDI;
+														else
+															if (path.toLowerCase().endsWith(".mp3"))
+																return GWT.getHostPageBaseURL()+StaticIconos.ICONOMP3;
+															else
+																if (path.toLowerCase().endsWith(".mp4"))
+																	return GWT.getHostPageBaseURL()+StaticIconos.ICONOMP4;
+																else
+																	if (path.toLowerCase().endsWith(".mpg"))
+																		return GWT.getHostPageBaseURL()+StaticIconos.ICONOMPG;
+																	else
+																		if (path.toLowerCase().endsWith(".odt"))
+																			return GWT.getHostPageBaseURL()+StaticIconos.ICONOODT;
+																		else
+																			if (path.toLowerCase().endsWith(".ods"))
+																				return GWT.getHostPageBaseURL()+StaticIconos.ICONOODS;
+																			else
+																				if (path.toLowerCase().endsWith(".zip"))
+																					return GWT.getHostPageBaseURL()+StaticIconos.ICONOZIP;
+																				else
+																					if (path.toLowerCase().endsWith(".rtf"))
+																						return GWT.getHostPageBaseURL()+StaticIconos.ICONORTF;
+																					else
+																						if (path.toLowerCase().endsWith(".ttf"))
+																							return GWT.getHostPageBaseURL()+StaticIconos.ICONOTTF;
+																						else
+																							if (path.toLowerCase().endsWith(".txt"))
+																								return GWT.getHostPageBaseURL()+StaticIconos.ICONOTXT;
+																							else
+																								if (path.toLowerCase().endsWith(".wav"))
+																									return GWT.getHostPageBaseURL()+StaticIconos.ICONOWAV;
+																								else
+																									if (path.toLowerCase().endsWith(".wma"))
+																										return GWT.getHostPageBaseURL()+StaticIconos.ICONOWMA;
+																									else
+																										if (path.toLowerCase().endsWith(".wmv"))
+																											return GWT.getHostPageBaseURL()+StaticIconos.ICONOWMV;
+																										else
+																											if (path.toLowerCase().endsWith(".xls"))
+																												return GWT.getHostPageBaseURL()+StaticIconos.ICONOXLS;
+																											else
+																												if (path.toLowerCase().endsWith(".xlsx"))
+																													return GWT.getHostPageBaseURL()+StaticIconos.ICONOXLSX;
+																												else
+																													if (path.toLowerCase().endsWith(".xml"))
+																														return GWT.getHostPageBaseURL()+StaticIconos.ICONOXML;
+	
+	
+											
+	
+		
+		return GWT.getHostPageBaseURL()+StaticIconos.ICONODEFAULT;
+		
+	}
+
 	/**
 	 * Devuelve si el tipo es de tipo meta Basico
 	 * @param metaActual
@@ -389,6 +401,16 @@ public class ShowsStaticFunctions {
 		else if (metaActual instanceof MetaRelation)
 			return true;
 		else return false;
+	}
+
+	public static String calculaImagenAsociada(Construct elementoIconoBoton) {
+		for (MetaValue elem : elementoIconoBoton.getDescription()) {
+			String res=getIcon(elem);
+				if (res!=null)
+					return 	calculaIconoPorExtension(res);
+		}
+		
+		return GWT.getHostPageBaseURL()+StaticIconos.ICONODEFAULT;
 	}
 
 	

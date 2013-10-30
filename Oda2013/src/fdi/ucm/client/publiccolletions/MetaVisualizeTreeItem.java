@@ -12,7 +12,7 @@ import fdi.ucm.shared.model.collection.meta.Meta;
 import fdi.ucm.shared.model.collection.meta.MetaControlled;
 import fdi.ucm.shared.model.collection.meta.MetaText;
 import fdi.ucm.shared.model.collection.meta.controlled.Term;
-import fdi.ucm.shared.model.collection.resources.Resources;
+import fdi.ucm.shared.model.collection.resources.Construct;
 
 /**
  * Clase que genera un elemento en un arbol y permite la creacion del resto de elementos en caso apertura.
@@ -24,8 +24,8 @@ public class MetaVisualizeTreeItem extends TreeItem {
 	
 	protected Meta attribute;
 	protected ArrayList<MetaVisualizeTreeItem> Hijos;
-	protected ArrayList<Resources> HijosRecurso;
-	protected static List<Resources> ListEntrada;
+	protected ArrayList<Construct> HijosRecurso;
+	protected static List<Construct> ListEntrada;
 	protected ArrayList<Term> filtro;
 	protected ArrayList<String> filtroTexto;
 	protected boolean open;
@@ -84,14 +84,14 @@ public class MetaVisualizeTreeItem extends TreeItem {
 	/**
 	 * @return the hijosRecurso
 	 */
-	public ArrayList<Resources> getHijosRecurso() {
+	public ArrayList<Construct> getHijosRecurso() {
 		return HijosRecurso;
 	}
 
 	/**
 	 * @param hijosRecurso the hijosRecurso to set
 	 */
-	public void setHijosRecurso(ArrayList<Resources> hijosRecurso) {
+	public void setHijosRecurso(ArrayList<Construct> hijosRecurso) {
 		HijosRecurso = hijosRecurso;
 	}
 
@@ -154,14 +154,14 @@ public class MetaVisualizeTreeItem extends TreeItem {
 	/**
 	 * @return the listEntrada
 	 */
-	public static List<Resources> getListEntrada() {
+	public static List<Construct> getListEntrada() {
 		return ListEntrada;
 	}
 
 	/**
 	 * @param list the listEntrada to set
 	 */
-	public static void setListEntrada(List<Resources> list) {
+	public static void setListEntrada(List<Construct> list) {
 		ListEntrada = list;
 	}
 

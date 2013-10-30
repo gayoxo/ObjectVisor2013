@@ -40,7 +40,7 @@ import fdi.ucm.shared.model.collection.meta.controlled.Vocabulary;
 import fdi.ucm.shared.model.collection.metavalues.MetaControlledValue;
 import fdi.ucm.shared.model.collection.metavalues.MetaTextValue;
 import fdi.ucm.shared.model.collection.metavalues.MetaValue;
-import fdi.ucm.shared.model.collection.resources.Resources;
+import fdi.ucm.shared.model.collection.resources.Construct;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.kiouri.sliderbar.client.event.BarValueChangedEvent;
 import com.kiouri.sliderbar.client.event.BarValueChangedHandler;
@@ -67,7 +67,7 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 	private static Collection coleccion;
 	private static String BasePath;
 	private SliderBarSimpleHorizontal SB;
-	private ArrayList<Resources> Lista;
+	private ArrayList<Construct> Lista;
 	private SplitLayoutPanelPropio OEThis;
 	private SimplePanel PanelScrollBar;
 	
@@ -196,9 +196,7 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 		ZonaArboles.setWidget(ArbolAGenerar);
 		ArbolAGenerar.setSize("100%", "100%");
 		
-		MetaVisualizeTreeItem.setListEntrada(coleccion.getSectionValues());
-		TabElement.setBasePath(BasePath);
-		RecursoDescriptionComposite.setBasePath(BasePath);
+		MetaVisualizeTreeItem.setListEntrada(coleccion.getEstructuras());
 		
 		if (coleccion!=null)
 			processCollection(coleccion.getMetamodelSchemas(), ArbolAGenerar);
@@ -473,18 +471,18 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 	 * @param filtro 
 	 * @return
 	 */
-	protected static ArrayList<Resources> FindResources(List<Resources> listEntrada,
+	protected static ArrayList<Construct> FindResources(List<Construct> listEntrada,
 			Meta ElementoABuscar, ArrayList<Term> filtro,ArrayList<String> filtroTexto) {
-		ArrayList<Resources> Salida = new ArrayList<Resources>();
-		for (Resources resources : listEntrada) {
+		ArrayList<Construct> Salida = new ArrayList<Construct>();
+		for (Construct resources : listEntrada) {
 			for (MetaValue valorDesc : resources.getDescription()) {
 				if (valorDesc.getHastype()==ElementoABuscar)
 					Salida.add(resources);
 			}
 		}
 		
-		HashSet<Resources> quitar=new HashSet<Resources>();
-		for (Resources resources : Salida) {
+		HashSet<Construct> quitar=new HashSet<Construct>();
+		for (Construct resources : Salida) {
 			for (Term termino : filtro) {
 				boolean encontrado=false;
 				for (MetaValue valorDesc : resources.getDescription()) {
@@ -502,13 +500,13 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 			}
 		}
 		
-		for (Resources resourcesAQuitar : quitar) {
+		for (Construct resourcesAQuitar : quitar) {
 			Salida.remove(resourcesAQuitar);
 		}
 		
 		
-		HashSet<Resources> quitarTexto = new HashSet<Resources>();
-		for (Resources resources : Salida) {
+		HashSet<Construct> quitarTexto = new HashSet<Construct>();
+		for (Construct resources : Salida) {
 			for (String testofiltro : filtroTexto) {
 				boolean encontrado = false;
 				for (MetaValue valorDesc : resources.getDescription()) {
@@ -527,7 +525,7 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 			}
 		}
 		
-		for (Resources resourcesAQuitar : quitarTexto) {
+		for (Construct resourcesAQuitar : quitarTexto) {
 			Salida.remove(resourcesAQuitar);
 		}
 		
@@ -581,7 +579,7 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 		
 		HashSet<String> lista=new HashSet<String>();
 		
-		for (Resources recursopos : coleccion.getSectionValues()) {
+		for (Construct recursopos : coleccion.getEstructuras()) {
 			for (MetaValue metavalorpos : recursopos.getDescription()) {
 				if ((metavalorpos instanceof MetaTextValue)&&(metavalorpos.getHastype()==meta))
 					{
@@ -618,7 +616,7 @@ public class SplitLayoutPanelPropio extends SplitLayoutPanel {
 		int actual = 0;
 		int inicial=LastElement;
 		for (int i = 0; i<10 && (LastElement+i) < Lista.size(); i++) {
-			Resources recurso =Lista.get(LastElement+i);
+			Construct recurso =Lista.get(LastElement+i);
 			PanelRecursosActuales.add(new RecursoDescriptionComposite(recurso,coleccion.getMetamodelSchemas()));
 			actual++;
 		}

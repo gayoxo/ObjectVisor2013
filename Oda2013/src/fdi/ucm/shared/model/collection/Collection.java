@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+import fdi.ucm.shared.model.collection.resources.Construct;
 import fdi.ucm.shared.model.collection.resources.Resources;
 
 
@@ -26,6 +27,8 @@ public class Collection  implements Serializable,IsSerializable{
 	
 	private List<Resources> SectionValues;
 	
+	private List<Construct> Estructuras;
+	
 	
 
 	/**
@@ -34,6 +37,7 @@ public class Collection  implements Serializable,IsSerializable{
 	public Collection() {
 		MetamodelSchemas= new ArrayList<CollectionAttribute>();
 		SectionValues=new ArrayList<Resources>();
+		Estructuras=new ArrayList<Construct>();
 		id=null;
 				
 	}
@@ -104,6 +108,21 @@ public class Collection  implements Serializable,IsSerializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	/**
+	 * @return the estructuras
+	 */
+	public List<Construct> getEstructuras() {
+		return Estructuras;
+	}
+
+	/**
+	 * @param estructuras the estructuras to set
+	 */
+	public void setEstructuras(List<Construct> estructuras) {
+		Estructuras = estructuras;
+	}
+	
 	
 	
 }

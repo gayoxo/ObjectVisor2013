@@ -1,6 +1,7 @@
 package fdi.ucm.shared.model.collection.resources;
 
-import fdi.ucm.shared.model.collection.Attributable;
+import java.io.Serializable;
+
 import fdi.ucm.shared.model.collection.Collection;
 
 
@@ -11,36 +12,28 @@ import fdi.ucm.shared.model.collection.Collection;
  * @author Joaquin Gayoso-Cabada
  *
  */
-public abstract class Resources extends Attributable{
+public abstract class Resources implements Serializable,RelationObject{
 
-	private static final long serialVersionUID = 1L;
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7786350162913651910L;
 	private Collection collectionFather;
 
-	
-	/**
-	 * Constructor por defecto. 
-	 */
 	public Resources() {
-		super();
-	}
 
-	/**
-	 * @return the collectionFather
-	 */
+	}
+	
+
 	public Collection getCollectionFather() {
 		return collectionFather;
 	}
 
-	/**
-	 * @param collectionFather the collectionFather to set
-	 */
+
+
 	public void setCollectionFather(Collection collectionFather) {
-		this.collectionFather = collectionFather;
+		this.collectionFather=collectionFather;
+		
 	}
-
-
-	
-	
 	
 }
