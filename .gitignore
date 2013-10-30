@@ -5,6 +5,8 @@
 *.war
 *.tmp
 *.symbolMap
+*.js
+*.prefs
 
 # gwt caches and compiled units #
 war/gwt_bree/
