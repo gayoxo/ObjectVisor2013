@@ -163,6 +163,7 @@ public class ConstructDescriptorPopUpPanel extends PopupPanel implements PoupCer
 				VerticalPanel PanelA = new VerticalPanel();
 				Pestanas.put((Meta) MetaElem, PanelA);
 				MetaOrden.add((Meta) MetaElem);
+				procesaHijosMeta(MetaElem.getSons());
 				}
 			else 
 				{
@@ -445,10 +446,62 @@ public class ConstructDescriptorPopUpPanel extends PopupPanel implements PoupCer
 				PanelA.setSize("100%", "100%");
 				Pestanas.put((Meta) MetaElem, PanelA);
 				MetaOrden.add((Meta) MetaElem);
+				procesaHijosMeta(MetaElem.getSons());
 				}
 			else 
 				{
 				 procesaEstrella((Iterator)MetaElem);
+				}
+			
+
+		}
+		
+	}
+	
+	/**
+	 * Procesa los hijos meta para hacer pestañas
+	 * @param sons
+	 */
+	private void procesaHijosMeta(List<CollectionAttribute> sons) {
+		for (CollectionAttribute MetaElem : sons) {
+			
+			if (MetaElem instanceof Meta && !ShowsStaticFunctions.NotBasic((Meta) MetaElem))
+				{
+				VerticalPanel PanelA = new VerticalPanel();
+				Pestanas.put((Meta) MetaElem, PanelA);
+				MetaOrden.add((Meta) MetaElem);
+				}
+			else if (MetaElem instanceof Iterator)
+				{
+				 procesaHijosMetaEstrella((Iterator)MetaElem);
+				}
+			
+
+		}
+		
+	}
+
+
+
+
+
+	/**
+	 * Procesa los hijos estrella de manera unitaria
+	 * @param metaElem
+	 */
+	private void procesaHijosMetaEstrella(Iterator metaElem) {
+		for (CollectionAttribute MetaElem : metaElem.getSons()) {
+			
+			if (MetaElem instanceof Meta && !ShowsStaticFunctions.NotBasic((Meta) MetaElem))
+				{
+				VerticalPanel PanelA = new VerticalPanel();
+//				PanelA.setSize("100%", "100%");
+				Pestanas.put((Meta) MetaElem, PanelA);
+				MetaOrden.add((Meta) MetaElem);
+				}
+			else if (MetaElem instanceof Iterator)
+				{
+				procesaHijosMetaEstrella((Iterator)MetaElem);
 				}
 			
 

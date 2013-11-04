@@ -578,7 +578,7 @@ public class PublicCollectionSplitLayoutPanel extends SplitLayoutPanel {
 		int inicial=LastElement;
 		for (int i = 0; i<10 && (LastElement+i) < Lista.size(); i++) {
 			Construct recurso =Lista.get(LastElement+i);
-			PanelRecursosActuales.add(new RecursoDescriptionComposite(recurso,coleccion.getMetamodelSchemas()));
+			PanelRecursosActuales.add(new ConstructDescriptionComposite(recurso,coleccion.getMetamodelSchemas()));
 			actual++;
 		}
 		LastElement=LastElement+actual;

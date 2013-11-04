@@ -33,7 +33,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Joaquin Gayoso-Cabada
  *
  */
-public class RecursoDescriptionComposite extends Composite {
+public class ConstructDescriptionComposite extends Composite {
 
 	private static final String SHOWMORE = "Show More";
 	protected static final int MaxWidth = 50;
@@ -54,7 +54,7 @@ public class RecursoDescriptionComposite extends Composite {
 	private HorizontalPanel PanelGeneral;
 	private VerticalPanel PanelGeneral2;
 
-	public RecursoDescriptionComposite(Construct recurso,List<CollectionAttribute> list) {
+	public ConstructDescriptionComposite(Construct recurso,List<CollectionAttribute> list) {
 		super();
 		Pestanas=new HashMap<Meta, VerticalPanel>();
 		
