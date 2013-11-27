@@ -19,11 +19,12 @@ import fdi.ucm.shared.model.collection.metavalues.MetaBooleanValue;
 import fdi.ucm.shared.model.collection.metavalues.MetaControlledValue;
 import fdi.ucm.shared.model.collection.metavalues.MetaDateValue;
 import fdi.ucm.shared.model.collection.metavalues.MetaNumericValue;
+import fdi.ucm.shared.model.collection.metavalues.MetaRelationConstructValue;
+import fdi.ucm.shared.model.collection.metavalues.MetaRelationResourceValue;
 import fdi.ucm.shared.model.collection.metavalues.MetaRelationValue;
 import fdi.ucm.shared.model.collection.metavalues.MetaTextValue;
 import fdi.ucm.shared.model.collection.metavalues.MetaValue;
 import fdi.ucm.shared.model.collection.resources.Construct;
-import fdi.ucm.shared.model.collection.resources.RelationObject;
 import fdi.ucm.shared.model.collection.resources.Resources;
 
 /**
@@ -121,20 +122,21 @@ public class TabElement extends Composite {
 		else if (metaValueD instanceof MetaRelationValue)
 		{
 			MetaRelationValue MRV=(MetaRelationValue)metaValueD;
-			RelationObject elementoIconoBoton=MRV.getValue();
 			
-			if (elementoIconoBoton instanceof Resources)
+			if (MRV instanceof MetaRelationResourceValue)
 			{
-			ImagenAsociada=ShowsStaticFunctions.calculaImagenAsociada((Resources)elementoIconoBoton);
+			Resources elementoIconoBoton=((MetaRelationResourceValue) MRV).getValue();
+			ImagenAsociada=ShowsStaticFunctions.calculaImagenAsociada(elementoIconoBoton);
 			
-			Image MRVI=new MetaRelationResourceValueImage((Resources)elementoIconoBoton,ColeccionSons,ImagenAsociada);
+			Image MRVI=new MetaRelationResourceValueImage(elementoIconoBoton,ColeccionSons,ImagenAsociada);
 			Result= MRVI;
 			}
-			else if (elementoIconoBoton instanceof Construct)
+			else if (MRV instanceof MetaRelationConstructValue)
 			{
-			ImagenAsociada=ShowsStaticFunctions.calculaImagenAsociada((Construct)elementoIconoBoton);
+			Construct elementoIconoBoton=((MetaRelationConstructValue) MRV).getValue();
+			ImagenAsociada=ShowsStaticFunctions.calculaImagenAsociada(elementoIconoBoton);
 			
-			Image MRVI=new MetaRelationConstructValueImage((Construct)elementoIconoBoton,ColeccionSons,ImagenAsociada);
+			Image MRVI=new MetaRelationConstructValueImage(elementoIconoBoton,ColeccionSons,ImagenAsociada);
 			Result= MRVI;
 				
 			}

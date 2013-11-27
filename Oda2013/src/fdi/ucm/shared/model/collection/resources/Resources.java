@@ -12,7 +12,7 @@ import fdi.ucm.shared.model.collection.Collection;
  * @author Joaquin Gayoso-Cabada
  *
  */
-public abstract class Resources implements Serializable,RelationObject{
+public abstract class Resources implements Serializable{
 
 	/**
 	 * 

@@ -8,9 +8,9 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.PopupPanel;
 
 import fdi.ucm.shared.model.collection.CollectionAttribute;
+import fdi.ucm.shared.model.collection.metavalues.MetaRelationConstructValue;
+import fdi.ucm.shared.model.collection.metavalues.MetaRelationResourceValue;
 import fdi.ucm.shared.model.collection.metavalues.MetaRelationValue;
-import fdi.ucm.shared.model.collection.resources.Construct;
-import fdi.ucm.shared.model.collection.resources.Resources;
 
 /**
  * Clase que implementa un Boton de tivo metavalue para uso de las Relacions
@@ -32,15 +32,15 @@ public class MetaRelationValueButton extends Button {
 			@Override
 			public void onClick(ClickEvent event) {
 				PopupPanel RPUP=null;
-				if (MetaRelationValue.getValue() instanceof Construct)
+				if (MetaRelationValue instanceof MetaRelationConstructValue)
 				{
-					RPUP=new ConstructDescriptorPopUpPanel((Construct)MetaRelationValue.getValue(),ColeccionSons);
+					RPUP=new ConstructDescriptorPopUpPanel(((MetaRelationConstructValue)MetaRelationValue).getValue(),ColeccionSons);
 					PublicCollectionSplitLayoutPanel.getPila_de_cerrado().add(RPUP);
 					RPUP.center();
 				}
-				else if (MetaRelationValue.getValue() instanceof Resources)
+				else if (MetaRelationValue instanceof MetaRelationResourceValue)
 				{
-					RPUP=new ReferenceDescriptorPopUpPanel((Resources)MetaRelationValue.getValue(),ColeccionSons);
+					RPUP=new ReferenceDescriptorPopUpPanel(((MetaRelationResourceValue)MetaRelationValue).getValue(),ColeccionSons);
 					PublicCollectionSplitLayoutPanel.getPila_de_cerrado().add(RPUP);
 					RPUP.center();
 				}

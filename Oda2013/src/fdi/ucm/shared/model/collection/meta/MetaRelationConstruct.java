@@ -7,12 +7,12 @@ import fdi.ucm.shared.model.collection.CollectionAttribute;
  * @author Joaquin Gayoso
  *
  */
-public abstract class MetaRelation extends Meta{
+public class MetaRelationConstruct extends MetaRelation{
 
 	private static final long serialVersionUID = 1L;
 	
 	
-	public MetaRelation() {
+	public MetaRelationConstruct() {
 		super();
 	}
 
@@ -22,7 +22,7 @@ public abstract class MetaRelation extends Meta{
 	 * @param father
 	 * @param summary
 	 */
-	public MetaRelation(String name, CollectionAttribute father) {
+	public MetaRelationConstruct(String name, CollectionAttribute father) {
 		super(name,father);
 	}
 	

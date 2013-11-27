@@ -9,7 +9,7 @@ import fdi.ucm.shared.model.collection.meta.Meta;
  * @author Joaquin Gayoso-Cabada
  *
  */
-public class Construct extends Attributable implements RelationObject{
+public class Construct extends Attributable{
 
 	private static final long serialVersionUID = 1L;
 	private Collection collectionFather;

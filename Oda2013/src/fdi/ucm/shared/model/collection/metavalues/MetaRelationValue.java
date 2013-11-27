@@ -4,8 +4,6 @@
 package fdi.ucm.shared.model.collection.metavalues;
 
 import fdi.ucm.shared.model.collection.meta.MetaRelation;
-import fdi.ucm.shared.model.collection.resources.RelationObject;
-import fdi.ucm.shared.model.collection.resources.Resources;
 
 
 
@@ -15,13 +13,12 @@ import fdi.ucm.shared.model.collection.resources.Resources;
  *
  */
 
-public class MetaRelationValue extends MetaValue {
+public abstract class MetaRelationValue extends MetaValue {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private RelationObject RValue;
 	
 	/**
 	 * COnstructor por defecto.
@@ -29,7 +26,6 @@ public class MetaRelationValue extends MetaValue {
 	 */
 	public MetaRelationValue() {
 		super();
-		RValue=null;
 	}
 
 	/**
@@ -38,37 +34,11 @@ public class MetaRelationValue extends MetaValue {
 	 */
 	public MetaRelationValue(MetaRelation hastype) {
 		super(hastype);
-		RValue=null;
 	}
 
 	/**
-	 * Constructor con todos los parametros.
-	 * @param hastype Elemento al que pertenece.
-	 * @param value valor de la referencia.
+	 * Set Value of retalion to null
 	 */
-	public MetaRelationValue(MetaRelation hastype, RelationObject value) {
-		super(hastype);
-		RValue = value;
-	}
-
-	/**
-	 * @return the value
-	 */
-	public RelationObject getValue() {
-		return RValue;
-	}
-
-	
-	
-	/**
-	 * @param value the value to set
-	 */
-	public void setValue(Resources value) {
-		RValue = value;
-	}
-	
-	
-	
-	
+	public abstract void removeValue();
 
 }
