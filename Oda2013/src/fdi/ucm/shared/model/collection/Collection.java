@@ -6,8 +6,9 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-import fdi.ucm.shared.model.collection.resources.Construct;
-import fdi.ucm.shared.model.collection.resources.Resources;
+import fdi.ucm.shared.model.collection.document.Documents;
+import fdi.ucm.shared.model.collection.document.Resources;
+import fdi.ucm.shared.model.collection.grammar.Structure;
 
 
 /**
@@ -23,11 +24,11 @@ public class Collection  implements Serializable,IsSerializable{
 	
 	private String Name;
 	
-	private List<CollectionAttribute> MetamodelSchemas;
+	private List<Structure> MetamodelSchemas;
 	
 	private List<Resources> SectionValues;
 	
-	private List<Construct> Estructuras;
+	private List<Documents> Estructuras;
 	
 	
 
@@ -35,9 +36,9 @@ public class Collection  implements Serializable,IsSerializable{
 	 * Constructor por defecto necesario para serializacion
 	 */
 	public Collection() {
-		MetamodelSchemas= new ArrayList<CollectionAttribute>();
+		MetamodelSchemas= new ArrayList<Structure>();
 		SectionValues=new ArrayList<Resources>();
-		Estructuras=new ArrayList<Construct>();
+		Estructuras=new ArrayList<Documents>();
 		id=null;
 				
 	}
@@ -46,7 +47,7 @@ public class Collection  implements Serializable,IsSerializable{
 	 * Constructor por defecto necesario para serializacion
 	 */
 	public Collection(String Namein) {
-		MetamodelSchemas= new ArrayList<CollectionAttribute>();
+		MetamodelSchemas= new ArrayList<Structure>();
 		SectionValues=new ArrayList<Resources>();
 		Name=Namein;
 		id=null;		
@@ -55,14 +56,14 @@ public class Collection  implements Serializable,IsSerializable{
 	/**
 	 * @return the metamodelSchemas
 	 */
-	public List<CollectionAttribute> getMetamodelSchemas() {
+	public List<Structure> getMetamodelSchemas() {
 		return MetamodelSchemas;
 	}
 
 	/**
 	 * @param metamodelSchemas the metamodelSchemas to set
 	 */
-	public void setMetamodelSchemas(ArrayList<CollectionAttribute> metamodelSchemas) {
+	public void setMetamodelSchemas(ArrayList<Structure> metamodelSchemas) {
 		MetamodelSchemas = metamodelSchemas;
 	}
 
@@ -112,14 +113,14 @@ public class Collection  implements Serializable,IsSerializable{
 	/**
 	 * @return the estructuras
 	 */
-	public List<Construct> getEstructuras() {
+	public List<Documents> getEstructuras() {
 		return Estructuras;
 	}
 
 	/**
 	 * @param estructuras the estructuras to set
 	 */
-	public void setEstructuras(List<Construct> estructuras) {
+	public void setEstructuras(List<Documents> estructuras) {
 		Estructuras = estructuras;
 	}
 	
