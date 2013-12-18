@@ -38,7 +38,7 @@ public class WindowEditorMasterIndex implements WindowEditorInterface {
 					public void onSuccess(CollectionAndFilePath result) {
 						PopupPanelLoading.getInstance().hide();
 						if (result.getColeccion()!=null)
-							EntryPointControlador.ToPublicCollectionVisualiceWindowEditor(result.getColeccion(), "http://"+Window.Location.getHost()+"/ME2013/Files/"+result.getFilePath(), result.getDescription());
+							EntryPointControlador.ToPublicCollectionVisualiceWindowEditor(result.getColeccion(), result.getDescription());
 						else processGeneral();
 					}
 					

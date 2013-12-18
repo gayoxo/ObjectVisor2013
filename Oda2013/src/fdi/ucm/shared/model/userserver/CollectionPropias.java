@@ -36,9 +36,6 @@ public class CollectionPropias implements Serializable,IsSerializable{
 	@Column(nullable=false)
 	private String SavePath;
 	
-	@Column(nullable=true)
-	private String FilePath;
-	
 	@Column(nullable=false)
 	private boolean Publica;
 	
@@ -53,11 +50,10 @@ public class CollectionPropias implements Serializable,IsSerializable{
 	 * @param path
 	 * @param filepath
 	 */
-	public CollectionPropias(String name, String path,String filepath) {
+	public CollectionPropias(String name, String path) {
 		super();
 		Name = name;
 		SavePath = path;
-		FilePath=filepath;
 		Publica=false;
 	}
 
@@ -105,15 +101,6 @@ public class CollectionPropias implements Serializable,IsSerializable{
 		SavePath = savePath;
 	}
 	
-	public String getFilePath() {
-		return FilePath;
-	}
-	
-	public void setFilePath(String filePath) {
-		FilePath = filePath;
-	}
-
-
 	/**
 	 * @return the publica
 	 */

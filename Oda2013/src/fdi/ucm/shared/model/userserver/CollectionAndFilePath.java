@@ -19,14 +19,12 @@ public class CollectionAndFilePath implements Serializable,IsSerializable{
 	
 	private static final long serialVersionUID = 6592631257848928894L;
 	private Collection Coleccion;
-	private String FilePath;
 	private String Description;
 	
 	
 	public CollectionAndFilePath() {
 		super();
 		Coleccion = null;
-		FilePath = "";
 		Description="";
 	}
 	
@@ -34,10 +32,9 @@ public class CollectionAndFilePath implements Serializable,IsSerializable{
 	 * @param coleccion
 	 * @param filePath
 	 */
-	public CollectionAndFilePath(Collection coleccion, String filePath,String description) {
+	public CollectionAndFilePath(Collection coleccion, String description) {
 		super();
 		Coleccion = coleccion;
-		FilePath = filePath;
 		Description= description;
 	}
 
@@ -55,19 +52,6 @@ public class CollectionAndFilePath implements Serializable,IsSerializable{
 		Coleccion = coleccion;
 	}
 
-	/**
-	 * @return the filePath
-	 */
-	public String getFilePath() {
-		return FilePath;
-	}
-
-	/**
-	 * @param filePath the filePath to set
-	 */
-	public void setFilePath(String filePath) {
-		FilePath = filePath;
-	}
 
 	/**
 	 * @return the description

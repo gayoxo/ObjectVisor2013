@@ -67,7 +67,6 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 	private VerticalPanel PanelRecursosActuales;
 	private Label PageLabel;
 	private static Collection coleccion;
-	private static String BasePath;
 	private SliderBarSimpleHorizontal SB;
 	private ArrayList<Documents> Lista;
 	private SplitLayoutPanelPublicCollection OEThis;
@@ -273,19 +272,11 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 
 	
 	/**
-	 * @return the basePath
-	 */
-	public static String getBasePath() {
-		return BasePath;
-	}
-
-	/**
 	 * @param coleccion the coleccion to set
 	 * @param basePath the basePath to set
 	 */
-	public static void setColeccionAndBasePath(Collection coleccion,String basePath) {
+	public static void setColeccionAndBasePath(Collection coleccion) {
 		SplitLayoutPanelPublicCollection.coleccion = coleccion;
-		SplitLayoutPanelPublicCollection.BasePath=basePath;
 	}
 
 	/**

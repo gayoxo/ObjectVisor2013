@@ -49,9 +49,8 @@ public class Oda3ServiceImp extends RemoteServiceServlet implements Oda3Service{
 	    	if (!results.isEmpty())  
 	    		{
 	    		Collection SalidaC=LoadCollection(results.get(0));
-	    		String filePath=results.get(0).getFilePath();
 	    		String descString=results.get(0).getDescription();
-	    		return new CollectionAndFilePath(SalidaC, filePath,descString);
+	    		return new CollectionAndFilePath(SalidaC, descString);
 	    		}
 	
 	    em.close();

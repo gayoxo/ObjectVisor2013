@@ -33,9 +33,9 @@ public class EntryPointControlador implements EntryPoint{
 	}
 	
 
-	public static void ToPublicCollectionVisualiceWindowEditor(Collection Coleccion, String FilePath, String Description) {
+	public static void ToPublicCollectionVisualiceWindowEditor(Collection Coleccion, String Description) {
 		RootPanel.get().clear();
-		SplitLayoutPanelPublicCollection.setColeccionAndBasePath(Coleccion, FilePath);
+		SplitLayoutPanelPublicCollection.setColeccionAndBasePath(Coleccion);
 		WE=PCVWE;
 		WE.showWindow();
 		PCVWE.setLabelInformativa(Description);

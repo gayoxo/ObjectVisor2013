@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.google.gwt.core.client.GWT;
 
-import fdi.ucm.client.publiccolletions.SplitLayoutPanelPublicCollection;
 import fdi.ucm.shared.model.collection.document.Documents;
 import fdi.ucm.shared.model.collection.document.Element;
 import fdi.ucm.shared.model.collection.document.File;
@@ -201,7 +200,7 @@ public class Oda2013OperatinoalViewStaticFunctions {
 		if (elementoIcono==null)
 			return null;
 		else if (elementoIcono instanceof File)
-			return SplitLayoutPanelPublicCollection.getBasePath()+"/"+((File)elementoIcono).getPath();
+			return ((File)elementoIcono).getPath();
 		else if (elementoIcono instanceof URL)
 			return ((URL)elementoIcono).getSrc();
 		else return null;
@@ -247,7 +246,7 @@ public class Oda2013OperatinoalViewStaticFunctions {
 		||
 		path.toLowerCase().endsWith(".png")
 		)
-		return SplitLayoutPanelPublicCollection.getBasePath()+"/"+path;
+		return path;
 	else
 		if (path.toLowerCase().endsWith(".rar"))
 			return GWT.getHostPageBaseURL()+Oda2013StaticIconos.ICONORAR;
