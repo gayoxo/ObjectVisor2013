@@ -3,14 +3,11 @@
  */
 package fdi.ucm.client.publiccolletions;
 
-import java.util.List;
-
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Image;
 
 import fdi.ucm.shared.model.collection.document.Documents;
-import fdi.ucm.shared.model.collection.grammar.Structure;
 
 /**
  * Clase que genera una imagen cliqueable para el caso de las imagenes
@@ -20,14 +17,12 @@ import fdi.ucm.shared.model.collection.grammar.Structure;
 public class ImageMetaRelationConstructValue extends Image {
 
 	
-	private List<Structure> ColeccionSons;
 	private Documents RecursoAsociado;
 	protected static final int MaxWidth = 50;
 
-	public ImageMetaRelationConstructValue(Documents imagen, List<Structure> coleccionSons, String imagenAsociada) {
+	public ImageMetaRelationConstructValue(Documents imagen,String imagenAsociada) {
 		super();
 		setUrl(imagenAsociada);
-		ColeccionSons=coleccionSons;
 		RecursoAsociado=imagen;
 		addClickHandler(new ClickHandler() {
 			
@@ -35,7 +30,7 @@ public class ImageMetaRelationConstructValue extends Image {
 			public void onClick(ClickEvent event) {
 				
 				
-				PopupPanelConstructDescriptor RPUP=new PopupPanelConstructDescriptor(RecursoAsociado,ColeccionSons);
+				PopupPanelConstructDescriptor RPUP=new PopupPanelConstructDescriptor(RecursoAsociado);
 				SplitLayoutPanelPublicCollection.getPila_de_cerrado().add(RPUP);
 				RPUP.center();
 				

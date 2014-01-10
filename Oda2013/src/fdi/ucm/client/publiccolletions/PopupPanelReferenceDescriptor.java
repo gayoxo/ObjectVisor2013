@@ -3,8 +3,6 @@
  */
 package fdi.ucm.client.publiccolletions;
 
-import java.util.List;
-
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.PopupPanel;
 
@@ -26,7 +24,6 @@ import fdi.ucm.client.controller.Oda2013OperatinoalViewStaticFunctions;
 import fdi.ucm.shared.model.collection.document.File;
 import fdi.ucm.shared.model.collection.document.Resources;
 import fdi.ucm.shared.model.collection.document.URL;
-import fdi.ucm.shared.model.collection.grammar.Structure;
 
 /**
  * Panel PopUp que muestra el objeto en funcion del valor de referencia,
@@ -48,7 +45,7 @@ public class PopupPanelReferenceDescriptor extends PopupPanel implements PoupPan
 	private static final String FILE_PATH = "File Path : ";
 
 	
-	public PopupPanelReferenceDescriptor(Resources value,List<Structure> coleccionSons) {
+	public PopupPanelReferenceDescriptor(Resources value) {
 		setAutoHideEnabled(true);
 		setModal(true);
 		AllClose=true;

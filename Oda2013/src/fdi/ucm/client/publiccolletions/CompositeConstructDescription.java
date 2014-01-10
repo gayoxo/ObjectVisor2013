@@ -27,6 +27,7 @@ import fdi.ucm.shared.model.collection.document.Documents;
 import fdi.ucm.shared.model.collection.document.Element;
 import fdi.ucm.shared.model.collection.document.Resources;
 import fdi.ucm.shared.model.collection.grammar.ElementType;
+import fdi.ucm.shared.model.collection.grammar.Grammar;
 import fdi.ucm.shared.model.collection.grammar.Iterator;
 import fdi.ucm.shared.model.collection.grammar.Structure;
 
@@ -46,7 +47,6 @@ public class CompositeConstructDescription extends Composite {
 	private Documents Recurso;
 	private ArrayList<Element> vaciosCreados;
 	private ArrayList<ElementType> MetaOrden;
-	private List<Structure> ColeccionSons;
 	private Image Icono;
 	private String Destino;
 	private String ImagenAsociada;
@@ -56,11 +56,10 @@ public class CompositeConstructDescription extends Composite {
 	private HorizontalPanel PanelGeneral;
 	private VerticalPanel PanelGeneral2;
 
-	public CompositeConstructDescription(Documents recurso,List<Structure> list) {
+	public CompositeConstructDescription(Documents recurso) {
 		super();
 		Pestanas=new HashMap<ElementType, VerticalPanel>();
 		
-		ColeccionSons=list;
 		Procesados=new HashMap<Element,CompositeTabElement>();	
 		Recurso=recurso;
 		vaciosCreados=new ArrayList<Element>();
@@ -143,9 +142,6 @@ public class CompositeConstructDescription extends Composite {
 		PanelAmpliador.add(PanelContenedorDecoyBoton);
 		PanelContenedorDecoyBoton.setWidth("100%");
 
-
-		
-		CompositeTabElement.setColeccionSons(ColeccionSons);
 		
 		PanelDecorador = new SimplePanel();
 		PanelContenedorDecoyBoton.add(PanelDecorador);
@@ -162,7 +158,7 @@ public class CompositeConstructDescription extends Composite {
 		horizontalPanel.add(OpenElement);
 		OpenElement.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				PopupPanelConstructDescriptor RPUP=new PopupPanelConstructDescriptor(Recurso,ColeccionSons);
+				PopupPanelConstructDescriptor RPUP=new PopupPanelConstructDescriptor(Recurso);
 				SplitLayoutPanelPublicCollection.getPila_de_cerrado().add(RPUP);
 				RPUP.center();
 			}
@@ -179,7 +175,7 @@ public class CompositeConstructDescription extends Composite {
 		
 		PanelDecorador.add(PanelA);
 		
-		for (Structure MetaElem : ColeccionSons) {
+		for (Grammar MetaElem : SplitLayoutPanelPublicCollection.getColeccion().getMetamodelGrammar()) {
 				
 			if (MetaElem instanceof ElementType)
 				{

@@ -3,8 +3,6 @@
  */
 package fdi.ucm.client.publiccolletions;
 
-import java.util.List;
-
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Image;
@@ -25,7 +23,6 @@ import fdi.ucm.shared.model.collection.document.MetaNumericValue;
 import fdi.ucm.shared.model.collection.document.ResourceElement;
 import fdi.ucm.shared.model.collection.document.Resources;
 import fdi.ucm.shared.model.collection.document.TextElement;
-import fdi.ucm.shared.model.collection.grammar.Structure;
 
 /**
  * Clase que implementa un elemento tabulado;
@@ -36,7 +33,6 @@ public class CompositeTabElement extends Composite {
 	
 	
 	private VerticalPanel PanelHijos;
-	private static List<Structure> ColeccionSons;
 	private static String ImagenAsociada;
 	private Label LabelType;
 	private static final String TWO_POINTS = ":";
@@ -126,7 +122,7 @@ public class CompositeTabElement extends Composite {
 			Documents elementoIconoBoton=MRV.getValue();
 			ImagenAsociada=Oda2013OperatinoalViewStaticFunctions.calculaImagenAsociada(elementoIconoBoton);
 			
-			Image MRVI=new ImageMetaRelationConstructValue(elementoIconoBoton,ColeccionSons,ImagenAsociada);
+			Image MRVI=new ImageMetaRelationConstructValue(elementoIconoBoton,ImagenAsociada);
 			Result= MRVI;
 			
 		}
@@ -137,7 +133,7 @@ public class CompositeTabElement extends Composite {
 			Resources elementoIconoBoton=MRV.getValue();
 			ImagenAsociada=Oda2013OperatinoalViewStaticFunctions.calculaImagenAsociada(elementoIconoBoton);
 			
-			Image MRVI=new ImageMetaRelationResourceValue(elementoIconoBoton,ColeccionSons,ImagenAsociada);
+			Image MRVI=new ImageMetaRelationResourceValue(elementoIconoBoton,ImagenAsociada);
 			Result= MRVI;
 
 			
@@ -151,19 +147,6 @@ public class CompositeTabElement extends Composite {
 		return V;
 	}
 
-	/**
-	 * @return the coleccionSons
-	 */
-	public static List<Structure> getColeccionSons() {
-		return ColeccionSons;
-	}
-
-	/**
-	 * @param coleccionSons2 the coleccionSons to set
-	 */
-	public static void setColeccionSons(List<Structure> coleccionSons2) {
-		ColeccionSons = coleccionSons2;
-	}
 
 	
 

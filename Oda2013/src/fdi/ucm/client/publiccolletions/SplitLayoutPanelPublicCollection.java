@@ -162,7 +162,7 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 		TreeItemMetaVisualize.setListEntrada(coleccion.getEstructuras());
 		
 		if (coleccion!=null)
-			processCollection(coleccion.getMetamodelGrammar(), ArbolAGenerar);
+			processCollectionG(coleccion.getMetamodelGrammar(), ArbolAGenerar);
 		
 		
 		
@@ -273,24 +273,15 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 			List<Grammar> list, Tree arbolAGenerar) {
 		for (Grammar atributo1 : list) {
 			
-			TreeItemMetaVisualize trtmNewItem;
-			if (Oda2013OperatinoalViewStaticFunctions.isBrowseable(((ElementType)atributo1)))
+			TreeItemGrammarVisualize trtmNewItem;
+			if (Oda2013OperatinoalViewStaticFunctions.isBrowseable(atributo1))
 					
 				{
-				trtmNewItem = new TreeItemMetaVisualize((ElementType)atributo1,new ArrayList<Term>(),new ArrayList<String>());
+				trtmNewItem = new TreeItemGrammarVisualize(atributo1);
 				arbolAGenerar.addItem(trtmNewItem);
-					if (atributo1 instanceof MetaControlled)
-						processCollectionControlled(((MetaControlled) atributo1).getVocabulary(), trtmNewItem,trtmNewItem.getHijos());
-						else
-							if (atributo1 instanceof TextElementType)
-								//{
-								processCollectionText((TextElementType) trtmNewItem.getAttribute(), trtmNewItem,trtmNewItem.getHijos());
-								//processCollection(atributo1.getSons(), arbolAGenerar);
-								//}
-								else
-									processCollection(trtmNewItem.getAttribute().getSons(), trtmNewItem,trtmNewItem.getHijos());
+				processCollection(trtmNewItem.getAttribute().getSons(), trtmNewItem,trtmNewItem.getHijos());
 					}
-				else 	
+			else 	
 					processCollection(atributo1.getSons(), arbolAGenerar);
 			
 			
@@ -409,6 +400,38 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 		}
 	}
 
+	/**
+	 * Procesa lista cuando viene de un nodo hijo
+	 * @param list
+	 * @param padre
+	 * @param hijosDelPadre
+	 */
+	public static void processCollection(List<Structure> list,
+			TreeItemGrammarVisualize padre,
+			ArrayList<TreeItemMetaVisualize> hijosDelPadre) {
+		for (Structure atributoHijo : list) {
+			
+			TreeItemMetaVisualize trtmNewItem;
+			if ((atributoHijo instanceof ElementType)
+					&&(Oda2013OperatinoalViewStaticFunctions.isBrowseable((ElementType)atributoHijo))
+					)
+				{
+				trtmNewItem = new TreeItemMetaVisualize((ElementType)atributoHijo,padre.getFiltro(),padre.getFiltroTexto());
+				padre.addItem(trtmNewItem);
+				hijosDelPadre.add(trtmNewItem);
+				}
+			else 
+
+				processCollection(atributoHijo.getSons(), padre,hijosDelPadre);	
+
+		}
+
+		padre.setState(true, true);
+		
+		
+	}
+	
+	
 	/**
 	 * Procesa lista cuando viene de un nodo hijo
 	 * @param list
@@ -607,7 +630,7 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 		int inicial=LastElement;
 		for (int i = 0; i<10 && (LastElement+i) < Lista.size(); i++) {
 			Documents recurso =Lista.get(LastElement+i);
-			PanelRecursosActuales.add(new CompositeConstructDescription(recurso,coleccion.getMetamodelSchemas()));
+			PanelRecursosActuales.add(new CompositeConstructDescription(recurso));
 			actual++;
 		}
 		LastElement=LastElement+actual;

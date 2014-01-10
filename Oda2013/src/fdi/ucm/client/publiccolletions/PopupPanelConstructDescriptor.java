@@ -15,6 +15,7 @@ import fdi.ucm.shared.model.collection.document.Documents;
 import fdi.ucm.shared.model.collection.document.Element;
 import fdi.ucm.shared.model.collection.document.Resources;
 import fdi.ucm.shared.model.collection.grammar.ElementType;
+import fdi.ucm.shared.model.collection.grammar.Grammar;
 import fdi.ucm.shared.model.collection.grammar.Iterator;
 import fdi.ucm.shared.model.collection.grammar.Structure;
 
@@ -57,7 +58,7 @@ public class PopupPanelConstructDescriptor extends PopupPanel implements PoupPan
 	protected static final int MaxHeight = 200;
 
 	
-	public PopupPanelConstructDescriptor(Documents value,List<Structure> coleccionSons) {
+	public PopupPanelConstructDescriptor(Documents value) {
 		setAutoHideEnabled(true);
 		setModal(true);
 		AllClose=true;
@@ -157,7 +158,7 @@ public class PopupPanelConstructDescriptor extends PopupPanel implements PoupPan
 		horizontalPanel.setWidget(btnNewButton);
 		btnNewButton.setWidth("50px");
 		
-		for (Structure MetaElem : coleccionSons) {
+		for (Grammar MetaElem : SplitLayoutPanelPublicCollection.getColeccion().getMetamodelGrammar()) {
 			
 			if (MetaElem instanceof ElementType)
 				{

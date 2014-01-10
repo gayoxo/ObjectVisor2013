@@ -11,6 +11,7 @@ import fdi.ucm.shared.model.collection.document.OperationalValue;
 import fdi.ucm.shared.model.collection.document.Resources;
 import fdi.ucm.shared.model.collection.document.URL;
 import fdi.ucm.shared.model.collection.grammar.ElementType;
+import fdi.ucm.shared.model.collection.grammar.Grammar;
 import fdi.ucm.shared.model.collection.grammar.LinkElementType;
 import fdi.ucm.shared.model.collection.grammar.MetaBoolean;
 import fdi.ucm.shared.model.collection.grammar.MetaControlled;
@@ -131,6 +132,11 @@ public class Oda2013OperatinoalViewStaticFunctions {
 		return null;
 	}
 	
+	/**
+	 * Funcion que define si un meta es navegable
+	 * @param meta
+	 * @return
+	 */
 	public static boolean isBrowseable(ElementType meta) {
 		ArrayList<OperationalView> Shows = meta.getShows();
 		for (OperationalView show : Shows) {
@@ -146,6 +152,25 @@ public class Oda2013OperatinoalViewStaticFunctions {
 		return false;
 	}
 
+	/**
+	 * Funcion que define si un meta es navegable
+	 * @param meta
+	 * @return
+	 */
+	public static boolean isBrowseable(Grammar meta) {
+		ArrayList<OperationalView> Shows = meta.getViews();
+		for (OperationalView show : Shows) {
+			ArrayList<OperationalValueType> ShowValue = show.getValues();
+			for (OperationalValueType showValues : ShowValue) {
+				if (showValues.getName().equals(Oda2013StaticNames.BROWSERSHOWN))
+						if (showValues.getDefault().equals(Boolean.toString(true)))
+									return true;
+						if (showValues.getDefault().equals(Boolean.toString(false)))
+									return false;
+							}
+						}
+		return false;
+	}
 	
 	/**
 	 * Funcion que retorna el icono de un recurso Objeto digital
