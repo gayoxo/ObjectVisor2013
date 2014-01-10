@@ -5,8 +5,6 @@ package fdi.ucm.client.publiccolletions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
 import com.google.gwt.user.client.ui.Composite;
 
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -27,7 +25,6 @@ import fdi.ucm.shared.model.collection.document.Documents;
 import fdi.ucm.shared.model.collection.document.Element;
 import fdi.ucm.shared.model.collection.document.Resources;
 import fdi.ucm.shared.model.collection.grammar.ElementType;
-import fdi.ucm.shared.model.collection.grammar.Grammar;
 import fdi.ucm.shared.model.collection.grammar.Iterator;
 import fdi.ucm.shared.model.collection.grammar.Structure;
 
@@ -175,7 +172,10 @@ public class CompositeConstructDescription extends Composite {
 		
 		PanelDecorador.add(PanelA);
 		
-		for (Grammar MetaElem : SplitLayoutPanelPublicCollection.getColeccion().getMetamodelGrammar()) {
+		
+		
+		
+		for (Structure MetaElem : Recurso.getDocument().getSons()) {
 				
 			if (MetaElem instanceof ElementType)
 				{

@@ -15,7 +15,6 @@ import fdi.ucm.shared.model.collection.document.Documents;
 import fdi.ucm.shared.model.collection.document.Element;
 import fdi.ucm.shared.model.collection.document.Resources;
 import fdi.ucm.shared.model.collection.grammar.ElementType;
-import fdi.ucm.shared.model.collection.grammar.Grammar;
 import fdi.ucm.shared.model.collection.grammar.Iterator;
 import fdi.ucm.shared.model.collection.grammar.Structure;
 
@@ -55,6 +54,7 @@ public class PopupPanelConstructDescriptor extends PopupPanel implements PoupPan
 	private String Destino;
 	private String ImagenAsociada;
 	private Image Icono;
+	private VerticalPanel PanelGrammar;
 	protected static final int MaxHeight = 200;
 
 	
@@ -158,23 +158,27 @@ public class PopupPanelConstructDescriptor extends PopupPanel implements PoupPan
 		horizontalPanel.setWidget(btnNewButton);
 		btnNewButton.setWidth("50px");
 		
-		for (Grammar MetaElem : SplitLayoutPanelPublicCollection.getColeccion().getMetamodelGrammar()) {
-			
-			if (MetaElem instanceof ElementType)
-				{
-				VerticalPanel PanelA = new VerticalPanel();
-				Pestanas.put((ElementType) MetaElem, PanelA);
-				MetaOrden.add((ElementType) MetaElem);
-				procesaHijosMeta(MetaElem.getSons());
-				}
-			else 
-				{
-				 procesaEstrella((Iterator)MetaElem);
-				}
-			
-
-		}
+		PanelGrammar = new VerticalPanel();
+			procesaHijosMeta(Recurso.getDocument().getSons());
 		
+//		
+//		for (Grammar MetaElem : SplitLayoutPanelPublicCollection.getColeccion().getMetamodelGrammar()) {
+//			
+//			if (MetaElem instanceof ElementType)
+//				{
+//				VerticalPanel PanelA = new VerticalPanel();
+//				Pestanas.put((ElementType) MetaElem, PanelA);
+//				MetaOrden.add((ElementType) MetaElem);
+//				procesaHijosMeta(MetaElem.getSons());
+//				}
+//			else 
+//				{
+//				 procesaEstrella((Iterator)MetaElem);
+//				}
+//			
+//
+//		}
+//		
 		
 		for (Element MetaValueD : Recurso.getDescription()) {
 			if (!Procesados.containsKey(MetaValueD)&&(Oda2013OperatinoalViewStaticFunctions.isVisible(MetaValueD)))
@@ -182,7 +186,15 @@ public class PopupPanelConstructDescriptor extends PopupPanel implements PoupPan
 		}
 		
 		
-		
+
+		if (PanelGrammar.getWidgetCount()>0)
+		{
+		ScrollPanel panelScrollVertical = new ScrollPanel();
+		panelScrollVertical.setSize("100%","100%");
+		PanelDecorador.add(panelScrollVertical, Recurso.getDocument().getNombre(), true); 
+			panelScrollVertical.add(PanelGrammar);
+
+		}
 		
 		for (ElementType MetaActual : MetaOrden) {
 			VerticalPanel res=Pestanas.get(MetaActual);
@@ -435,37 +447,14 @@ public class PopupPanelConstructDescriptor extends PopupPanel implements PoupPan
 	}
 
 
-	/**
-	 * Mecanismo de proceso de un atributo estrella para la creacion de las pestañas
-	 * @param metaElem
-	 */
-	private void procesaEstrella(Iterator metaElem) {
-		for (Structure MetaElem : metaElem.getSons()) {
-			
-			if (MetaElem instanceof ElementType)
-				{
-				VerticalPanel PanelA = new VerticalPanel();
-				PanelA.setSize("100%", "100%");
-				Pestanas.put((ElementType) MetaElem, PanelA);
-				MetaOrden.add((ElementType) MetaElem);
-				procesaHijosMeta(MetaElem.getSons());
-				}
-			else 
-				{
-				 procesaEstrella((Iterator)MetaElem);
-				}
-			
-
-		}
-		
-	}
+	
 	
 	/**
 	 * Procesa los hijos meta para hacer pestañas
 	 * @param sons
 	 */
 	private void procesaHijosMeta(List<Structure> sons) {
-		for (Structure MetaElem : sons) {
+for (Structure MetaElem : sons) {
 			
 			if (MetaElem instanceof ElementType && !Oda2013OperatinoalViewStaticFunctions.NotBasic((ElementType) MetaElem))
 				{
@@ -473,6 +462,10 @@ public class PopupPanelConstructDescriptor extends PopupPanel implements PoupPan
 				Pestanas.put((ElementType) MetaElem, PanelA);
 				MetaOrden.add((ElementType) MetaElem);
 				}
+			else if (MetaElem instanceof ElementType)
+			{
+			Pestanas.put((ElementType) MetaElem, PanelGrammar);
+			}
 			else if (MetaElem instanceof Iterator)
 				{
 				 procesaHijosMetaEstrella((Iterator)MetaElem);
@@ -492,7 +485,7 @@ public class PopupPanelConstructDescriptor extends PopupPanel implements PoupPan
 	 * @param metaElem
 	 */
 	private void procesaHijosMetaEstrella(Iterator metaElem) {
-		for (Structure MetaElem : metaElem.getSons()) {
+	for (Structure MetaElem : metaElem.getSons()) {
 			
 			if (MetaElem instanceof ElementType && !Oda2013OperatinoalViewStaticFunctions.NotBasic((ElementType) MetaElem))
 				{
@@ -501,6 +494,10 @@ public class PopupPanelConstructDescriptor extends PopupPanel implements PoupPan
 				Pestanas.put((ElementType) MetaElem, PanelA);
 				MetaOrden.add((ElementType) MetaElem);
 				}
+			else if (MetaElem instanceof ElementType)
+			{
+			Pestanas.put((ElementType) MetaElem, PanelGrammar);
+			}
 			else if (MetaElem instanceof Iterator)
 				{
 				procesaHijosMetaEstrella((Iterator)MetaElem);
