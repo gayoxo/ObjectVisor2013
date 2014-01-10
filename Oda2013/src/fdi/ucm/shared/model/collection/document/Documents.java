@@ -7,7 +7,7 @@ import java.util.List;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 import fdi.ucm.shared.model.collection.Collection;
-import fdi.ucm.shared.model.collection.grammar.ElementType;
+import fdi.ucm.shared.model.collection.grammar.Grammar;
 
 /**
  * Clase que diseña las construciones basicas .
@@ -18,8 +18,9 @@ public class Documents implements Serializable,IsSerializable{
 
 	private static final long serialVersionUID = 1L;
 	private Collection collectionFather;
-	private ElementType Document;
+	private Grammar Grammar;
 	protected List<Element> Description;
+	private ArrayList<OperationalValue> ViewsValues;
 
 
 	/**
@@ -28,6 +29,7 @@ public class Documents implements Serializable,IsSerializable{
 	public Documents() {
 		super();
 		Description=new ArrayList<Element>();
+		setViewsValues(new ArrayList<OperationalValue>());
 	}
 
 
@@ -35,9 +37,10 @@ public class Documents implements Serializable,IsSerializable{
 	/**
 	 * @param document
 	 */
-	public Documents(ElementType document) {
-		Document = document;
+	public Documents(Grammar document) {
+		Grammar = document;
 		Description=new ArrayList<Element>();
+		setViewsValues(new ArrayList<OperationalValue>());
 	}
 
 
@@ -58,8 +61,8 @@ public class Documents implements Serializable,IsSerializable{
 	/**
 	 * @return the document
 	 */
-	public ElementType getDocument() {
-		return Document;
+	public Grammar getDocument() {
+		return Grammar;
 	}
 
 
@@ -67,8 +70,8 @@ public class Documents implements Serializable,IsSerializable{
 	/**
 	 * @param document the document to set
 	 */
-	public void setDocument(ElementType document) {
-		Document = document;
+	public void setDocument(Grammar document) {
+		Grammar = document;
 	}
 
 	/**
@@ -83,6 +86,24 @@ public class Documents implements Serializable,IsSerializable{
 	 */
 	public void setDescription(ArrayList<Element> description) {
 		Description = description;
+	}
+
+
+
+	/**
+	 * @return the viewsValues
+	 */
+	public ArrayList<OperationalValue> getViewsValues() {
+		return ViewsValues;
+	}
+
+
+
+	/**
+	 * @param viewsValues the viewsValues to set
+	 */
+	public void setViewsValues(ArrayList<OperationalValue> viewsValues) {
+		ViewsValues = viewsValues;
 	}
 	
 }

@@ -25,5 +25,14 @@ public class ResourceElementType extends ElementType{
 		super(name,father);
 	}
 	
+	/**
+	 * @param name
+	 * @param father
+	 * @param summary
+	 */
+	public ResourceElementType(String name, Grammar GramaticaPadre) {
+		super(name,GramaticaPadre);
+	}
+	
 
 }

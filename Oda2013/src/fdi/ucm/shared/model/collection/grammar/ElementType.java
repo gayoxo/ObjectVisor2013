@@ -43,12 +43,21 @@ public class ElementType extends Structure implements Serializable,IsSerializabl
 	 * @param name Nombre del atributo.
 	 * @param browseable Define si es navegable
 	 */
-		public ElementType(String name, Structure father) {
-			super();
+		public ElementType(String name,Grammar GramaticaPadre) {
+			super(null,GramaticaPadre);
 			Name = name;
-			Father = father;
 			Shows=new ArrayList<OperationalView>();
 		}
+		
+		/** @param father Padre del attibuto.
+		 * @param name Nombre del atributo.
+		 * @param browseable Define si es navegable
+		 */
+			public ElementType(String name, Structure father) {
+				super(father,null);
+				Name = name;
+				Shows=new ArrayList<OperationalView>();
+			}
 	
 	/**
 	 * @return the name

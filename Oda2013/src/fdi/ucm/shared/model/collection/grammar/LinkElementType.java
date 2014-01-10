@@ -21,6 +21,15 @@ public class LinkElementType extends ElementType{
 	 * @param father
 	 * @param summary
 	 */
+	public LinkElementType(String name, Grammar GramaticaPadre) {
+		super(name,GramaticaPadre);
+	}
+	
+	/**
+	 * @param name
+	 * @param father
+	 * @param summary
+	 */
 	public LinkElementType(String name, Structure father) {
 		super(name,father);
 	}

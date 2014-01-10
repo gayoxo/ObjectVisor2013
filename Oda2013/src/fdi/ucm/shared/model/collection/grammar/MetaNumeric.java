@@ -29,7 +29,13 @@ public class MetaNumeric extends ElementType {
 	}
 
 	
-
+	/**
+	 * @param name
+	 * @param father
+	 */
+	public MetaNumeric(String name,Grammar GramaticaPadre) {
+		super(name, GramaticaPadre);
+	}
 
 	
 	

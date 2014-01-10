@@ -37,6 +37,7 @@ import fdi.ucm.shared.model.collection.document.Element;
 import fdi.ucm.shared.model.collection.document.MetaControlledValue;
 import fdi.ucm.shared.model.collection.document.TextElement;
 import fdi.ucm.shared.model.collection.grammar.ElementType;
+import fdi.ucm.shared.model.collection.grammar.Grammar;
 import fdi.ucm.shared.model.collection.grammar.MetaControlled;
 import fdi.ucm.shared.model.collection.grammar.Structure;
 import fdi.ucm.shared.model.collection.grammar.TextElementType;
@@ -161,7 +162,7 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 		TreeItemMetaVisualize.setListEntrada(coleccion.getEstructuras());
 		
 		if (coleccion!=null)
-			processCollection(coleccion.getMetamodelSchemas(), ArbolAGenerar);
+			processCollection(coleccion.getMetamodelGrammar(), ArbolAGenerar);
 		
 		
 		
@@ -240,6 +241,41 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 			if ((atributo1 instanceof ElementType)
 					&&(Oda2013OperatinoalViewStaticFunctions.isBrowseable(((ElementType)atributo1)))
 					)
+				{
+				trtmNewItem = new TreeItemMetaVisualize((ElementType)atributo1,new ArrayList<Term>(),new ArrayList<String>());
+				arbolAGenerar.addItem(trtmNewItem);
+					if (atributo1 instanceof MetaControlled)
+						processCollectionControlled(((MetaControlled) atributo1).getVocabulary(), trtmNewItem,trtmNewItem.getHijos());
+						else
+							if (atributo1 instanceof TextElementType)
+								//{
+								processCollectionText((TextElementType) trtmNewItem.getAttribute(), trtmNewItem,trtmNewItem.getHijos());
+								//processCollection(atributo1.getSons(), arbolAGenerar);
+								//}
+								else
+									processCollection(trtmNewItem.getAttribute().getSons(), trtmNewItem,trtmNewItem.getHijos());
+					}
+				else 	
+					processCollection(atributo1.getSons(), arbolAGenerar);
+			
+			
+		
+		}
+		
+	}
+	
+	/**
+	 * Procesa la lista de elementos sobre la base
+	 * @param list
+	 * @param arbolAGenerar 
+	 */
+	private void processCollectionG(
+			List<Grammar> list, Tree arbolAGenerar) {
+		for (Grammar atributo1 : list) {
+			
+			TreeItemMetaVisualize trtmNewItem;
+			if (Oda2013OperatinoalViewStaticFunctions.isBrowseable(((ElementType)atributo1)))
+					
 				{
 				trtmNewItem = new TreeItemMetaVisualize((ElementType)atributo1,new ArrayList<Term>(),new ArrayList<String>());
 				arbolAGenerar.addItem(trtmNewItem);

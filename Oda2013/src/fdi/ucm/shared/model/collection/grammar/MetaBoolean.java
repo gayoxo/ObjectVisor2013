@@ -31,7 +31,14 @@ public class MetaBoolean extends ElementType {
 
 	
 
-	
+	/**
+	 * {@link ElementType constructor}
+	 * @param name
+	 * @param father
+	 */
+	public MetaBoolean(String name,Grammar GramaticaPadre) {
+		super(name, GramaticaPadre);
+	}
 	
 	
 

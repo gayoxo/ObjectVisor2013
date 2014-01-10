@@ -9,8 +9,6 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-import fdi.ucm.shared.model.collection.Collection;
-
 /**
  * Crea el objeto base que define un coleccion attribute
  * @author Joaquin Gayoso-Cabada
@@ -20,7 +18,7 @@ public abstract class Structure implements Serializable,IsSerializable{
 	
 
 	
-	private Collection collectionFather;
+	private Grammar collectionFather;
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -44,7 +42,7 @@ public abstract class Structure implements Serializable,IsSerializable{
 	 * Constructor con parametros
 	 * @param father padre del objeto
 	 */
-	public Structure(Structure father) {
+	public Structure(Structure father,Grammar ColeccionPadre) {
 		super();
 		Father = father;
 		Sons=new ArrayList<Structure>();	
@@ -118,7 +116,7 @@ public abstract class Structure implements Serializable,IsSerializable{
 	/**
 	 * @return the collectionFather
 	 */
-	public Collection getCollectionFather() {
+	public Grammar getCollectionFather() {
 		return collectionFather;
 	}
 
@@ -126,7 +124,7 @@ public abstract class Structure implements Serializable,IsSerializable{
 	/**
 	 * @param collectionFather the collectionFather to set
 	 */
-	public void setCollectionFather(Collection collectionFather) {
+	public void setCollectionFather(Grammar collectionFather) {
 		this.collectionFather = collectionFather;
 	}
 

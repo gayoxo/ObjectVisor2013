@@ -28,6 +28,13 @@ public class TextElementType extends ElementType {
 		super(name,father);
 	}
 
+	/**
+	 * @param name
+	 * @param father
+	 */
+	public TextElementType(String name,Grammar GramaticaPadre) {
+		super(name,GramaticaPadre);
+	}
 	
 	
 

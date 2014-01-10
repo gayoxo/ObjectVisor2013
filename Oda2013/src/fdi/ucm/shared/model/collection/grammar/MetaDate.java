@@ -28,7 +28,16 @@ public class MetaDate extends ElementType {
 	}
 
 	
+	/**
+	 * @param name
+	 * @param father
+	 * @param summary
+	 */
+	public MetaDate(String name,Grammar GramaticaPadre) {
+		super(name, GramaticaPadre);
+	}
 
+	
 	
 	
 	

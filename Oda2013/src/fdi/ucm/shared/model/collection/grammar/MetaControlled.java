@@ -41,6 +41,15 @@ public class MetaControlled extends ElementType {
 
 
 
+	/**
+	 * @param name
+	 * @param father
+	 */
+	public MetaControlled(String name,Grammar GramaticaPadre) {
+		super(name,GramaticaPadre);
+		vocabulary=new Vocabulary();
+	}
+
 
 
 	/**

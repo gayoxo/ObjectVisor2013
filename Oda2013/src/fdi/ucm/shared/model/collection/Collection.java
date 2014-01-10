@@ -8,7 +8,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 import fdi.ucm.shared.model.collection.document.Documents;
 import fdi.ucm.shared.model.collection.document.Resources;
-import fdi.ucm.shared.model.collection.grammar.Structure;
+import fdi.ucm.shared.model.collection.grammar.Grammar;
 
 
 /**
@@ -24,7 +24,7 @@ public class Collection  implements Serializable,IsSerializable{
 	
 	private String Name;
 	
-	private List<Structure> MetamodelSchemas;
+	private List<Grammar> MetamodelSchemas;
 	
 	private List<Resources> SectionValues;
 	
@@ -36,7 +36,7 @@ public class Collection  implements Serializable,IsSerializable{
 	 * Constructor por defecto necesario para serializacion
 	 */
 	public Collection() {
-		MetamodelSchemas= new ArrayList<Structure>();
+		MetamodelSchemas= new ArrayList<Grammar>();
 		SectionValues=new ArrayList<Resources>();
 		Estructuras=new ArrayList<Documents>();
 		id=null;
@@ -47,7 +47,7 @@ public class Collection  implements Serializable,IsSerializable{
 	 * Constructor por defecto necesario para serializacion
 	 */
 	public Collection(String Namein) {
-		MetamodelSchemas= new ArrayList<Structure>();
+		MetamodelSchemas= new ArrayList<Grammar>();
 		SectionValues=new ArrayList<Resources>();
 		Name=Namein;
 		id=null;		
@@ -56,14 +56,14 @@ public class Collection  implements Serializable,IsSerializable{
 	/**
 	 * @return the metamodelSchemas
 	 */
-	public List<Structure> getMetamodelSchemas() {
+	public List<Grammar> getMetamodelGrammar() {
 		return MetamodelSchemas;
 	}
 
 	/**
 	 * @param metamodelSchemas the metamodelSchemas to set
 	 */
-	public void setMetamodelSchemas(ArrayList<Structure> metamodelSchemas) {
+	public void setMetamodelGrammar(ArrayList<Grammar> metamodelSchemas) {
 		MetamodelSchemas = metamodelSchemas;
 	}
 

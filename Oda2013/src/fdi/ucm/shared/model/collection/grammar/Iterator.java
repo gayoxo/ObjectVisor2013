@@ -30,11 +30,19 @@ public class Iterator extends Structure {
  * @param father Padre del attibuto.
 	 */
 	public Iterator(Structure father) {
-		super(father);
+		super(father,null);
 		AmbitoSTotales=1;
 	}
 
-
+	/**
+	 * Constructor con todos los parametros
+ * @param father Padre del attibuto.
+	 */
+	public Iterator(Grammar Padre) {
+		super(null,Padre);
+		AmbitoSTotales=1;
+	}
+	
 	/**
 	 * @return the ambitoSTotales
 	 */
