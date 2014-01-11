@@ -19,7 +19,6 @@ import fdi.ucm.shared.model.collection.document.LinkElement;
 import fdi.ucm.shared.model.collection.document.MetaBooleanValue;
 import fdi.ucm.shared.model.collection.document.MetaControlledValue;
 import fdi.ucm.shared.model.collection.document.MetaDateValue;
-import fdi.ucm.shared.model.collection.document.MetaNumericValue;
 import fdi.ucm.shared.model.collection.document.ResourceElement;
 import fdi.ucm.shared.model.collection.document.Resources;
 import fdi.ucm.shared.model.collection.document.TextElement;
@@ -106,8 +105,8 @@ public class CompositeTabElement extends Composite {
 			Result=new Label(((TextElement) metaValueD).getValue());
 		else if (metaValueD instanceof MetaControlledValue)
 			Result=new Label(((MetaControlledValue) metaValueD).getValue().getTerm());
-		else if (metaValueD instanceof MetaNumericValue)
-			Result=new Label( ((MetaNumericValue) metaValueD).getValue().toString());
+//		else if (metaValueD instanceof MetaNumericValue)
+//			Result=new Label( ((MetaNumericValue) metaValueD).getValue().toString());
 		else if (metaValueD instanceof MetaBooleanValue)
 			Result=new Label( ((MetaBooleanValue) metaValueD).getValue().toString());
 		else if (metaValueD instanceof MetaDateValue)
