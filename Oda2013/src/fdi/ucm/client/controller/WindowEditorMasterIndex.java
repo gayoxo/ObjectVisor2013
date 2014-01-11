@@ -53,7 +53,7 @@ public class WindowEditorMasterIndex implements WindowEditorInterface {
 	}
 
 	private void processGeneral() {
-		//TODO UN INDEX QUE ESCUPA TODO LO PUBLICADO
+		//TODO UN INDEX QUE ESCUPA LO PUBLICADO
 		Window.alert(Oda2013ConstantsError.ERROR_LOADING_COLLECTION_PUBLIC);
 		
 	}
