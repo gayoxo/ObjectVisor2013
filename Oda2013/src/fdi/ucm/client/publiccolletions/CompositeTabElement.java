@@ -3,7 +3,6 @@
  */
 package fdi.ucm.client.publiccolletions;
 
-import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
@@ -16,9 +15,7 @@ import fdi.ucm.client.controller.Oda2013OperatinoalViewStaticFunctions;
 import fdi.ucm.shared.model.collection.document.Documents;
 import fdi.ucm.shared.model.collection.document.Element;
 import fdi.ucm.shared.model.collection.document.LinkElement;
-import fdi.ucm.shared.model.collection.document.MetaBooleanValue;
 import fdi.ucm.shared.model.collection.document.MetaControlledValue;
-import fdi.ucm.shared.model.collection.document.MetaDateValue;
 import fdi.ucm.shared.model.collection.document.ResourceElement;
 import fdi.ucm.shared.model.collection.document.Resources;
 import fdi.ucm.shared.model.collection.document.TextElement;
@@ -105,15 +102,6 @@ public class CompositeTabElement extends Composite {
 			Result=new Label(((TextElement) metaValueD).getValue());
 		else if (metaValueD instanceof MetaControlledValue)
 			Result=new Label(((MetaControlledValue) metaValueD).getValue().getTerm());
-//		else if (metaValueD instanceof MetaNumericValue)
-//			Result=new Label( ((MetaNumericValue) metaValueD).getValue().toString());
-		else if (metaValueD instanceof MetaBooleanValue)
-			Result=new Label( ((MetaBooleanValue) metaValueD).getValue().toString());
-		else if (metaValueD instanceof MetaDateValue)
-		{
-			DateTimeFormat fmt = DateTimeFormat.getFormat("dd/MM/yyyy"); 
-			Result=new Label( fmt.format(((MetaDateValue) metaValueD).getValue()));
-		}
 		else if (metaValueD instanceof LinkElement)
 		{
 			LinkElement MRV=(LinkElement)metaValueD;
