@@ -531,7 +531,7 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 		int inicial=LastElement;
 		for (int i = 0; i<10 && (LastElement+i) < Lista.size(); i++) {
 			Documents recurso =Lista.get(LastElement+i);
-			PanelRecursosActuales.add(new CompositeConstructDescription(recurso));
+			PanelRecursosActuales.add(new CompositeDocumentDescription(recurso));
 			actual++;
 		}
 		LastElement=LastElement+actual;

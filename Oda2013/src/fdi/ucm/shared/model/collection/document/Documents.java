@@ -31,6 +31,7 @@ public class Documents implements Serializable,IsSerializable{
 		super();
 		Description=new ArrayList<Element>();
 		setViewsValues(new ArrayList<OperationalValue>());
+		DescriptionText="";
 	}
 
 
@@ -42,6 +43,7 @@ public class Documents implements Serializable,IsSerializable{
 		Grammar = document;
 		Description=new ArrayList<Element>();
 		setViewsValues(new ArrayList<OperationalValue>());
+		DescriptionText="";
 	}
 
 

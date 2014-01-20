@@ -19,6 +19,7 @@ import fdi.ucm.shared.model.collection.grammar.Iterator;
 import fdi.ucm.shared.model.collection.grammar.Structure;
 
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DecoratedTabPanel;
 import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -161,6 +162,8 @@ public class PopupPanelConstructDescriptor extends PopupPanel implements PoupPan
 		PanelGrammar = new VerticalPanel();
 			procesaHijosMeta(Recurso.getDocument().getSons());
 		
+			Composite Descripcion=new CompositeDocumentDescriptionDescriptionTab(Recurso.getDescriptionText());
+			PanelGrammar.add(Descripcion);
 //		
 //		for (Grammar MetaElem : SplitLayoutPanelPublicCollection.getColeccion().getMetamodelGrammar()) {
 //			

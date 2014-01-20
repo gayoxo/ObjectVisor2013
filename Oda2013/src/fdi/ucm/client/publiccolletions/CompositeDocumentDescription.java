@@ -33,7 +33,7 @@ import fdi.ucm.shared.model.collection.grammar.Structure;
  * @author Joaquin Gayoso-Cabada
  *
  */
-public class CompositeConstructDescription extends Composite {
+public class CompositeDocumentDescription extends Composite {
 
 	private static final String SHOWMORE = "Show More";
 	protected static final int MaxWidth = 50;
@@ -53,7 +53,7 @@ public class CompositeConstructDescription extends Composite {
 	private HorizontalPanel PanelGeneral;
 	private VerticalPanel PanelGeneral2;
 
-	public CompositeConstructDescription(Documents recurso) {
+	public CompositeDocumentDescription(Documents recurso) {
 		super();
 		Pestanas=new HashMap<ElementType, VerticalPanel>();
 		
@@ -192,12 +192,15 @@ public class CompositeConstructDescription extends Composite {
 		}
 		
 		
+	
 		
 		for (Element MetaValueD : recurso.getDescription()) {
 			if (!Procesados.containsKey(MetaValueD)&&(Oda2013OperatinoalViewStaticFunctions.isSummary(MetaValueD)))
 					procesa(MetaValueD);
 		}
 		
+		Composite Descripcion=new CompositeDocumentDescriptionDescriptionTab(Recurso.getDescriptionText());
+		PanelA.add(Descripcion);
 
 	}
 
