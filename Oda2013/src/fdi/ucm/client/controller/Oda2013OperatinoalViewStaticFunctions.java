@@ -13,7 +13,6 @@ import fdi.ucm.shared.model.collection.document.URL;
 import fdi.ucm.shared.model.collection.grammar.ElementType;
 import fdi.ucm.shared.model.collection.grammar.Grammar;
 import fdi.ucm.shared.model.collection.grammar.LinkElementType;
-import fdi.ucm.shared.model.collection.grammar.MetaControlled;
 import fdi.ucm.shared.model.collection.grammar.OperationalValueType;
 import fdi.ucm.shared.model.collection.grammar.OperationalView;
 import fdi.ucm.shared.model.collection.grammar.ResourceElementType;
@@ -371,9 +370,7 @@ public class Oda2013OperatinoalViewStaticFunctions {
 	 * @return
 	 */
 	public static boolean NotBasic(ElementType metaActual) {
-		if (metaActual instanceof MetaControlled)
-			return true;
-		else if (metaActual instanceof TextElementType)
+		if (metaActual instanceof TextElementType)
 			return true;
 		else if (metaActual instanceof LinkElementType)
 			return true;

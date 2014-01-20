@@ -34,16 +34,11 @@ import fdi.ucm.client.controller.Oda2013OperatinoalViewStaticFunctions;
 import fdi.ucm.shared.model.collection.Collection;
 import fdi.ucm.shared.model.collection.document.Documents;
 import fdi.ucm.shared.model.collection.document.Element;
-import fdi.ucm.shared.model.collection.document.MetaControlledValue;
 import fdi.ucm.shared.model.collection.document.TextElement;
 import fdi.ucm.shared.model.collection.grammar.ElementType;
 import fdi.ucm.shared.model.collection.grammar.Grammar;
-import fdi.ucm.shared.model.collection.grammar.MetaControlled;
 import fdi.ucm.shared.model.collection.grammar.Structure;
 import fdi.ucm.shared.model.collection.grammar.TextElementType;
-import fdi.ucm.shared.model.collection.grammar.controlled.Term;
-import fdi.ucm.shared.model.collection.grammar.controlled.Vocabulary;
-
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.kiouri.sliderbar.client.event.BarValueChangedEvent;
 import com.kiouri.sliderbar.client.event.BarValueChangedHandler;
@@ -59,7 +54,6 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 //	protected static final String MORE_BUTTON = "More";
 //	protected static final String LESS_BUTTON = "Back";
 	private static HashMap<ElementType, Boolean> FlagsDeApertura;
-	private static HashMap<Term, Boolean> FlagsDeAperturaTerm;
 	private static HashMap<String, Boolean> FlagsDeAperturaString;
 	private ScrollPanel scrollElementos;
 	private static Stack<PopupPanel> Pila_de_cerrado;
@@ -78,8 +72,6 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 		if (FlagsDeApertura==null)
 			FlagsDeApertura=new HashMap<ElementType, Boolean>();
 		
-		if (FlagsDeAperturaTerm==null)
-			FlagsDeAperturaTerm=new HashMap<Term, Boolean>();
 		
 		if (FlagsDeAperturaString==null)
 			FlagsDeAperturaString=new HashMap<String, Boolean>();
@@ -121,12 +113,6 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 		});
 		ArbolAGenerar.addOpenHandler(new OpenHandler<TreeItem>() {
 			public void onOpen(OpenEvent<TreeItem> event) {
-				if (event.getTarget() instanceof TreeItemMetaControlledTermMetaVisualize)  
-					{
-					FlagsDeAperturaTerm.put(((TreeItemMetaControlledTermMetaVisualize)event.getTarget()).getTermino(),true);
-					((TreeItemMetaControlledTermMetaVisualize)event.getTarget()).OpenSons();
-					}
-				else 
 					if (event.getTarget() instanceof TreeItemMetaVisualize)
 					{	
 						FlagsDeApertura.put(((TreeItemMetaVisualize)event.getTarget()).getAttribute(),true);	
@@ -144,10 +130,6 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 			
 			@Override
 			public void onClose(CloseEvent<TreeItem> event) {
-				if (event.getTarget() instanceof TreeItemMetaControlledTermMetaVisualize)  
-				FlagsDeAperturaTerm.put(((TreeItemMetaControlledTermMetaVisualize)event.getTarget()).getTermino(),false);
-
-			else 
 				if (event.getTarget() instanceof TreeItemMetaVisualize)
 					FlagsDeApertura.put(((TreeItemMetaVisualize)event.getTarget()).getAttribute(),false);	
 				else 
@@ -242,11 +224,8 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 					&&(Oda2013OperatinoalViewStaticFunctions.isBrowseable(((ElementType)atributo1)))
 					)
 				{
-				trtmNewItem = new TreeItemMetaVisualize((ElementType)atributo1,new ArrayList<Term>(),new ArrayList<String>());
+				trtmNewItem = new TreeItemMetaVisualize((ElementType)atributo1,new ArrayList<String>());
 				arbolAGenerar.addItem(trtmNewItem);
-					if (atributo1 instanceof MetaControlled)
-						processCollectionControlled(((MetaControlled) atributo1).getVocabulary(), trtmNewItem,trtmNewItem.getHijos());
-						else
 							if (atributo1 instanceof TextElementType)
 								//{
 								processCollectionText((TextElementType) trtmNewItem.getAttribute(), trtmNewItem,trtmNewItem.getHijos());
@@ -334,20 +313,8 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 		FlagsDeApertura = flagsDeApertura;
 	}
 
-	/**
-	 * @return the flagsDeAperturaTerm
-	 */
-	public static HashMap<Term, Boolean> getFlagsDeAperturaTerm() {
-		return FlagsDeAperturaTerm;
-	}
 
-	/**
-	 * @param flagsDeAperturaTerm the flagsDeAperturaTerm to set
-	 */
-	public static void setFlagsDeAperturaTerm(
-			HashMap<Term, Boolean> flagsDeAperturaTerm) {
-		FlagsDeAperturaTerm = flagsDeAperturaTerm;
-	}
+
 
 	/**
 	 * @return the flagsDeAperturaString
@@ -364,41 +331,7 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 		FlagsDeAperturaString = flagsDeAperturaString;
 	}
 
-	/**
-	 * procesa una coleccion para un atributo controlado.
-	 * @param vocabulary
-	 * @param padre
-	 * @param hijosDelPadre
-	 */
-	public static void processCollectionControlled(Vocabulary vocabulary,
-			TreeItemMetaVisualize padre,
-			ArrayList<TreeItemMetaVisualize> hijosDelPadre) {
-		for (Term Terminos : vocabulary.getList()) {
-			TreeItemMetaVisualize trtmNewItem = new TreeItemMetaControlledTermMetaVisualize(padre.getAttribute(),Terminos,padre.getFiltro(),padre.getFiltroTexto());
-			if (trtmNewItem.getHijosRecurso().size()!=0)
-				{
-				padre.addItem(trtmNewItem);
-				hijosDelPadre.add(trtmNewItem);
-				}
-		}
-		
-		
-		Boolean A=null;
-		if (padre instanceof TreeItemMetaControlledTermMetaVisualize)  
-			A = getFlagsDeAperturaTerm().get(((TreeItemMetaControlledTermMetaVisualize)padre).getTermino());
-			
-		else 
-			if (padre instanceof TreeItemMetaVisualize)
-				A = getFlagsDeApertura().get(padre.getAttribute());
-			else 
-				if (padre instanceof TreeItemMetaTextMetaVisualize)
-					A = getFlagsDeAperturaString().get(((TreeItemMetaTextMetaVisualize) padre).getTextoPropio());
-
-		if (A!=null&&A)
-		{
-		padre.setState(true, true);
-		}
-	}
+	
 
 	/**
 	 * Procesa lista cuando viene de un nodo hijo
@@ -416,7 +349,7 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 					&&(Oda2013OperatinoalViewStaticFunctions.isBrowseable((ElementType)atributoHijo))
 					)
 				{
-				trtmNewItem = new TreeItemMetaVisualize((ElementType)atributoHijo,padre.getFiltro(),padre.getFiltroTexto());
+				trtmNewItem = new TreeItemMetaVisualize((ElementType)atributoHijo,padre.getFiltroTexto());
 				padre.addItem(trtmNewItem);
 				hijosDelPadre.add(trtmNewItem);
 				}
@@ -448,7 +381,7 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 					&&(Oda2013OperatinoalViewStaticFunctions.isBrowseable((ElementType)atributoHijo))
 					)
 				{
-				trtmNewItem = new TreeItemMetaVisualize((ElementType)atributoHijo,padre.getFiltro(),padre.getFiltroTexto());
+				trtmNewItem = new TreeItemMetaVisualize((ElementType)atributoHijo,padre.getFiltroTexto());
 				padre.addItem(trtmNewItem);
 				hijosDelPadre.add(trtmNewItem);
 				}
@@ -459,10 +392,6 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 		}
 		
 		Boolean A=null;
-		if (padre instanceof TreeItemMetaControlledTermMetaVisualize)  
-			A = getFlagsDeAperturaTerm().get(((TreeItemMetaControlledTermMetaVisualize)padre).getTermino());
-			
-		else 
 			if (padre instanceof TreeItemMetaVisualize)
 				A = getFlagsDeApertura().get(padre.getAttribute());
 			else 
@@ -485,38 +414,14 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 	 * @return
 	 */
 	protected static ArrayList<Documents> FindResources(List<Documents> listEntrada,
-			ElementType ElementoABuscar, ArrayList<Term> filtro,ArrayList<String> filtroTexto) {
+			ElementType ElementoABuscar, ArrayList<String> filtroTexto) {
 		ArrayList<Documents> Salida = new ArrayList<Documents>();
 		for (Documents resources : listEntrada) {
 			for (Element valorDesc : resources.getDescription()) {
 				if (valorDesc.getHastype()==ElementoABuscar)
 					Salida.add(resources);
 			}
-		}
-		
-		HashSet<Documents> quitar=new HashSet<Documents>();
-		for (Documents resources : Salida) {
-			for (Term termino : filtro) {
-				boolean encontrado=false;
-				for (Element valorDesc : resources.getDescription()) {
-					if ((valorDesc instanceof MetaControlledValue)&&((MetaControlledValue)valorDesc).getValue()==termino)
-						{
-						encontrado=true;
-						break;
-						}
-				}
-				if (!encontrado)
-					{
-					quitar.add(resources);
-					break;
-					}
-			}
-		}
-		
-		for (Documents resourcesAQuitar : quitar) {
-			Salida.remove(resourcesAQuitar);
-		}
-		
+		}	
 		
 		HashSet<Documents> quitarTexto = new HashSet<Documents>();
 		for (Documents resources : Salida) {
@@ -561,7 +466,7 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 		ArrayList<String> ResursorAptos=FindVocabularyText(meta);
 		Collections.sort(ResursorAptos);
 		for (String texto1 : ResursorAptos) {
-			TreeItemMetaTextMetaVisualize TreeItem= new TreeItemMetaTextMetaVisualize(padre.getAttribute(),texto1,padre.getFiltro(),padre.getFiltroTexto());
+			TreeItemMetaTextMetaVisualize TreeItem= new TreeItemMetaTextMetaVisualize(padre.getAttribute(),texto1,padre.getFiltroTexto());
 			if (TreeItem.getHijosRecurso().size()!=0)
 			{
 			padre.addItem(TreeItem);
@@ -571,10 +476,6 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 		
 		
 		Boolean A=null;
-		if (padre instanceof TreeItemMetaControlledTermMetaVisualize)  
-			A = getFlagsDeAperturaTerm().get(((TreeItemMetaControlledTermMetaVisualize)padre).getTermino());
-			
-		else 
 			if (padre instanceof TreeItemMetaVisualize)
 				A = getFlagsDeApertura().get(padre.getAttribute());
 			else 

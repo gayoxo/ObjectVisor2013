@@ -21,6 +21,7 @@ public class Documents implements Serializable,IsSerializable{
 	private Grammar Grammar;
 	protected List<Element> Description;
 	private ArrayList<OperationalValue> ViewsValues;
+	private String DescriptionText;
 
 
 	/**
@@ -104,6 +105,24 @@ public class Documents implements Serializable,IsSerializable{
 	 */
 	public void setViewsValues(ArrayList<OperationalValue> viewsValues) {
 		ViewsValues = viewsValues;
+	}
+
+
+
+	/**
+	 * @return the descriptionText
+	 */
+	public String getDescriptionText() {
+		return DescriptionText;
+	}
+
+
+
+	/**
+	 * @param descriptionText the descriptionText to set
+	 */
+	public void setDescriptionText(String descriptionText) {
+		DescriptionText = descriptionText;
 	}
 	
 }

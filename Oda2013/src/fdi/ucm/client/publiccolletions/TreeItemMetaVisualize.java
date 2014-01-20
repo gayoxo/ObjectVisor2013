@@ -10,9 +10,7 @@ import com.google.gwt.user.client.ui.TreeItem;
 
 import fdi.ucm.shared.model.collection.document.Documents;
 import fdi.ucm.shared.model.collection.grammar.ElementType;
-import fdi.ucm.shared.model.collection.grammar.MetaControlled;
 import fdi.ucm.shared.model.collection.grammar.TextElementType;
-import fdi.ucm.shared.model.collection.grammar.controlled.Term;
 
 /**
  * Clase que genera un elemento en un arbol y permite la creacion del resto de elementos en caso apertura.
@@ -26,15 +24,14 @@ public class TreeItemMetaVisualize extends TreeItem {
 	protected ArrayList<TreeItemMetaVisualize> Hijos;
 	protected ArrayList<Documents> HijosRecurso;
 	protected static List<Documents> ListEntrada;
-	protected ArrayList<Term> filtro;
 	protected ArrayList<String> filtroTexto;
 	protected boolean open;
 	
-	public TreeItemMetaVisualize(ElementType atributo1, ArrayList<Term> arrayList,ArrayList<String> filtroTextoin) {
+	public TreeItemMetaVisualize(ElementType atributo1, ArrayList<String> filtroTextoin) {
 		super();
-		asignaciones(atributo1,arrayList,filtroTextoin);
+		asignaciones(atributo1,filtroTextoin);
 		
-		HijosRecurso=SplitLayoutPanelPublicCollection.FindResources(ListEntrada, atributo1,filtro,filtroTexto);
+		HijosRecurso=SplitLayoutPanelPublicCollection.FindResources(ListEntrada, atributo1,filtroTexto);
 		
 		if (HijosRecurso.size()>0)
 			setHTML(atributo1.getName()+"("+HijosRecurso.size()+")");
@@ -44,15 +41,11 @@ public class TreeItemMetaVisualize extends TreeItem {
 	}
 
 
-	protected void asignaciones(ElementType atributo1, ArrayList<Term> arrayList,
+	protected void asignaciones(ElementType atributo1,
 			ArrayList<String> filtroTextoin) {
 		open=false;
 		attribute=atributo1;
 		Hijos=new ArrayList<TreeItemMetaVisualize>();
-		filtro=new ArrayList<Term>();
-		for (Term term : arrayList) {
-			filtro.add(term);
-		}
 		filtroTexto=new ArrayList<String>();
 		for (String string : filtroTextoin) {
 			filtroTexto.add(string);
@@ -61,20 +54,7 @@ public class TreeItemMetaVisualize extends TreeItem {
 	}
 
 
-	/**
-	 * @return the filtro
-	 */
-	public ArrayList<Term> getFiltro() {
-		return filtro;
-	}
 
-
-	/**
-	 * @param filtro the filtro to set
-	 */
-	public void setFiltro(ArrayList<Term> filtro) {
-		this.filtro = filtro;
-	}
 
 
 	public TreeItemMetaVisualize() {
@@ -118,18 +98,10 @@ public class TreeItemMetaVisualize extends TreeItem {
 		if (!open)
 			{
 			for (TreeItemMetaVisualize Hijo : Hijos) {
-				if ((Hijo instanceof TreeItemMetaControlledTermMetaVisualize)||(Hijo instanceof TreeItemMetaTextMetaVisualize))
-					SplitLayoutPanelPublicCollection.processCollection(Hijo.getAttribute().getSons(), Hijo,Hijo.getHijos());
-				else
-				{
-				if (Hijo.getAttribute() instanceof MetaControlled)
-					SplitLayoutPanelPublicCollection.processCollectionControlled(((MetaControlled) Hijo.getAttribute()).getVocabulary(), Hijo,Hijo.getHijos());
-				else
-					if (Hijo.getAttribute() instanceof TextElementType)
+				if (Hijo.getAttribute() instanceof TextElementType)
 						SplitLayoutPanelPublicCollection.processCollectionText((TextElementType) Hijo.getAttribute(), Hijo,Hijo.getHijos());
 						else 
 							SplitLayoutPanelPublicCollection.processCollection(Hijo.getAttribute().getSons(), Hijo,Hijo.getHijos());
-				}
 			}
 			open=true;
 			}

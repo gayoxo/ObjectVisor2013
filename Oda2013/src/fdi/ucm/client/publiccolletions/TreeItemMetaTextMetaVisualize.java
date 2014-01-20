@@ -6,7 +6,6 @@ package fdi.ucm.client.publiccolletions;
 import java.util.ArrayList;
 
 import fdi.ucm.shared.model.collection.grammar.ElementType;
-import fdi.ucm.shared.model.collection.grammar.controlled.Term;
 
 
 
@@ -20,15 +19,15 @@ public class TreeItemMetaTextMetaVisualize extends TreeItemMetaVisualize {
 	private String TextoPropio;
 	
 	public TreeItemMetaTextMetaVisualize(ElementType atributo1, String textopropio,
-			ArrayList<Term> arrayList, ArrayList<String> filtroTextoin) {
+			ArrayList<String> filtroTextoin) {
 		super();
 		TextoPropio=textopropio;
 		
-		asignaciones(atributo1, arrayList, filtroTextoin);
+		asignaciones(atributo1, filtroTextoin);
 		
 		filtroTexto.add(atributo1.getName()+TextoPropio);
 		
-		HijosRecurso=SplitLayoutPanelPublicCollection.FindResources(ListEntrada, atributo1,filtro,filtroTexto);
+		HijosRecurso=SplitLayoutPanelPublicCollection.FindResources(ListEntrada, atributo1,filtroTexto);
 
 		if (HijosRecurso.size()>0)
 			setHTML("<i> " +TextoPropio +" </i>"+"("+HijosRecurso.size()+")");

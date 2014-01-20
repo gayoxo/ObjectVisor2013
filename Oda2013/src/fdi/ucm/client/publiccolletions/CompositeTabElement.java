@@ -15,7 +15,6 @@ import fdi.ucm.client.controller.Oda2013OperatinoalViewStaticFunctions;
 import fdi.ucm.shared.model.collection.document.Documents;
 import fdi.ucm.shared.model.collection.document.Element;
 import fdi.ucm.shared.model.collection.document.LinkElement;
-import fdi.ucm.shared.model.collection.document.MetaControlledValue;
 import fdi.ucm.shared.model.collection.document.ResourceElement;
 import fdi.ucm.shared.model.collection.document.Resources;
 import fdi.ucm.shared.model.collection.document.TextElement;
@@ -48,14 +47,6 @@ public class CompositeTabElement extends Composite {
 		image.setSize("25px", "22px");
 		
 		ElementPanel.add(getElementbase(metaValueD));
-		
-	
-		
-//		Image image = new Image((String) null);
-//		ElementPanel.add(image);
-		
-//		HTML htmlNewHtml = new HTML("<img src=\"Keyicon.png\" alt=\"*\" align=\"middle\" >", true);
-//		ElementPanel.add(htmlNewHtml);
 		
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
 		verticalPanel.add(horizontalPanel);
@@ -100,8 +91,6 @@ public class CompositeTabElement extends Composite {
 		
 		if (metaValueD instanceof TextElement)
 			Result=new Label(((TextElement) metaValueD).getValue());
-		else if (metaValueD instanceof MetaControlledValue)
-			Result=new Label(((MetaControlledValue) metaValueD).getValue().getTerm());
 		else if (metaValueD instanceof LinkElement)
 		{
 			LinkElement MRV=(LinkElement)metaValueD;
