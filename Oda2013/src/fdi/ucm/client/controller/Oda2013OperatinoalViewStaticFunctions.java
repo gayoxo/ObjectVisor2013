@@ -174,42 +174,17 @@ public class Oda2013OperatinoalViewStaticFunctions {
 	 * @return
 	 */
 	public static Resources getIcon(Documents recurso) {
-		for (Element elem : recurso.getDescription()) {
-			String res=getIcon(elem);
-				if (res!=null)
-					return new File(res);
-		}
-		
-		return null;
-	}
-	
-	
-	/**
-	 * Funcion que retorna el icono de un MetaValue donde esta definido el icono
-	 * @param elem
-	 * @return
-	 */
-	private static String getIcon(Element elem) {
-		
-		ArrayList<OperationalValue> ShowsInst = elem.getShows();
-		for (OperationalValue show : ShowsInst) {
-				if (show.getType().getName().equals(Oda2013StaticNames.ICON))
-					return show.getValue();
 
-		}
+			String res=recurso.getIcon();
+				if (!res.isEmpty())
+					return new File(res);
+
 		
-		ArrayList<OperationalView> Shows = elem.getHastype().getShows();
-		for (OperationalView show : Shows) {
-			ArrayList<OperationalValueType> ShowValue = show.getValues();
-			for (OperationalValueType showValues : ShowValue) {
-				if (showValues.getName().equals(Oda2013StaticNames.ICON))
-					if (!showValues.getDefault().isEmpty())
-						return showValues.getDefault();
-			}
-		}
 		return null;
-		
 	}
+	
+	
+	
 	
 /**
  * Calcula el destino dependiendo si es imagen o URL
@@ -380,11 +355,10 @@ public class Oda2013OperatinoalViewStaticFunctions {
 	}
 
 	public static String calculaImagenAsociada(Documents elementoIconoBoton) {
-		for (Element elem : elementoIconoBoton.getDescription()) {
-			String res=getIcon(elem);
-				if (res!=null)
+
+			String res=elementoIconoBoton.getIcon();
+				if (!res.isEmpty())
 					return 	calculaIconoPorExtension(res);
-		}
 		
 		return GWT.getHostPageBaseURL()+Oda2013StaticIconos.ICONODEFAULT;
 	}

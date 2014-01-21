@@ -172,7 +172,8 @@ public class CompositeDocumentDescription extends Composite {
 		
 		PanelDecorador.add(PanelA);
 		
-		
+		Composite Descripcion=new CompositeDocumentDescriptionDescriptionTab(Recurso.getDescriptionText());
+		PanelA.add(Descripcion);
 		
 		
 		for (Structure MetaElem : Recurso.getDocument().getSons()) {
@@ -199,8 +200,7 @@ public class CompositeDocumentDescription extends Composite {
 					procesa(MetaValueD);
 		}
 		
-		Composite Descripcion=new CompositeDocumentDescriptionDescriptionTab(Recurso.getDescriptionText());
-		PanelA.add(Descripcion);
+		
 
 	}
 

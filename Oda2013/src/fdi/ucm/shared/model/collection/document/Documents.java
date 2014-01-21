@@ -22,6 +22,7 @@ public class Documents implements Serializable,IsSerializable{
 	protected List<Element> Description;
 	private ArrayList<OperationalValue> ViewsValues;
 	private String DescriptionText;
+	private String Icon;
 
 
 	/**
@@ -32,6 +33,7 @@ public class Documents implements Serializable,IsSerializable{
 		Description=new ArrayList<Element>();
 		setViewsValues(new ArrayList<OperationalValue>());
 		DescriptionText="";
+		Icon ="";
 	}
 
 
@@ -44,6 +46,7 @@ public class Documents implements Serializable,IsSerializable{
 		Description=new ArrayList<Element>();
 		setViewsValues(new ArrayList<OperationalValue>());
 		DescriptionText="";
+		Icon ="";
 	}
 
 
@@ -125,6 +128,24 @@ public class Documents implements Serializable,IsSerializable{
 	 */
 	public void setDescriptionText(String descriptionText) {
 		DescriptionText = descriptionText;
+	}
+
+
+
+	/**
+	 * @return the icon
+	 */
+	public String getIcon() {
+		return Icon;
+	}
+
+
+
+	/**
+	 * @param icon the icon to set
+	 */
+	public void setIcon(String icon) {
+		Icon = icon;
 	}
 	
 }
