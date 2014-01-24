@@ -7,7 +7,7 @@ import java.util.List;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 import fdi.ucm.shared.model.collection.document.Documents;
-import fdi.ucm.shared.model.collection.document.Resources;
+import fdi.ucm.shared.model.collection.document.File;
 import fdi.ucm.shared.model.collection.grammar.Grammar;
 
 
@@ -26,7 +26,7 @@ public class Collection  implements Serializable,IsSerializable{
 	
 	private List<Grammar> MetamodelSchemas;
 	
-	private List<Resources> SectionValues;
+	private List<File> SectionValues;
 	
 	private List<Documents> Estructuras;
 	
@@ -37,7 +37,7 @@ public class Collection  implements Serializable,IsSerializable{
 	 */
 	public Collection() {
 		MetamodelSchemas= new ArrayList<Grammar>();
-		SectionValues=new ArrayList<Resources>();
+		SectionValues=new ArrayList<File>();
 		Estructuras=new ArrayList<Documents>();
 		id=null;
 				
@@ -48,7 +48,7 @@ public class Collection  implements Serializable,IsSerializable{
 	 */
 	public Collection(String Namein) {
 		MetamodelSchemas= new ArrayList<Grammar>();
-		SectionValues=new ArrayList<Resources>();
+		SectionValues=new ArrayList<File>();
 		Name=Namein;
 		id=null;		
 	}
@@ -70,14 +70,14 @@ public class Collection  implements Serializable,IsSerializable{
 	/**
 	 * @return the sectionValues
 	 */
-	public List<Resources> getSectionValues() {
+	public List<File> getSectionValues() {
 		return SectionValues;
 	}
 
 	/**
 	 * @param sectionValues the sectionValues to set
 	 */
-	public void setSectionValues(ArrayList<Resources> sectionValues) {
+	public void setSectionValues(ArrayList<File> sectionValues) {
 		SectionValues = sectionValues;
 	}	
 

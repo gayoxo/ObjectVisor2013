@@ -8,8 +8,6 @@ import fdi.ucm.shared.model.collection.document.Documents;
 import fdi.ucm.shared.model.collection.document.Element;
 import fdi.ucm.shared.model.collection.document.File;
 import fdi.ucm.shared.model.collection.document.OperationalValue;
-import fdi.ucm.shared.model.collection.document.Resources;
-import fdi.ucm.shared.model.collection.document.URL;
 import fdi.ucm.shared.model.collection.grammar.ElementType;
 import fdi.ucm.shared.model.collection.grammar.Grammar;
 import fdi.ucm.shared.model.collection.grammar.LinkElementType;
@@ -173,14 +171,14 @@ public class Oda2013OperatinoalViewStaticFunctions {
 	 * @param objetoDigital
 	 * @return
 	 */
-	public static Resources getIcon(Documents recurso) {
+	public static String getIcon(Documents recurso) {
 
-			String res=recurso.getIcon();
-				if (!res.isEmpty())
-					return new File(res);
+		if (recurso.getIcon()!=null)
+			return recurso.getIcon();
+				
 
 		
-		return null;
+		return "";
 	}
 	
 	
@@ -192,15 +190,26 @@ public class Oda2013OperatinoalViewStaticFunctions {
  * @param BasePath path del sistema de archivos
  * @return Direccion destino
  */
-	public static String calculaDestino(Resources elementoIcono) {
+	public static String calculaDestino(File elementoIcono) {
 		if (elementoIcono==null)
 			return null;
 		else if (elementoIcono instanceof File)
 			return ((File)elementoIcono).getPath();
-		else if (elementoIcono instanceof URL)
-			return ((URL)elementoIcono).getSrc();
 		else return null;
 	}
+	
+	/**
+	 * Calcula el destino dependiendo si es imagen o URL
+	 * @param elementoIcono recurso a calcular destino
+	 * @param BasePath path del sistema de archivos
+	 * @return Direccion destino
+	 */
+		public static String calculaDestino(String elementoIcono) {
+			if (elementoIcono==null)
+				return null;
+			else return elementoIcono;
+			
+		}
 	
 	
 	/**
@@ -209,18 +218,27 @@ public class Oda2013OperatinoalViewStaticFunctions {
 	 * @param BasePath path del sistema de archivos
 	 * @return path del icono o imagen asociado.
 	 */
-	public static String calculaImagenAsociada(Resources elementoIcono) {
+	public static String calculaImagenAsociada(File elementoIcono) {
 		if (elementoIcono==null)
 			return GWT.getHostPageBaseURL()+Oda2013StaticIconos.ICONODEFAULT;
-		if (elementoIcono instanceof File)
-			{
+		else
 			return calculaIconoPorExtension(((File)elementoIcono).getPath());
-							
-			}
-		else if (elementoIcono instanceof URL)
-			return GWT.getHostPageBaseURL()+Oda2013StaticIconos.ICONOURL;
-		
-		return GWT.getHostPageBaseURL()+Oda2013StaticIconos.ICONODEFAULT;
+
+
+	}
+	
+	/**
+	 * Clase que define el icono en funcion del elemento
+	 * @param elementoIcono elemento entrada
+	 * @param BasePath path del sistema de archivos
+	 * @return path del icono o imagen asociado.
+	 */
+	public static String calculaImagenAsociada(String elementoIcono) {
+		if (elementoIcono==null)
+			return GWT.getHostPageBaseURL()+Oda2013StaticIconos.ICONODEFAULT;
+		else
+			return calculaIconoPorExtension(elementoIcono);
+	
 	}
 
 	

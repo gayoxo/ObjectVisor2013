@@ -22,8 +22,6 @@ import com.google.gwt.user.client.ui.Image;
 
 import fdi.ucm.client.controller.Oda2013OperatinoalViewStaticFunctions;
 import fdi.ucm.shared.model.collection.document.File;
-import fdi.ucm.shared.model.collection.document.Resources;
-import fdi.ucm.shared.model.collection.document.URL;
 
 /**
  * Panel PopUp que muestra el objeto en funcion del valor de referencia,
@@ -34,18 +32,17 @@ public class PopupPanelReferenceDescriptor extends PopupPanel implements PoupPan
 
 	
 	private static final String X = "X";
-	private Resources Recurso;
+	private File Recurso;
 	private boolean AllClose;
 	private String Destino;
 	private String ImagenAsociada;
 	private Image Icono;
 	private Label LabelVariable;
 	protected static final int MaxHeight = 200;
-	private static final String SRC = "Src : ";
 	private static final String FILE_PATH = "File Path : ";
 
 	
-	public PopupPanelReferenceDescriptor(Resources value) {
+	public PopupPanelReferenceDescriptor(File value) {
 		setAutoHideEnabled(true);
 		setModal(true);
 		AllClose=true;
@@ -128,9 +125,6 @@ public class PopupPanelReferenceDescriptor extends PopupPanel implements PoupPan
 
 		if (Recurso instanceof File)
 			LabelVariable.setText(FILE_PATH + ((File)Recurso).getPath());
-		else
-			if (Recurso instanceof URL)
-				LabelVariable.setText(SRC + ((URL)Recurso).getSrc());
 		
 		
 		

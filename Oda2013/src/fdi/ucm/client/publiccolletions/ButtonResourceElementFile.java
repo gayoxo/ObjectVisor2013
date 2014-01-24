@@ -5,19 +5,19 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.PopupPanel;
 
-import fdi.ucm.shared.model.collection.document.ResourceElement;
+import fdi.ucm.shared.model.collection.document.ResourceElementFile;
 
 /**
  * Clase que implementa un Boton de tivo metavalue para uso de las Relacions
  * @author Joaquin Gayoso
  *
  */
-public class ButtonResourceElement extends Button {
+public class ButtonResourceElementFile extends Button {
 
-	private ResourceElement MetaRelationValue;
+	private ResourceElementFile MetaRelationValue;
 
 
-	public ButtonResourceElement(ResourceElement metaValueD) {
+	public ButtonResourceElementFile(ResourceElementFile metaValueD) {
 		super();
 		MetaRelationValue=metaValueD;
 		setHTML(metaValueD.getHastype().getName());

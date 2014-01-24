@@ -5,9 +5,10 @@ package fdi.ucm.client.publiccolletions;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Image;
 
-import fdi.ucm.shared.model.collection.document.Resources;
+import fdi.ucm.shared.model.collection.document.File;
 
 /**
  * Clase que genera una imagen cliqueable para el caso de las imagenes
@@ -17,10 +18,11 @@ import fdi.ucm.shared.model.collection.document.Resources;
 public class ImageMetaRelationResourceValue extends Image {
 
 	
-	private Resources RecursoAsociado;
+	private File RecursoAsociado;
+	private String RecursoAsociadoS;
 	protected static final int MaxWidth = 50;
 
-	public ImageMetaRelationResourceValue(Resources imagen,String imagenAsociada) {
+	public ImageMetaRelationResourceValue(File imagen,String imagenAsociada) {
 		super();
 		setUrl(imagenAsociada);
 		RecursoAsociado=imagen;
@@ -33,6 +35,21 @@ public class ImageMetaRelationResourceValue extends Image {
 				PopupPanelReferenceDescriptor RPUP=new PopupPanelReferenceDescriptor(RecursoAsociado);
 				SplitLayoutPanelPublicCollection.getPila_de_cerrado().add(RPUP);
 				RPUP.center();
+				
+			}
+		});
+	}
+	
+	public ImageMetaRelationResourceValue(String imagen,String imagenAsociada) {
+		super();
+		setUrl(imagenAsociada);
+		RecursoAsociadoS=imagen;
+		addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				
+				Window.open(RecursoAsociadoS, "_blank", "");
 				
 			}
 		});

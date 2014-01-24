@@ -3,16 +3,21 @@
  */
 package fdi.ucm.shared.model.collection.document;
 
+import java.io.Serializable;
+
+import fdi.ucm.shared.model.collection.Collection;
+
 /**
  * Clase que implementa un sectionValue file
  * @author Joaquin Gayoso-Cabada
  *
  */
-public class File extends Resources{
+public class File implements Serializable{
 
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7786350162913651910L;
 	private String Path;
+	private Collection collectionFather;
 	
 	public File() {
 		super();
@@ -39,5 +44,14 @@ public class File extends Resources{
 		Path = path;
 	}
 	
-	
+	public Collection getCollectionFather() {
+		return collectionFather;
+	}
+
+
+
+	public void setCollectionFather(Collection collectionFather) {
+		this.collectionFather=collectionFather;
+		
+	}
 }

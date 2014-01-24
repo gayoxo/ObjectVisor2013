@@ -14,9 +14,10 @@ import com.google.gwt.user.client.ui.Widget;
 import fdi.ucm.client.controller.Oda2013OperatinoalViewStaticFunctions;
 import fdi.ucm.shared.model.collection.document.Documents;
 import fdi.ucm.shared.model.collection.document.Element;
+import fdi.ucm.shared.model.collection.document.File;
 import fdi.ucm.shared.model.collection.document.LinkElement;
-import fdi.ucm.shared.model.collection.document.ResourceElement;
-import fdi.ucm.shared.model.collection.document.Resources;
+import fdi.ucm.shared.model.collection.document.ResourceElementFile;
+import fdi.ucm.shared.model.collection.document.ResourceElementURL;
 import fdi.ucm.shared.model.collection.document.TextElement;
 
 /**
@@ -102,11 +103,23 @@ public class CompositeTabElement extends Composite {
 			Result= MRVI;
 			
 		}
-		else if (metaValueD instanceof ResourceElement)
+		else if (metaValueD instanceof ResourceElementFile)
 		{
-			ResourceElement MRV=(ResourceElement)metaValueD;
+			ResourceElementFile MRV=(ResourceElementFile)metaValueD;
 
-			Resources elementoIconoBoton=MRV.getValue();
+			File elementoIconoBoton=MRV.getValue();
+			ImagenAsociada=Oda2013OperatinoalViewStaticFunctions.calculaImagenAsociada(elementoIconoBoton);
+			
+			Image MRVI=new ImageMetaRelationResourceValue(elementoIconoBoton,ImagenAsociada);
+			Result= MRVI;
+
+			
+			
+		}else if (metaValueD instanceof ResourceElementURL)
+		{
+			ResourceElementURL MRV=(ResourceElementURL)metaValueD;
+
+			String elementoIconoBoton=MRV.getValue();
 			ImagenAsociada=Oda2013OperatinoalViewStaticFunctions.calculaImagenAsociada(elementoIconoBoton);
 			
 			Image MRVI=new ImageMetaRelationResourceValue(elementoIconoBoton,ImagenAsociada);

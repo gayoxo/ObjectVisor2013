@@ -23,7 +23,6 @@ import com.google.gwt.user.client.ui.Image;
 import fdi.ucm.client.controller.Oda2013OperatinoalViewStaticFunctions;
 import fdi.ucm.shared.model.collection.document.Documents;
 import fdi.ucm.shared.model.collection.document.Element;
-import fdi.ucm.shared.model.collection.document.Resources;
 import fdi.ucm.shared.model.collection.grammar.ElementType;
 import fdi.ucm.shared.model.collection.grammar.Iterator;
 import fdi.ucm.shared.model.collection.grammar.Structure;
@@ -81,7 +80,7 @@ public class CompositeDocumentDescription extends Composite {
 		//PanelDelIcono.setSize("", "");
 		PanelGeneral.setCellVerticalAlignment(PanelDelIcono, HasVerticalAlignment.ALIGN_MIDDLE);
 		
-		Resources elementoIcono = Oda2013OperatinoalViewStaticFunctions.getIcon(recurso);
+		String elementoIcono = Oda2013OperatinoalViewStaticFunctions.getIcon(recurso);
 		
 		
 		Destino=Oda2013OperatinoalViewStaticFunctions.calculaDestino(elementoIcono);

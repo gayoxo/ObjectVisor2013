@@ -13,7 +13,6 @@ import com.google.gwt.user.client.ui.PopupPanel;
 import fdi.ucm.client.controller.Oda2013OperatinoalViewStaticFunctions;
 import fdi.ucm.shared.model.collection.document.Documents;
 import fdi.ucm.shared.model.collection.document.Element;
-import fdi.ucm.shared.model.collection.document.Resources;
 import fdi.ucm.shared.model.collection.grammar.ElementType;
 import fdi.ucm.shared.model.collection.grammar.Iterator;
 import fdi.ucm.shared.model.collection.grammar.Structure;
@@ -108,7 +107,7 @@ public class PopupPanelConstructDescriptor extends PopupPanel implements PoupPan
 		
 
 		
-		Resources elementoIcono = Oda2013OperatinoalViewStaticFunctions.getIcon(value);
+		String elementoIcono = Oda2013OperatinoalViewStaticFunctions.getIcon(value);
 		
 		Destino=Oda2013OperatinoalViewStaticFunctions.calculaDestino(elementoIcono);
 		ImagenAsociada=Oda2013OperatinoalViewStaticFunctions.calculaImagenAsociada(elementoIcono);
