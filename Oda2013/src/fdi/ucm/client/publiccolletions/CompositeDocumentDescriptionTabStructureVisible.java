@@ -1,6 +1,7 @@
 package fdi.ucm.client.publiccolletions;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -18,7 +19,9 @@ import fdi.ucm.shared.model.collection.document.ResourceElementFile;
 import fdi.ucm.shared.model.collection.document.ResourceElementURL;
 import fdi.ucm.shared.model.collection.document.TextElement;
 import fdi.ucm.shared.model.collection.grammar.ElementType;
+import fdi.ucm.shared.model.collection.grammar.Iterator;
 import fdi.ucm.shared.model.collection.grammar.LinkElementType;
+import fdi.ucm.shared.model.collection.grammar.Structure;
 import fdi.ucm.shared.model.collection.grammar.TextElementType;
 
 public class CompositeDocumentDescriptionTabStructureVisible extends Composite {
@@ -31,15 +34,17 @@ public class CompositeDocumentDescriptionTabStructureVisible extends Composite {
 	private Image MRVI;
 	private Label LabelType;
 	
-	private ElementType Elemento;
+	private Structure Elemento;
 	private Documents Recurso;
 	private ArrayList<Integer> Ambitos;
 	private boolean Active;
+	private int PosActualAmbitos;
+	private CompositeDocumentDescriptionTabStructureVisible Padre;
 	
 	
 	public CompositeDocumentDescriptionTabStructureVisible(
 			ElementType metaValue, Documents documentoG,
-			ArrayList<Integer> ambitos) {
+			ArrayList<Integer> ambitos, boolean Visible,CompositeDocumentDescriptionTabStructureVisible padre) {
 		Elemento=metaValue;
 		
 		Recurso=documentoG;
@@ -48,42 +53,73 @@ public class CompositeDocumentDescriptionTabStructureVisible extends Composite {
 		
 		Active = false;
 		
+		Padre=padre;
+		
 		VerticalPanel verticalPanel = new VerticalPanel();
 		initWidget(verticalPanel);
-
-			HorizontalPanel ElementPanel = new HorizontalPanel();
-			verticalPanel.add(ElementPanel);
-			ElementPanel.setSize("", "100%");
-			
-			
-			Image image = new Image(ICONOS_KEYICON_PNG);
-			ElementPanel.add(image);
-			image.setSize("25px", "22px");
-			
-			Element MV=getMetaValue((ElementType)Elemento);
-			
-			if (MV==null)
-				{
-				MV=generanuevo((ElementType)Elemento);
-				MV.setAmbitos(Ambitos);
-				ElementPanel.add(getElementbase((ElementType)Elemento));
-				}
-			else 
-				{
-				
-				ElementPanel.add(getElementbase(MV));
-				}
-
-			HorizontalPanel horizontalPanel = new HorizontalPanel();
-			verticalPanel.add(horizontalPanel);
-			
-			SimplePanel Glue = new SimplePanel();
-			horizontalPanel.add(Glue);
-			Glue.setWidth("35px");
-			
-			PanelHijos = new VerticalPanel();
-			horizontalPanel.add(PanelHijos);
 		
+		if (Visible)
+		{
+
+	
+				HorizontalPanel ElementPanel = new HorizontalPanel();
+				verticalPanel.add(ElementPanel);
+				ElementPanel.setSize("", "100%");
+				
+				
+				Image image = new Image(ICONOS_KEYICON_PNG);
+				ElementPanel.add(image);
+				image.setSize("25px", "22px");
+				
+				Element MV=getMetaValue((ElementType)Elemento);
+				
+				if (MV==null)
+					{
+					MV=generanuevo((ElementType)Elemento);
+					MV.setAmbitos(Ambitos);
+					ElementPanel.add(getElementbase((ElementType)Elemento));
+					}
+				else 
+					{
+					activate();
+					ElementPanel.add(getElementbase(MV));
+					}
+	
+				HorizontalPanel horizontalPanel = new HorizontalPanel();
+				verticalPanel.add(horizontalPanel);
+				
+				SimplePanel Glue = new SimplePanel();
+				horizontalPanel.add(Glue);
+				Glue.setWidth("35px");
+				
+				PanelHijos = new VerticalPanel();
+				horizontalPanel.add(PanelHijos);
+		}else
+			PanelHijos=verticalPanel;
+		
+		
+for (Structure elementoHijo : Elemento.getSons()) {
+			
+			if (elementoHijo instanceof ElementType && Oda2013OperatinoalViewStaticFunctions.isVisible((ElementType)elementoHijo))
+			{
+				CompositeDocumentDescriptionTabStructureVisible T=new CompositeDocumentDescriptionTabStructureVisible((ElementType)elementoHijo,Recurso,Ambitos,true,this);
+				if (T.isActive())
+					PanelHijos.add(T);
+			} 
+			else if (elementoHijo instanceof ElementType &&!Oda2013OperatinoalViewStaticFunctions.isVisible((ElementType)elementoHijo))
+			{
+				CompositeDocumentDescriptionTabStructureVisible T=new CompositeDocumentDescriptionTabStructureVisible((ElementType)elementoHijo,Recurso,Ambitos,false,this);
+				if (T.isActive())
+					PanelHijos.add(T);
+			}
+			else if (elementoHijo instanceof Iterator)
+			{
+				CompositeDocumentDescriptionTabStructureVisible T=new CompositeDocumentDescriptionTabStructureVisible((Iterator)elementoHijo,Recurso,Ambitos);
+				if (T.isActive())
+					PanelHijos.add(T);
+			}	
+			
+		}
 		
 	}
 
@@ -94,6 +130,131 @@ public class CompositeDocumentDescriptionTabStructureVisible extends Composite {
 
 
 	
+
+	public CompositeDocumentDescriptionTabStructureVisible(
+			Iterator metaValue, Documents documentoG,
+			ArrayList<Integer> ambitos) {
+	Elemento=metaValue;
+		
+		Recurso=documentoG;
+		
+		Ambitos	= ambitos;
+		
+		PosActualAmbitos = Ambitos.size();
+		
+		VerticalPanel verticalPanel = new VerticalPanel();
+		initWidget(verticalPanel);
+		
+		PanelHijos=verticalPanel;
+		
+		Active=false;
+		
+		HashSet<Integer> I=calculaAmbitosDescend((Iterator)Elemento);
+		for (Integer ambito : I) {
+			
+			for (Structure elementoHijo : Elemento.getSons()) {
+				ArrayList<Integer> pas=new ArrayList<Integer>();
+				clone(pas,Ambitos);
+				pas.add(ambito);
+
+				if (elementoHijo instanceof ElementType && Oda2013OperatinoalViewStaticFunctions.isVisible((ElementType)elementoHijo))
+				{
+					CompositeDocumentDescriptionTabStructureVisible T=new CompositeDocumentDescriptionTabStructureVisible((ElementType)elementoHijo,Recurso,pas,true,this);
+					if (T.isActive())
+						PanelHijos.add(T);
+				} 
+				else if (elementoHijo instanceof ElementType && !Oda2013OperatinoalViewStaticFunctions.isVisible((ElementType)elementoHijo))
+				{
+					CompositeDocumentDescriptionTabStructureVisible T=new CompositeDocumentDescriptionTabStructureVisible((ElementType)elementoHijo,Recurso,pas,false,this);
+					if (T.isActive())
+						PanelHijos.add(T);
+				} 
+				else if (elementoHijo instanceof Iterator){
+					CompositeDocumentDescriptionTabStructureVisible T=new CompositeDocumentDescriptionTabStructureVisible((Iterator)elementoHijo,Recurso,pas);
+					if (T.isActive())
+						PanelHijos.add(T);
+				}
+				
+			}
+		}
+	}
+
+
+
+
+	/**
+	 * Clona los ambitos
+	 * @param pas
+	 * @param ambitos
+	 */
+	private void clone(ArrayList<Integer> pas, ArrayList<Integer> ambitos) {
+		for (Integer integer : ambitos) {
+			pas.add(integer.intValue());
+		}
+		
+	}
+
+
+	/**
+	 * Calcula el numero de ambitos a generar
+	 * @param elemento1
+	 * @return
+	 */
+	private HashSet<Integer> calculaAmbitosDescend(Structure elemento1) {
+
+		HashSet<Integer> Salida=new HashSet<Integer>();
+		for (Structure hijo : elemento1.getSons()) {
+
+			if (hijo instanceof ElementType)
+			{
+				
+			ArrayList<Element> MV=getMetaValueList((ElementType)hijo);
+			for (Element element : MV) {
+				Integer Yo=-1;
+				if (element.getAmbitos().size()>PosActualAmbitos)
+					Yo=element.getAmbitos().get(PosActualAmbitos);
+			
+				
+				if (Yo!=-1 && !Salida.contains(Yo))
+					Salida.add(Yo);
+				}
+			}
+			
+			HashSet<Integer> SalidaHijos = calculaAmbitosDescend(hijo);
+			
+			for (Integer integer : SalidaHijos) {
+				if (!Salida.contains(integer))
+					Salida.add(integer);
+			}
+			
+			
+		}
+		
+		
+		return Salida;
+	}
+
+
+	/**
+	 * Obtiene la lista de los metavalores.
+	 * @param elemento1
+	 * @return
+	 */
+	private ArrayList<Element> getMetaValueList(ElementType elemento1) {
+		ArrayList<Element> Salida = new ArrayList<Element>();
+		for (Element element : Recurso.getDescription()) {
+			if (element.getHastype()==elemento1&&EqualsAmbitos(element.getAmbitos()))
+				Salida.add(element);
+			
+		}
+		return Salida;
+	}
+	
+	
+
+
+
+
 
 	/**
 	 * Obtiene el MetaValor Asociado y sino crea uno
@@ -238,7 +399,15 @@ public class CompositeDocumentDescriptionTabStructureVisible extends Composite {
 
 
 
-
+	/**
+	 * Me activo yo y mis padres
+	 */
+	private void activate() {
+		Active=true;
+		if (Padre!=null)
+			Padre.activate();
+		
+	}
 
 
 

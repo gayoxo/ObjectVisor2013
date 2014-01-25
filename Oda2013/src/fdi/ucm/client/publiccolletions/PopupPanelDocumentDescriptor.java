@@ -14,6 +14,7 @@ import fdi.ucm.client.controller.Oda2013OperatinoalViewStaticFunctions;
 import fdi.ucm.shared.model.collection.document.Documents;
 import fdi.ucm.shared.model.collection.document.Element;
 import fdi.ucm.shared.model.collection.grammar.ElementType;
+import fdi.ucm.shared.model.collection.grammar.Iterator;
 import fdi.ucm.shared.model.collection.grammar.Structure;
 
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -250,22 +251,29 @@ public class PopupPanelDocumentDescriptor extends PopupPanel implements Interfac
 		Composite Descripcion=new CompositeDocumentDescriptionDescriptionTab(Recurso.getDescriptionText());
 		PanelA.add(Descripcion);
 		
-		processSonGrammar(PanelA);
+		processSonGrammar();
 		
 	}
 
 
 
-	private void processSonGrammar(VerticalPanel panelA2) {
+	private void processSonGrammar() {
 
 		for (Structure elementoHijo : Recurso.getDocument().getSons()) {
 			
 			if (elementoHijo instanceof ElementType &&Oda2013OperatinoalViewStaticFunctions.NotBasic((ElementType)elementoHijo) && Oda2013OperatinoalViewStaticFunctions.isVisible((ElementType)elementoHijo))
 			{
-				CompositeDocumentDescriptionTabStructureVisible T=new CompositeDocumentDescriptionTabStructureVisible((ElementType)elementoHijo,Recurso,new ArrayList<Integer>());
-				panelA2.add(T);
-				processSons(elementoHijo.getSons(), T.getPanelHijos());
+				CompositeDocumentDescriptionTabStructureVisible T=new CompositeDocumentDescriptionTabStructureVisible((ElementType)elementoHijo,Recurso,new ArrayList<Integer>(),true,null);
+				
+				if (T.isActive())
+				PanelA.add(T);
 			} 
+			else if (elementoHijo instanceof ElementType &&Oda2013OperatinoalViewStaticFunctions.NotBasic((ElementType)elementoHijo) &&!Oda2013OperatinoalViewStaticFunctions.isVisible((ElementType)elementoHijo))
+			{
+				CompositeDocumentDescriptionTabStructureVisible T=new CompositeDocumentDescriptionTabStructureVisible((ElementType)elementoHijo,Recurso,new ArrayList<Integer>(),false,null);
+				if (T.isActive())
+				PanelA.add(T);
+			}
 			else if (elementoHijo instanceof ElementType &&!Oda2013OperatinoalViewStaticFunctions.NotBasic((ElementType)elementoHijo) && Oda2013OperatinoalViewStaticFunctions.isVisible((ElementType)elementoHijo))
 			{
 				VerticalPanel PanelAA = new VerticalPanel();
@@ -281,10 +289,16 @@ public class PopupPanelDocumentDescriptor extends PopupPanel implements Interfac
 				
 				processSons(elementoHijo.getSons(), PanelAA);
 				
+			}else if (elementoHijo instanceof ElementType &&!Oda2013OperatinoalViewStaticFunctions.NotBasic((ElementType)elementoHijo) && !Oda2013OperatinoalViewStaticFunctions.isVisible((ElementType)elementoHijo))
+			{
+				processSons(elementoHijo.getSons(), PanelA);
 			}
-			else
-				
-				processSons(elementoHijo.getSons(), panelA2);
+			else if (elementoHijo instanceof Iterator)
+			{
+				CompositeDocumentDescriptionTabStructureVisible T=new CompositeDocumentDescriptionTabStructureVisible((Iterator)elementoHijo,Recurso,new ArrayList<Integer>());
+				if (T.isActive())
+				PanelA.add(T);
+			}	
 			
 		}
 		
@@ -296,13 +310,25 @@ public class PopupPanelDocumentDescriptor extends PopupPanel implements Interfac
 		
 	for (Structure elementoHijo : sons) {
 			
-			if (elementoHijo instanceof ElementType &&Oda2013OperatinoalViewStaticFunctions.isVisible((ElementType)elementoHijo))
-			{
-				CompositeDocumentDescriptionTabStructureVisible T=new CompositeDocumentDescriptionTabStructureVisible((ElementType)elementoHijo,Recurso,new ArrayList<Integer>());
-				panelHijos.add(T);
-				processSons(elementoHijo.getSons(), T.getPanelHijos());
-			} 
-			else  processSons(elementoHijo.getSons(), panelHijos);
+		if (elementoHijo instanceof ElementType && Oda2013OperatinoalViewStaticFunctions.isVisible((ElementType)elementoHijo))
+		{
+			CompositeDocumentDescriptionTabStructureVisible T=new CompositeDocumentDescriptionTabStructureVisible((ElementType)elementoHijo,Recurso,new ArrayList<Integer>(),true,null);
+			if (T.isActive())
+			panelHijos.add(T);
+		} 
+		else if (elementoHijo instanceof ElementType &&!Oda2013OperatinoalViewStaticFunctions.isVisible((ElementType)elementoHijo))
+		{
+			CompositeDocumentDescriptionTabStructureVisible T=new CompositeDocumentDescriptionTabStructureVisible((ElementType)elementoHijo,Recurso,new ArrayList<Integer>(),false,null);
+			if (T.isActive())
+			panelHijos.add(T);
+		}
+		else if (elementoHijo instanceof Iterator)
+		{
+			CompositeDocumentDescriptionTabStructureVisible T=new CompositeDocumentDescriptionTabStructureVisible((Iterator)elementoHijo,Recurso,new ArrayList<Integer>());
+			if (T.isActive())
+			panelHijos.add(T);
+		}	
+		
 			
 		}
 		

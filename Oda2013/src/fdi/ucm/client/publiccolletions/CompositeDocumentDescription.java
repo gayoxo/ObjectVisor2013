@@ -4,8 +4,6 @@
 package fdi.ucm.client.publiccolletions;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gwt.user.client.ui.Composite;
 
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -187,7 +185,7 @@ public class CompositeDocumentDescription extends Composite {
 		Composite Descripcion=new CompositeDocumentDescriptionDescriptionTab(Recurso.getDescriptionText());
 		PanelA.add(Descripcion);
 		
-		processSons(Recurso.getDocument().getSons(),PanelA,new ArrayList<Integer>() );
+		processSons();
 		
 		
 
@@ -204,22 +202,22 @@ public class CompositeDocumentDescription extends Composite {
 	 * @param panelA2
 	 * @param ambitos 
 	 */
-	private void processSons(List<Structure> list, VerticalPanel panelA2, ArrayList<Integer> ambitos) {
-		for (Structure elementoHijo : list) {
+	private void processSons() {
+		for (Structure elementoHijo : Recurso.getDocument().getSons()) {
 			
 			if (elementoHijo instanceof ElementType && Oda2013OperatinoalViewStaticFunctions.isSummary((ElementType)elementoHijo))
 			{
-				CompositeDocumentDescriptionTabStructureSummary T=new CompositeDocumentDescriptionTabStructureSummary((ElementType)elementoHijo,Recurso,ambitos,true);
-				panelA2.add(T);
+				CompositeDocumentDescriptionTabStructureSummary T=new CompositeDocumentDescriptionTabStructureSummary((ElementType)elementoHijo,Recurso,new ArrayList<Integer>() ,true);
+				PanelA.add(T);
 			} 
 			else if (elementoHijo instanceof ElementType && !Oda2013OperatinoalViewStaticFunctions.isSummary((ElementType)elementoHijo))
 			{
-				CompositeDocumentDescriptionTabStructureSummary T=new CompositeDocumentDescriptionTabStructureSummary((ElementType)elementoHijo,Recurso,ambitos,false);
-				panelA2.add(T);
+				CompositeDocumentDescriptionTabStructureSummary T=new CompositeDocumentDescriptionTabStructureSummary((ElementType)elementoHijo,Recurso,new ArrayList<Integer>() ,false);
+				PanelA.add(T);
 			} 
 			else if (elementoHijo instanceof Iterator){
-				CompositeDocumentDescriptionTabStructureSummary T=new CompositeDocumentDescriptionTabStructureSummary((Iterator)elementoHijo,Recurso,ambitos);
-				panelA2.add(T);
+				CompositeDocumentDescriptionTabStructureSummary T=new CompositeDocumentDescriptionTabStructureSummary((Iterator)elementoHijo,Recurso,new ArrayList<Integer>() );
+				PanelA.add(T);
 			}
 		}
 		
