@@ -116,7 +116,7 @@ public class CompositeDocumentDescription extends Composite {
 				
 				@Override
 				public void onClick(ClickEvent event) {
-					PopupPanelCentrado P = new PopupPanelCentrado(true);
+					PopupPanelCentradoFrame P = new PopupPanelCentradoFrame(true);
 					Frame F = new Frame(Destino);
 					P.add(F,Destino);
 					P.center();

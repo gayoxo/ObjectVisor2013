@@ -5,7 +5,7 @@ package fdi.ucm.client.publiccolletions;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.Image;
 
 import fdi.ucm.shared.model.collection.document.File;
@@ -32,9 +32,12 @@ public class ImageMetaRelationResourceValue extends Image {
 			public void onClick(ClickEvent event) {
 				
 				
-				PopupPanelReferenceFileDescriptor RPUP=new PopupPanelReferenceFileDescriptor(RecursoAsociado);
-				SplitLayoutPanelPublicCollection.getPila_de_cerrado().add(RPUP);
-				RPUP.center();
+				PopupPanelCentradoFrame P = new PopupPanelCentradoFrame(true);
+				Frame F = new Frame(RecursoAsociado.getPath());
+				P.add(F,RecursoAsociado.getPath());
+				P.center();
+				
+				
 				
 			}
 		});
@@ -48,8 +51,10 @@ public class ImageMetaRelationResourceValue extends Image {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				
-				Window.open(RecursoAsociadoS, "_blank", "");
+				PopupPanelCentradoFrame P = new PopupPanelCentradoFrame(true);
+				Frame F = new Frame(RecursoAsociadoS);
+				P.add(F,RecursoAsociadoS);
+				P.center();
 				
 			}
 		});

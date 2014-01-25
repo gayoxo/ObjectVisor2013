@@ -3,8 +3,7 @@ package fdi.ucm.client.publiccolletions;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.PopupPanel;
-
+import com.google.gwt.user.client.ui.Frame;
 import fdi.ucm.shared.model.collection.document.ResourceElementFile;
 
 /**
@@ -25,10 +24,14 @@ public class ButtonResourceElementFile extends Button {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				PopupPanel RPUP=null;
-					RPUP=new PopupPanelReferenceFileDescriptor(MetaRelationValue.getValue());
-					SplitLayoutPanelPublicCollection.getPila_de_cerrado().add(RPUP);
-					RPUP.center();
+				
+					PopupPanelCentradoFrame P = new PopupPanelCentradoFrame(true);
+					Frame F = new Frame(MetaRelationValue.getValue().getPath());
+					P.add(F,MetaRelationValue.getValue().getPath());
+					P.center();
+					
+					
+					
 			}
 		});
 	}

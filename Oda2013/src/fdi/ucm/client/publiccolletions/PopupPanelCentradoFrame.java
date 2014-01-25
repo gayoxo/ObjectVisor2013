@@ -17,7 +17,7 @@ import com.google.gwt.user.client.Window;
  * @author Joaquin Gayoso-Cabada
  *
  */
-public class PopupPanelCentrado extends PopupPanel {
+public class PopupPanelCentradoFrame extends PopupPanel {
 
 	private static final String CLOSE = "Close";
 	private static final String SHOWEXTERNAL = "Show in a external Window";
@@ -26,7 +26,7 @@ public class PopupPanelCentrado extends PopupPanel {
 	private DockLayoutPanel dockLayoutPanel;
 
 
-	public PopupPanelCentrado(boolean b) {
+	public PopupPanelCentradoFrame(boolean b) {
 		super(b);
 		setModal(true);
 		setGlassEnabled(true);
