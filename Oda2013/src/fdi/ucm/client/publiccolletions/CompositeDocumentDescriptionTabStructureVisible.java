@@ -1,7 +1,7 @@
 package fdi.ucm.client.publiccolletions;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -18,12 +18,10 @@ import fdi.ucm.shared.model.collection.document.ResourceElementFile;
 import fdi.ucm.shared.model.collection.document.ResourceElementURL;
 import fdi.ucm.shared.model.collection.document.TextElement;
 import fdi.ucm.shared.model.collection.grammar.ElementType;
-import fdi.ucm.shared.model.collection.grammar.Iterator;
 import fdi.ucm.shared.model.collection.grammar.LinkElementType;
-import fdi.ucm.shared.model.collection.grammar.Structure;
 import fdi.ucm.shared.model.collection.grammar.TextElementType;
 
-public class CompositeDocumentDescriptionTabStructureSummary extends Composite {
+public class CompositeDocumentDescriptionTabStructureVisible extends Composite {
 
 	private static final String ICONOS_KEYICON_PNG = "Iconos/Keyicon.png";
 	private static final String TWO_POINTS = ":";
@@ -33,27 +31,26 @@ public class CompositeDocumentDescriptionTabStructureSummary extends Composite {
 	private Image MRVI;
 	private Label LabelType;
 	
-	private Structure Elemento;
+	private ElementType Elemento;
 	private Documents Recurso;
 	private ArrayList<Integer> Ambitos;
-	private int PosActualAmbitos;
+	private boolean Active;
 	
 	
-	public CompositeDocumentDescriptionTabStructureSummary(
+	public CompositeDocumentDescriptionTabStructureVisible(
 			ElementType metaValue, Documents documentoG,
-			ArrayList<Integer> ambitos, boolean Visible) {
+			ArrayList<Integer> ambitos) {
 		Elemento=metaValue;
 		
 		Recurso=documentoG;
 		
 		Ambitos	= ambitos;
 		
+		Active = false;
 		
 		VerticalPanel verticalPanel = new VerticalPanel();
 		initWidget(verticalPanel);
 
-		if (Visible)
-		{
 			HorizontalPanel ElementPanel = new HorizontalPanel();
 			verticalPanel.add(ElementPanel);
 			ElementPanel.setSize("", "100%");
@@ -86,29 +83,7 @@ public class CompositeDocumentDescriptionTabStructureSummary extends Composite {
 			
 			PanelHijos = new VerticalPanel();
 			horizontalPanel.add(PanelHijos);
-		}
-		else 
-			PanelHijos=verticalPanel;
 		
-		
-		for (Structure elementoHijo : Elemento.getSons()) {
-			
-			if (elementoHijo instanceof ElementType && Oda2013OperatinoalViewStaticFunctions.isSummary((ElementType)elementoHijo))
-			{
-				CompositeDocumentDescriptionTabStructureSummary T=new CompositeDocumentDescriptionTabStructureSummary((ElementType)elementoHijo,Recurso,Ambitos,true);
-				PanelHijos.add(T);
-			} 
-			else if (elementoHijo instanceof ElementType && !Oda2013OperatinoalViewStaticFunctions.isSummary((ElementType)elementoHijo))
-			{
-				CompositeDocumentDescriptionTabStructureSummary T=new CompositeDocumentDescriptionTabStructureSummary((ElementType)elementoHijo,Recurso,Ambitos,false);
-				PanelHijos.add(T);
-			} 
-			else if (elementoHijo instanceof Iterator){
-				CompositeDocumentDescriptionTabStructureSummary T=new CompositeDocumentDescriptionTabStructureSummary((Iterator)elementoHijo,Recurso,Ambitos);
-				PanelHijos.add(T);
-			}
-		}
-
 		
 	}
 
@@ -120,121 +95,6 @@ public class CompositeDocumentDescriptionTabStructureSummary extends Composite {
 
 	
 
-	public CompositeDocumentDescriptionTabStructureSummary(
-			Iterator metaValue, Documents documentoG,
-			ArrayList<Integer> ambitos) {
-
-		Elemento=metaValue;
-		
-		Recurso=documentoG;
-		
-		Ambitos	= ambitos;
-		
-		PosActualAmbitos = Ambitos.size();
-		
-		VerticalPanel verticalPanel = new VerticalPanel();
-		initWidget(verticalPanel);
-		
-		PanelHijos=verticalPanel;
-		
-		HashSet<Integer> I=calculaAmbitosDescend((Iterator)Elemento);
-		for (Integer ambito : I) {
-			
-			for (Structure elementoHijo : Elemento.getSons()) {
-				ArrayList<Integer> pas=new ArrayList<Integer>();
-				clone(pas,Ambitos);
-				pas.add(ambito);
-
-				if (elementoHijo instanceof ElementType && Oda2013OperatinoalViewStaticFunctions.isSummary((ElementType)elementoHijo))
-				{
-					CompositeDocumentDescriptionTabStructureSummary T=new CompositeDocumentDescriptionTabStructureSummary((ElementType)elementoHijo,Recurso,Ambitos,true);
-					PanelHijos.add(T);
-				} 
-				else if (elementoHijo instanceof ElementType && !Oda2013OperatinoalViewStaticFunctions.isSummary((ElementType)elementoHijo))
-				{
-					CompositeDocumentDescriptionTabStructureSummary T=new CompositeDocumentDescriptionTabStructureSummary((ElementType)elementoHijo,Recurso,Ambitos,false);
-					PanelHijos.add(T);
-				} 
-				else if (elementoHijo instanceof Iterator){
-					CompositeDocumentDescriptionTabStructureSummary T=new CompositeDocumentDescriptionTabStructureSummary((Iterator)elementoHijo,Recurso,Ambitos);
-					PanelHijos.add(T);
-				}
-				
-			}
-		}
-
-	}
-
-	/**
-	 * Clona los ambitos
-	 * @param pas
-	 * @param ambitos
-	 */
-	private void clone(ArrayList<Integer> pas, ArrayList<Integer> ambitos) {
-		for (Integer integer : ambitos) {
-			pas.add(integer.intValue());
-		}
-		
-	}
-
-
-	/**
-	 * Calcula el numero de ambitos a generar
-	 * @param elemento1
-	 * @return
-	 */
-	private HashSet<Integer> calculaAmbitosDescend(Structure elemento1) {
-
-		HashSet<Integer> Salida=new HashSet<Integer>();
-		for (Structure hijo : elemento1.getSons()) {
-
-			if (hijo instanceof ElementType)
-			{
-				
-			ArrayList<Element> MV=getMetaValueList((ElementType)hijo);
-			for (Element element : MV) {
-				Integer Yo=-1;
-				if (element.getAmbitos().size()>PosActualAmbitos)
-					Yo=element.getAmbitos().get(PosActualAmbitos);
-			
-				
-				if (Yo!=-1 && !Salida.contains(Yo))
-					Salida.add(Yo);
-				}
-			}
-			
-			HashSet<Integer> SalidaHijos = calculaAmbitosDescend(hijo);
-			
-			for (Integer integer : SalidaHijos) {
-				if (!Salida.contains(integer))
-					Salida.add(integer);
-			}
-			
-			
-		}
-		
-		
-		return Salida;
-	}
-
-
-	/**
-	 * Obtiene la lista de los metavalores.
-	 * @param elemento1
-	 * @return
-	 */
-	private ArrayList<Element> getMetaValueList(ElementType elemento1) {
-		ArrayList<Element> Salida = new ArrayList<Element>();
-		for (Element element : Recurso.getDescription()) {
-			if (element.getHastype()==elemento1&&EqualsAmbitos(element.getAmbitos()))
-				Salida.add(element);
-			
-		}
-		return Salida;
-	}
-	
-	
-	
 	/**
 	 * Obtiene el MetaValor Asociado y sino crea uno
 	 * @param elemento1
@@ -352,8 +212,38 @@ public class CompositeDocumentDescriptionTabStructureSummary extends Composite {
 	
 
 	
+	
+	/**
+	 * @return the panelHijos
+	 */
+	public VerticalPanel getPanelHijos() {
+		return PanelHijos;
+	}
 
 
 
-		
+
+
+
+
+
+
+	/**
+	 * @param panelHijos the panelHijos to set
+	 */
+	public void setPanelHijos(VerticalPanel panelHijos) {
+		PanelHijos = panelHijos;
+	}
+
+
+
+
+
+
+
+
+
+	public boolean isActive() {
+		return Active;
+	}
 }

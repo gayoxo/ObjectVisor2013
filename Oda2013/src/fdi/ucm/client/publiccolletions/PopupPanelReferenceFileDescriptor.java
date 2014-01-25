@@ -28,7 +28,7 @@ import fdi.ucm.shared.model.collection.document.File;
  * @author Joaquin Gayoso-Cabada
  *
  */
-public class PopupPanelReferenceFile extends PopupPanel implements PoupPanelInterfaceCerrableGrupo{
+public class PopupPanelReferenceFileDescriptor extends PopupPanel implements InterfacePoupPanelCerrableGrupo{
 
 	
 	private static final String X = "X";
@@ -42,7 +42,7 @@ public class PopupPanelReferenceFile extends PopupPanel implements PoupPanelInte
 	private static final String FILE_PATH = "File Path : ";
 
 	
-	public PopupPanelReferenceFile(File value) {
+	public PopupPanelReferenceFileDescriptor(File value) {
 		setAutoHideEnabled(true);
 		setModal(true);
 		AllClose=true;
@@ -157,7 +157,7 @@ public class PopupPanelReferenceFile extends PopupPanel implements PoupPanelInte
 		if (AllClose)
 			while (!SplitLayoutPanelPublicCollection.getPila_de_cerrado().isEmpty())
 			{
-				PoupPanelInterfaceCerrableGrupo RPP=(PoupPanelInterfaceCerrableGrupo) SplitLayoutPanelPublicCollection.getPila_de_cerrado().pop();
+				InterfacePoupPanelCerrableGrupo RPP=(InterfacePoupPanelCerrableGrupo) SplitLayoutPanelPublicCollection.getPila_de_cerrado().pop();
 				RPP.setAllClose(false);
 				((PopupPanel)RPP).hide();
 			}

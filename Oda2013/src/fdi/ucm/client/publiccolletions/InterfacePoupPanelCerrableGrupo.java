@@ -8,7 +8,7 @@ package fdi.ucm.client.publiccolletions;
  * @author Joaquin Gayoso-Cabada
  *
  */
-public interface PoupPanelInterfaceCerrableGrupo {
+public interface InterfacePoupPanelCerrableGrupo {
 
 	
 	/**

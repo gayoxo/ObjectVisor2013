@@ -14,16 +14,15 @@ import fdi.ucm.client.controller.Oda2013OperatinoalViewStaticFunctions;
 import fdi.ucm.shared.model.collection.document.Documents;
 import fdi.ucm.shared.model.collection.document.Element;
 import fdi.ucm.shared.model.collection.grammar.ElementType;
-import fdi.ucm.shared.model.collection.grammar.Iterator;
 import fdi.ucm.shared.model.collection.grammar.Structure;
 
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DecoratedTabPanel;
 import com.google.gwt.user.client.ui.Frame;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -39,22 +38,18 @@ import com.google.gwt.user.client.ui.Image;
  * @author Joaquin Gayoso-Cabada
  *
  */
-public class PopupPanelDocumentDescriptor extends PopupPanel implements PoupPanelInterfaceCerrableGrupo{
+public class PopupPanelDocumentDescriptor extends PopupPanel implements InterfacePoupPanelCerrableGrupo{
 
 	
 	private static final String X = "X";
-	private HashMap<ElementType, VerticalPanel> Pestanas;
-	private ArrayList<ElementType> MetaOrden;
 	private DecoratedTabPanel PanelDecorador;
-	private HashMap<Element,CompositeTabElement> Procesados;
 	private Documents Recurso;
-	private ArrayList<Element> vaciosCreados;
 	private boolean AllClose;
-	private  HashMap<ElementType, CompositeTabElement> MetaPestanaATab;
 	private String Destino;
 	private String ImagenAsociada;
 	private Image Icono;
-	private VerticalPanel PanelGrammar;
+	private VerticalPanel PanelA;
+	private int Heigh;
 	protected static final int MaxHeight = 200;
 
 	
@@ -66,7 +61,7 @@ public class PopupPanelDocumentDescriptor extends PopupPanel implements PoupPane
 		setAnimationEnabled(true);
 		setGlassEnabled(true);
 		int Width = Window.getClientWidth();
-		int Heigh = Window.getClientHeight();
+		Heigh = Window.getClientHeight();
 		
 		if (Width>200)
 			Width=Width-100;
@@ -74,12 +69,12 @@ public class PopupPanelDocumentDescriptor extends PopupPanel implements PoupPane
 			Heigh=Heigh-100;
 		
 		setSize(Width+"px", Heigh+"px");
-		Pestanas=new HashMap<ElementType, VerticalPanel>();
-		MetaOrden= new ArrayList<ElementType>();
-		Procesados=new HashMap<Element,CompositeTabElement>();	
+		new HashMap<ElementType, VerticalPanel>();
+		new ArrayList<ElementType>();
+		new HashMap<Element,CompositeTabElement>();	
 		Recurso=value;
-		vaciosCreados=new ArrayList<Element>();
-		MetaPestanaATab=new HashMap<ElementType, CompositeTabElement>();
+		new ArrayList<Element>();
+		new HashMap<ElementType, CompositeTabElement>();
 		setWidget(General);
 		
 		HorizontalPanel PanelGeneral = new HorizontalPanel();
@@ -158,76 +153,79 @@ public class PopupPanelDocumentDescriptor extends PopupPanel implements PoupPane
 		horizontalPanel.setWidget(btnNewButton);
 		btnNewButton.setWidth("50px");
 		
-		PanelGrammar = new VerticalPanel();
-			procesaHijosMeta(Recurso.getDocument().getSons());
 		
-			Composite Descripcion=new CompositeDocumentDescriptionDescriptionTab(Recurso.getDescriptionText());
-			PanelGrammar.add(Descripcion);
+		Refresh();
+		
+//		PanelGrammar = new VerticalPanel();
+//			procesaHijosMeta(Recurso.getDocument().getSons());
 //		
-//		for (Grammar MetaElem : SplitLayoutPanelPublicCollection.getColeccion().getMetamodelGrammar()) {
-//			
-//			if (MetaElem instanceof ElementType)
-//				{
-//				VerticalPanel PanelA = new VerticalPanel();
-//				Pestanas.put((ElementType) MetaElem, PanelA);
-//				MetaOrden.add((ElementType) MetaElem);
-//				procesaHijosMeta(MetaElem.getSons());
-//				}
-//			else 
-//				{
-//				 procesaEstrella((Iterator)MetaElem);
-//				}
-//			
+//			Composite Descripcion=new CompositeDocumentDescriptionDescriptionTab(Recurso.getDescriptionText());
+//			PanelGrammar.add(Descripcion);
+////		
+////		for (Grammar MetaElem : SplitLayoutPanelPublicCollection.getColeccion().getMetamodelGrammar()) {
+////			
+////			if (MetaElem instanceof ElementType)
+////				{
+////				VerticalPanel PanelA = new VerticalPanel();
+////				Pestanas.put((ElementType) MetaElem, PanelA);
+////				MetaOrden.add((ElementType) MetaElem);
+////				procesaHijosMeta(MetaElem.getSons());
+////				}
+////			else 
+////				{
+////				 procesaEstrella((Iterator)MetaElem);
+////				}
+////			
+////
+////		}
+////		
+//		
+//		for (Element MetaValueD : Recurso.getDescription()) {
+//			if (!Procesados.containsKey(MetaValueD)&&(Oda2013OperatinoalViewStaticFunctions.isVisible(MetaValueD)))
+//					procesa(MetaValueD);
+//		}
+//		
+//		
+//
+//		if (PanelGrammar.getWidgetCount()>0)
+//		{
+//		ScrollPanel panelScrollVertical = new ScrollPanel();
+//		panelScrollVertical.setSize("100%","100%");
+//		PanelDecorador.add(panelScrollVertical, Recurso.getDocument().getNombre(), true); 
+//			panelScrollVertical.add(PanelGrammar);
 //
 //		}
 //		
-		
-		for (Element MetaValueD : Recurso.getDescription()) {
-			if (!Procesados.containsKey(MetaValueD)&&(Oda2013OperatinoalViewStaticFunctions.isVisible(MetaValueD)))
-					procesa(MetaValueD);
-		}
-		
-		
-
-		if (PanelGrammar.getWidgetCount()>0)
-		{
-		ScrollPanel panelScrollVertical = new ScrollPanel();
-		panelScrollVertical.setSize("100%","100%");
-		PanelDecorador.add(panelScrollVertical, Recurso.getDocument().getNombre(), true); 
-			panelScrollVertical.add(PanelGrammar);
-
-		}
-		
-		for (ElementType MetaActual : MetaOrden) {
-			VerticalPanel res=Pestanas.get(MetaActual);
-			if (res.getWidgetCount()>0)
-				{
-				ScrollPanel panelScrollVertical = new ScrollPanel();
-//				int WidthScroll = Width-10;
-				int HeighScroll = Heigh-37;
-//				panelScrollVertical.setSize(WidthScroll+"px", HeighScroll+"px");
-				panelScrollVertical.setSize("100%", HeighScroll+"px");
-				PanelDecorador.add(panelScrollVertical, MetaActual.getName(), true);
-				if (Oda2013OperatinoalViewStaticFunctions.NotBasic(MetaActual))
-					panelScrollVertical.add(res);
-				else
-					{
-					CompositeTabElement T=MetaPestanaATab.get(MetaActual);
-					panelScrollVertical.add(T.getPanelHijos());
-					}
-				
-				}
-		}
-		
-//		for (Entry<Meta, VerticalPanel> PanelPestanas : Pestanas.entrySet()) {
-//			if (PanelPestanas.getValue().getWidgetCount()>0)
+//		for (ElementType MetaActual : MetaOrden) {
+//			VerticalPanel res=Pestanas.get(MetaActual);
+//			if (res.getWidgetCount()>0)
 //				{
 //				ScrollPanel panelScrollVertical = new ScrollPanel();
-//				panelScrollVertical.setSize("914px", "451px");
-//				PanelDecorador.add(panelScrollVertical, PanelPestanas.getKey().getName(), true);
-//				panelScrollVertical.add(PanelPestanas.getValue());
+////				int WidthScroll = Width-10;
+//				int HeighScroll = Heigh-37;
+////				panelScrollVertical.setSize(WidthScroll+"px", HeighScroll+"px");
+//				panelScrollVertical.setSize("100%", HeighScroll+"px");
+//				PanelDecorador.add(panelScrollVertical, MetaActual.getName(), true);
+//				if (Oda2013OperatinoalViewStaticFunctions.NotBasic(MetaActual))
+//					panelScrollVertical.add(res);
+//				else
+//					{
+//					CompositeTabElement T=MetaPestanaATab.get(MetaActual);
+//					panelScrollVertical.add(T.getPanelHijos());
+//					}
+//				
 //				}
 //		}
+//		
+////		for (Entry<Meta, VerticalPanel> PanelPestanas : Pestanas.entrySet()) {
+////			if (PanelPestanas.getValue().getWidgetCount()>0)
+////				{
+////				ScrollPanel panelScrollVertical = new ScrollPanel();
+////				panelScrollVertical.setSize("914px", "451px");
+////				PanelDecorador.add(panelScrollVertical, PanelPestanas.getKey().getName(), true);
+////				panelScrollVertical.add(PanelPestanas.getValue());
+////				}
+////		}
 		
 		if (PanelDecorador.getWidgetCount()>0)
 			PanelDecorador.selectTab(0);
@@ -237,279 +235,80 @@ public class PopupPanelDocumentDescriptor extends PopupPanel implements PoupPane
 	
 	
 
-	/**
-	 * Funcion que procesa un recurso, creando el padre si este no existe.
-	 * @param metaValueD
-	 */
-	private CompositeTabElement procesa(Element metaValueD) {
-		
-		if (Pestanas.containsKey(metaValueD.getHastype()))
-		{
-			
-			VerticalPanel A = Pestanas.get(metaValueD.getHastype());
-			CompositeTabElement nuevo= new CompositeTabElement(metaValueD);
-			A.add(nuevo);
-			Procesados.put(metaValueD, nuevo);
-			MetaPestanaATab.put(metaValueD.getHastype(), nuevo);
-			return nuevo;
-		}
-		else
-		{
-			ElementType Padre;
-			
-			
-			Padre=FindPadreVisibleAscendente(metaValueD,metaValueD.getHastype());
-			
-			if (Pestanas.containsKey(Padre))
-				if (isVisibleMeta(Padre,metaValueD))
-					{
-					//Se retorno el padre por ser el padre
-						return procesosobremipadre(metaValueD,Padre);
-					}
-				else
-				{
-					VerticalPanel PanelA = new VerticalPanel();
-					Pestanas.put((ElementType) metaValueD.getHastype(), PanelA);
-					MetaOrden.add((ElementType) metaValueD.getHastype());
-					CompositeTabElement nuevo= new CompositeTabElement(metaValueD);
-					PanelA.add(nuevo);
-					Procesados.put(metaValueD, nuevo);
-					return nuevo;
-				}
-			else
-				{
-				return procesosobremipadre(metaValueD,Padre);
-				}
-			
-			
-			
-			
-			}	
-		
-	}
+	private void Refresh() {
 	
-	
-	/**
-	 * procesa si el padre es visible
-	 * @param padre
-	 * @param metaValueD 
-	 * @return
-	 */
-	private boolean isVisibleMeta(ElementType padre, Element metaValueD) {
-		Element PadreMV=findMetaValue(padre, metaValueD.getAmbitos());
-		if (PadreMV!=null)
-			return Oda2013OperatinoalViewStaticFunctions.isVisible(PadreMV);
-		else
-			return Oda2013OperatinoalViewStaticFunctions.isVisible(padre);
-				
+		PanelA = new VerticalPanel();
+		PanelA.setSize("100%", "100%");
+		
+		ScrollPanel panelScrollVertical = new ScrollPanel();
+		int HeighScroll = Heigh-37;
+	panelScrollVertical.setSize("100%", HeighScroll+"px");
+	PanelDecorador.add(panelScrollVertical, Recurso.getDocument().getNombre(), true);
+		
+	panelScrollVertical.add(PanelA);
+		
+		Composite Descripcion=new CompositeDocumentDescriptionDescriptionTab(Recurso.getDescriptionText());
+		PanelA.add(Descripcion);
+		
+		processSonGrammar(PanelA);
+		
 	}
 
 
-	/**
-	 * Procesa un elemto sobre su padre
-	 * @param metaValueD
-	 * @param padre
-	 * @return 
-	 */
-	private CompositeTabElement procesosobremipadre(Element metaValueD, ElementType padre) {
-		
-		Element PadreValue=findMetaValue(padre,metaValueD.getAmbitos());
-		CompositeTabElement PadreTab;
-		if (PadreValue==null)
-		{
+
+	private void processSonGrammar(VerticalPanel panelA2) {
+
+		for (Structure elementoHijo : Recurso.getDocument().getSons()) {
 			
-			Element MV=getMetavalueVacio(padre,metaValueD.getAmbitos());
-			if (MV==null)
+			if (elementoHijo instanceof ElementType &&Oda2013OperatinoalViewStaticFunctions.NotBasic((ElementType)elementoHijo) && Oda2013OperatinoalViewStaticFunctions.isVisible((ElementType)elementoHijo))
 			{
-				MV = new Element(padre);
-				for (Integer iterable_element :metaValueD.getAmbitos()) {
-					MV.getAmbitos().add(iterable_element.intValue());
-				}
-				vaciosCreados.add(MV);
-				PadreTab=procesa(MV);
+				CompositeDocumentDescriptionTabStructureVisible T=new CompositeDocumentDescriptionTabStructureVisible((ElementType)elementoHijo,Recurso,new ArrayList<Integer>());
+				panelA2.add(T);
+				processSons(elementoHijo.getSons(), T.getPanelHijos());
+			} 
+			else if (elementoHijo instanceof ElementType &&!Oda2013OperatinoalViewStaticFunctions.NotBasic((ElementType)elementoHijo) && Oda2013OperatinoalViewStaticFunctions.isVisible((ElementType)elementoHijo))
+			{
+				VerticalPanel PanelAA = new VerticalPanel();
+				PanelAA.setSize("100%", "100%");
+				
+				ScrollPanel panelScrollVertical = new ScrollPanel();
+				int HeighScroll = Heigh-37;
+			panelScrollVertical.setSize("100%", HeighScroll+"px");
+			PanelDecorador.add(panelScrollVertical, ((ElementType)elementoHijo).getName(), true);
+				
+			panelScrollVertical.add(PanelAA);
+				
+				
+				processSons(elementoHijo.getSons(), PanelAA);
 				
 			}
 			else
+				
+				processSons(elementoHijo.getSons(), panelA2);
+			
+		}
+		
+	}
+
+
+
+	private void processSons(List<Structure> sons, VerticalPanel panelHijos) {
+		
+	for (Structure elementoHijo : sons) {
+			
+			if (elementoHijo instanceof ElementType &&Oda2013OperatinoalViewStaticFunctions.isVisible((ElementType)elementoHijo))
 			{
-				PadreTab=Procesados.get(MV);
-			}
-		
-		}
-		else{
-		
-		 PadreTab = Procesados.get(PadreValue);
-
-		 if (PadreTab==null)
-				{
-			 		PadreTab=procesa(PadreValue);
-				}
-		}
-		
-		VerticalPanel A = PadreTab.getPanelHijos();	
-		CompositeTabElement nuevo= new CompositeTabElement(metaValueD);
-		A.add(nuevo);
-		Procesados.put(metaValueD, nuevo);
-		return nuevo;
-		
-	}
-
-	/**
-	 * Busca al padre que ademas de se meta sea summary
-	 * @param metaValueD
-	 * @return
-	 */
-	private ElementType FindPadreVisibleAscendente(Element metaValueD,ElementType Metain) {
-		
-		ElementType Padre;
-		
-		if (Metain.getFather()==null)
-			return Metain;
-		
-		if (Metain.getFather() instanceof ElementType)
-			Padre=(ElementType) Metain.getFather();
-		else 
-			Padre=findMeta((Iterator) Metain.getFather());
-		
-		Element PadreMV=findMetaValue(Padre, metaValueD.getAmbitos());
-		
-		
-		
-		if (PadreMV!=null)
-			if (Oda2013OperatinoalViewStaticFunctions.isVisible(PadreMV))
-				return Padre;
-			else 
-				return FindPadreVisibleAscendente(PadreMV,PadreMV.getHastype());
-		else
-			if (Oda2013OperatinoalViewStaticFunctions.isVisible(Padre))
-				return Padre;
-			else 
-				return FindPadreVisibleAscendente(metaValueD,Padre);
-
-	}
-
-	/**
-	 * Genera Metavalue vacio
-	 * @param padre
-	 * @param ambitos
-	 * @return
-	 */
-	private Element getMetavalueVacio(ElementType padre, ArrayList<Integer> ambitos) {
-		for (Element vaciosCandidato : vaciosCreados) {
-			if ((vaciosCandidato.getHastype()==padre)&&(checkAmbitos(vaciosCandidato.getAmbitos(),ambitos)))
-				return vaciosCandidato;
-		}
-		
-		return null;
-	}
-
-	/**
-	 * Busca un MetaValue en la lista de recursos
-	 * @param element
-	 * @param AmbitosElementoBase
-	 * @return
-	 */
-	private Element findMetaValue(ElementType element, ArrayList<Integer> AmbitosElementoBase) {
-		for (Element metaValuePro : Recurso.getDescription()) {
-			if ((metaValuePro.getHastype()==element)&&(checkAmbitos(metaValuePro.getAmbitos(),AmbitosElementoBase)))
-				return metaValuePro;
-		}
-		return null;
-	}
-
-	
-	/**
-	 * Chequea si las dos listas de ambitos coinciden, la segunda es la que ha de ser mayor ( mas profunda ) que la primera ( padre )
-	 * @param ambitos ambitos del padre a chequear
-	 * @param AmbitosElementoBase ambitos del hijo
-	 * @return
-	 */
-	private boolean checkAmbitos(ArrayList<Integer> ambitos,
-			ArrayList<Integer> AmbitosElementoBase) {
-		
-		if (ambitos.size()>AmbitosElementoBase.size())
-			return false;
-		
-		for (int i = 0; i < AmbitosElementoBase.size(); i++) {
-			if ((ambitos.size()>i)&&(AmbitosElementoBase.get(i)!=null)&&(ambitos.get(i)!=null)&&(AmbitosElementoBase.get(i).intValue()!=ambitos.get(i).intValue()))
-				return false;
-		}
-		
-		return true;
-	}
-
-	/**
-	 * Busca el padre del elemento en Meta mas cercano hacia arriba en el arbol
-	 * @param IteradorProcesar
-	 * @return Meta mas cercano hacia arrriba en el arbol.
-	 */
-	private ElementType findMeta(Iterator IteradorProcesar) {
-		if (IteradorProcesar.getFather() instanceof ElementType)
-			return (ElementType) IteradorProcesar.getFather();
-		else return findMeta((Iterator)IteradorProcesar.getFather());
-	}
-
-
-	
-	
-	/**
-	 * Procesa los hijos meta para hacer pestañas
-	 * @param sons
-	 */
-	private void procesaHijosMeta(List<Structure> sons) {
-for (Structure MetaElem : sons) {
+				CompositeDocumentDescriptionTabStructureVisible T=new CompositeDocumentDescriptionTabStructureVisible((ElementType)elementoHijo,Recurso,new ArrayList<Integer>());
+				panelHijos.add(T);
+				processSons(elementoHijo.getSons(), T.getPanelHijos());
+			} 
+			else  processSons(elementoHijo.getSons(), panelHijos);
 			
-			if (MetaElem instanceof ElementType && !Oda2013OperatinoalViewStaticFunctions.NotBasic((ElementType) MetaElem))
-				{
-				VerticalPanel PanelA = new VerticalPanel();
-				Pestanas.put((ElementType) MetaElem, PanelA);
-				MetaOrden.add((ElementType) MetaElem);
-				}
-			else if (MetaElem instanceof ElementType)
-			{
-			Pestanas.put((ElementType) MetaElem, PanelGrammar);
-			}
-			else if (MetaElem instanceof Iterator)
-				{
-				 procesaHijosMetaEstrella((Iterator)MetaElem);
-				}
-			
-
 		}
 		
 	}
 
 
-
-
-
-	/**
-	 * Procesa los hijos estrella de manera unitaria
-	 * @param metaElem
-	 */
-	private void procesaHijosMetaEstrella(Iterator metaElem) {
-	for (Structure MetaElem : metaElem.getSons()) {
-			
-			if (MetaElem instanceof ElementType && !Oda2013OperatinoalViewStaticFunctions.NotBasic((ElementType) MetaElem))
-				{
-				VerticalPanel PanelA = new VerticalPanel();
-//				PanelA.setSize("100%", "100%");
-				Pestanas.put((ElementType) MetaElem, PanelA);
-				MetaOrden.add((ElementType) MetaElem);
-				}
-			else if (MetaElem instanceof ElementType)
-			{
-			Pestanas.put((ElementType) MetaElem, PanelGrammar);
-			}
-			else if (MetaElem instanceof Iterator)
-				{
-				procesaHijosMetaEstrella((Iterator)MetaElem);
-				}
-			
-
-		}
-		
-	}
-	
 	@Override
 	public void hide() {
 		super.hide();
@@ -521,7 +320,7 @@ for (Structure MetaElem : sons) {
 		if (AllClose)
 			while (!SplitLayoutPanelPublicCollection.getPila_de_cerrado().isEmpty())
 			{
-				PoupPanelInterfaceCerrableGrupo RPP=(PoupPanelInterfaceCerrableGrupo) SplitLayoutPanelPublicCollection.getPila_de_cerrado().pop();
+				InterfacePoupPanelCerrableGrupo RPP=(InterfacePoupPanelCerrableGrupo) SplitLayoutPanelPublicCollection.getPila_de_cerrado().pop();
 				RPP.setAllClose(false);
 				((PopupPanel)RPP).hide();
 			}
