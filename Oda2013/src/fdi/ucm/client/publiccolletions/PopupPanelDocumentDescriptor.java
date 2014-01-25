@@ -39,7 +39,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Joaquin Gayoso-Cabada
  *
  */
-public class PopupPanelConstructDescriptor extends PopupPanel implements PoupPanelInterfaceCerrableGrupo{
+public class PopupPanelDocumentDescriptor extends PopupPanel implements PoupPanelInterfaceCerrableGrupo{
 
 	
 	private static final String X = "X";
@@ -58,7 +58,7 @@ public class PopupPanelConstructDescriptor extends PopupPanel implements PoupPan
 	protected static final int MaxHeight = 200;
 
 	
-	public PopupPanelConstructDescriptor(Documents value) {
+	public PopupPanelDocumentDescriptor(Documents value) {
 		setAutoHideEnabled(true);
 		setModal(true);
 		AllClose=true;

@@ -30,7 +30,7 @@ public class ImageMetaRelationConstructValue extends Image {
 			public void onClick(ClickEvent event) {
 				
 				
-				PopupPanelConstructDescriptor RPUP=new PopupPanelConstructDescriptor(RecursoAsociado);
+				PopupPanelDocumentDescriptor RPUP=new PopupPanelDocumentDescriptor(RecursoAsociado);
 				SplitLayoutPanelPublicCollection.getPila_de_cerrado().add(RPUP);
 				RPUP.center();
 				

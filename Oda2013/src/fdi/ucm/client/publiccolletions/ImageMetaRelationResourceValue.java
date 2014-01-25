@@ -32,7 +32,7 @@ public class ImageMetaRelationResourceValue extends Image {
 			public void onClick(ClickEvent event) {
 				
 				
-				PopupPanelReferenceDescriptor RPUP=new PopupPanelReferenceDescriptor(RecursoAsociado);
+				PopupPanelReferenceFile RPUP=new PopupPanelReferenceFile(RecursoAsociado);
 				SplitLayoutPanelPublicCollection.getPila_de_cerrado().add(RPUP);
 				RPUP.center();
 				

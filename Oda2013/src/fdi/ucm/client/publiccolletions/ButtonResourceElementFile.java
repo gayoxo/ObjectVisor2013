@@ -26,7 +26,7 @@ public class ButtonResourceElementFile extends Button {
 			@Override
 			public void onClick(ClickEvent event) {
 				PopupPanel RPUP=null;
-					RPUP=new PopupPanelReferenceDescriptor(MetaRelationValue.getValue());
+					RPUP=new PopupPanelReferenceFile(MetaRelationValue.getValue());
 					SplitLayoutPanelPublicCollection.getPila_de_cerrado().add(RPUP);
 					RPUP.center();
 			}

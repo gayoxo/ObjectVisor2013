@@ -152,7 +152,7 @@ public class CompositeDocumentDescription extends Composite {
 		horizontalPanel.add(OpenElement);
 		OpenElement.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				PopupPanelConstructDescriptor RPUP=new PopupPanelConstructDescriptor(Recurso);
+				PopupPanelDocumentDescriptor RPUP=new PopupPanelDocumentDescriptor(Recurso);
 				SplitLayoutPanelPublicCollection.getPila_de_cerrado().add(RPUP);
 				RPUP.center();
 			}
