@@ -28,7 +28,7 @@ public class WindowEditorMasterIndex implements WindowEditorInterface {
 		
 		String IdentificadorPublico = com.google.gwt.user.client.Window.Location.getParameter("name");
 		if (IdentificadorPublico==null||IdentificadorPublico.isEmpty())
-			processGeneral();		
+			processGeneral2();		
 		else {
 				PopupPanelLoading.getInstance().setLabelTexto(Oda2013StaticNames.LOADING + IdentificadorPublico);
 				PopupPanelLoading.getInstance().center();
@@ -39,7 +39,7 @@ public class WindowEditorMasterIndex implements WindowEditorInterface {
 						PopupPanelLoading.getInstance().hide();
 						if (result.getColeccion()!=null)
 							EntryPointControlador.ToPublicCollectionVisualiceWindowEditor(result.getColeccion(), result.getDescription());
-						else processGeneral();
+						else processGeneral2();
 					}
 					
 					@Override
@@ -52,8 +52,13 @@ public class WindowEditorMasterIndex implements WindowEditorInterface {
 
 	}
 
+	protected void processGeneral2() {
+		Window.alert(Oda2013ConstantsError.ERROR_LOADING_COLLECTION_PUBLIC2);
+		Window.open("http://a-note.fdi.ucm.es/ModelEditor2013/", "", "");
+		
+	}
+
 	private void processGeneral() {
-		//TODO UN INDEX QUE ESCUPA LO PUBLICADO
 		Window.alert(Oda2013ConstantsError.ERROR_LOADING_COLLECTION_PUBLIC);
 		
 	}
