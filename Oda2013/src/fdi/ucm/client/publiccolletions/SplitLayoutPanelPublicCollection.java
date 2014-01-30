@@ -493,15 +493,24 @@ public class SplitLayoutPanelPublicCollection extends SplitLayoutPanel {
 		
 		HashSet<String> lista=new HashSet<String>();
 		
+		
+		Structure padre=meta;
+		
+		while (padre.getFather()!=null)
+			padre=padre.getFather();
+		
+		Grammar A=padre.getCollectionFather();
+		
 		for (Documents recursopos : coleccion.getEstructuras()) {
-			for (Element metavalorpos : recursopos.getDescription()) {
-				if ((metavalorpos instanceof TextElement)&&(metavalorpos.getHastype()==meta))
-					{
-					String valor=((TextElement)metavalorpos).getValue();
-					valor=valor.trim();
-					lista.add(valor);
-					}
-			}
+			if (recursopos.getDocument()==A)
+				for (Element metavalorpos : recursopos.getDescription()) {
+					if ((metavalorpos instanceof TextElement)&&(metavalorpos.getHastype()==meta))
+						{
+						String valor=((TextElement)metavalorpos).getValue();
+						valor=valor.trim();
+						lista.add(valor);
+						}
+				}
 		}
 		ArrayList<String> salida=new ArrayList<String>();
 		for (String string : lista) {
